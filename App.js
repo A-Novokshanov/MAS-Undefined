@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import LoginPage from './src/Screens/LoginPage.js';
+import RegisterPage from './src/Screens/RegisterPage.js';
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 
@@ -30,18 +31,20 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginPage} />
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false
+          }} 
+        initialRouteName="Login">
+        <Stack.Screen 
+            name="Login Page" 
+            component={LoginPage}
+        />
+        <Stack.Screen 
+            name="Register" 
+            component={RegisterPage} 
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

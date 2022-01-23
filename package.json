@@ -11,6 +11,7 @@
     "postinstall": "rn-nodeify --install fs,dgram,process,path,console --hack"
   },
   "dependencies": {
+    "@react-native-firebase/app": "^14.2.3",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
     "@react-navigation/stack": "^6.0.11",

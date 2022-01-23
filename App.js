@@ -36,14 +36,8 @@ export default function App() {
           headerShown: false
           }} 
         initialRouteName="Login">
-        <Stack.Screen 
-            name="Login Page" 
-            component={LoginPage}
-        />
-        <Stack.Screen 
-            name="Register" 
-            component={RegisterPage} 
-        />
+        <Stack.Screen name="Login Page" component={LoginPage}/>
+        <Stack.Screen name="Register Page" component={RegisterPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

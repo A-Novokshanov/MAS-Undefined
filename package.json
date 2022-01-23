@@ -3,20 +3,32 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "expo start --dev-client",
-    "android": "expo run:android",
-    "ios": "expo run:ios",
-    "web": "expo start --web"
+    "start": "expo start",
+    "web": "expo start --web",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "eject": "expo eject",
+    "postinstall": "rn-nodeify --install fs,dgram,process,path,console --hack"
   },
   "dependencies": {
+    "@react-navigation/native": "^6.0.6",
+    "@react-navigation/native-stack": "^6.2.5",
+    "@react-navigation/stack": "^6.0.11",
     "expo": "~44.0.2",
+    "expo-cli": "^5.0.3",
+    "expo-dev-client": "^0.8.2",
     "expo-splash-screen": "~0.14.1",
     "expo-status-bar": "~1.2.0",
     "firebase": "^9.6.4",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
-    "react-native-web": "0.17.1"
+    "react-native-gesture-handler": "^2.2.0",
+    "react-native-safe-area-context": "3.3.2",
+    "react-native-screens": "~3.10.1",
+    "react-native-web": "0.17.1",
+    "react-navigation-stack": "^2.10.4",
+    "uri-scheme": "^1.0.112"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

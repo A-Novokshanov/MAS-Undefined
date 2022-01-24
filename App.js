@@ -6,6 +6,7 @@ import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from '@react-navigation/stack';
 import LoginPage from './src/Screens/LoginPage.js';
 import RegisterPage from './src/Screens/RegisterPage.js';
+import ContentPage from './src/Screens/ContentPage.js';
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 
@@ -27,18 +28,19 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-const loginStack = createStackNavigator();
+const Stack = createStackNavigator();
 
 const LoginStack = () => (
     <NavigationContainer>
-      <loginStack.Navigator
+      <Stack.Navigator
         screenOptions={{
           headerShown: false
           }} 
         initialRouteName="Login">
-        <loginStack.Screen name="Login Page" component={LoginPage}/>
-        <loginStack.Screen name="Register Page" component={RegisterPage} />
-      </loginStack.Navigator>
+        <Stack.Screen name="Login Page" component={LoginPage}/>
+        <Stack.Screen name="Register Page" component={RegisterPage} />
+        <Stack.Screen name="Content Page" component={ContentPage} />
+      </Stack.Navigator>
     </NavigationContainer>
 )
 

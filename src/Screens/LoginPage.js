@@ -7,17 +7,20 @@ import styles from '../Style/Styles.styles';
 
 export default class LoginPage extends React.Component {
 
-    submitLogin(email, password) {
-        console.log(email + " " + password)
+    async submitLogin(email, password) {
+        console.log(email + " HELLO " + password)
         const auth = getAuth();
-        signInWithEmailAndPassword(email, password)
+
+        await signInWithEmailAndPassword(auth, email, password)
+        this.props.navigation.navigate("Content Page")
     }
     render() {
         return (
             <View style={styles.app}>
             <View style={styles.container}>
-                <Text style={styles.generic}>CS 4261 - Programming Assignment 1</Text>
+                <Text style={styles.subtitle}>CS 4261 - Programming Assignment 1</Text>
                 <Text style={styles.title}>Cryptocurrency Price Tracker</Text>
+                <Text style={styles.subtitle}>Please Log In</Text>
                 </View>
             <Formik initialValues = 
                 {{title: 'Login',
@@ -25,7 +28,7 @@ export default class LoginPage extends React.Component {
                 password: '',
                 error: '2'
                 }}
-                onSubmit = {values => submitLogin(values.email, values.password).catch(error => setFieldValue('error', error.message))}
+                onSubmit = {values => this.submitLogin(values.email, values.password).catch(error => console.log("hehe " + error.message)/*setFieldValue('error', error.message)*/)}
             >
                 {({handleChange, handleBlur, handleSubmit, values}) => (
                 <View style={styles.container}>
@@ -45,7 +48,7 @@ export default class LoginPage extends React.Component {
                         value={values.password}
                         style={styles.input}
                     />
-                    <Text style={styles.error}>{values.error}  </Text>
+                    <Text style={styles.error}> {values.error}  </Text>
                     <TouchableOpacity 
                     style={styles.button}
                     onPress={handleSubmit}>

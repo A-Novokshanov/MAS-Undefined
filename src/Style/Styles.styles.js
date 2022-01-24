@@ -17,6 +17,13 @@ export default StyleSheet.create({
         color: '#FFD700',
         textAlign: "center"
     },
+    subtitle: {
+        marginTop: 30,
+        fontSize: 20,
+        fontWeight: "400",
+        color: '#FFD700',
+        textAlign: "center"
+    },
     generic: {
         marginTop: 25,
         fontSize: 20,

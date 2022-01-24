@@ -1,8 +1,9 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native'
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import {createStackNavigator} from '@react-navigation/stack';
 import LoginPage from './src/Screens/LoginPage.js';
 import RegisterPage from './src/Screens/RegisterPage.js';
 // Import the functions you need from the SDKs you need
@@ -26,19 +27,28 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-const Stack = createStackNavigator();
+const loginStack = createStackNavigator();
 
-export default function App() {
-  return (
+const LoginStack = () => (
     <NavigationContainer>
-      <Stack.Navigator
+      <loginStack.Navigator
         screenOptions={{
           headerShown: false
           }} 
         initialRouteName="Login">
-        <Stack.Screen name="Login Page" component={LoginPage}/>
-        <Stack.Screen name="Register Page" component={RegisterPage} />
-      </Stack.Navigator>
+        <loginStack.Screen name="Login Page" component={LoginPage}/>
+        <loginStack.Screen name="Register Page" component={RegisterPage} />
+      </loginStack.Navigator>
     </NavigationContainer>
-  );
-}
+)
+
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      Login: LoginStack,
+    },
+    {
+      initialRouteName: "Login"
+    }
+  )
+)

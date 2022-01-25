@@ -1,7 +1,7 @@
-# Rate my App app!
+# Cryptocurrency Price Tracker App!
 
 This is the first programming assignment for CS-4261-A.
-The team that worked on this is Andrew Novokshanov and Duy Nguyen.
+The team that worked on this project was Andrew Novokshanov and Duy Nguyen.
 
 ## What the app does:
 

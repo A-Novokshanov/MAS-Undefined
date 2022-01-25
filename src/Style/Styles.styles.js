@@ -2,13 +2,45 @@ import { StyleSheet, StatusBar } from "react-native";
 
 export default StyleSheet.create({
     app: {
-        backgroundColor:'#5549bf',
+        backgroundColor:'white',
         flex: 1
     },
     container: {
         marginTop: 10,
         padding: 5,
         fontSize: 20
+    },
+    divider: {
+        height: StyleSheet.hairlineWidth,
+        backgroundColor: 'black',
+        marginHorizontal: 16,
+        marginTop: 16,
+    },
+    itemWrapper: {
+        marginTop:24,
+        paddingHorizontal: 16,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: 'center',
+    },
+    coinTitleWrapper: {
+        marginLeft: 8,
+    },
+    leftWrapper: {
+        flexDirection: "row",
+        alignItems: 'center',
+    },
+    cryptoTitle: {
+        fontSize: 16,
+    },
+    cryptoDetail: {
+        marginTop: 4,
+        fontSize: 12,
+        color: "#A9ABB1",
+    },
+    titleWrapper: {
+        marginTop: 30,
+        paddingHorizontal: 10,
     },
     title: {
         marginTop: 30,
@@ -19,10 +51,11 @@ export default StyleSheet.create({
     },
     subtitle: {
         marginTop: 30,
+        marginLeft: 20,
         fontSize: 20,
-        fontWeight: "400",
-        color: '#FFD700',
-        textAlign: "center"
+        fontWeight: "bold",
+        color: 'darkblue',
+        textAlign: "left"
     },
     generic: {
         marginTop: 25,
@@ -48,6 +81,10 @@ export default StyleSheet.create({
         textAlign: "left",
         justifyContent: 'center',
         borderRadius: 50
+    },
+    image: {
+        height: 48,
+        width: 48,
     },
     error: {
         marginTop: 1,

@@ -30,6 +30,9 @@ export default StyleSheet.create({
         flexDirection: "row",
         alignItems: 'center',
     },
+    rightWrapper: {
+        alignItems: 'flex-end',
+    },
     cryptoTitle: {
         fontSize: 16,
     },

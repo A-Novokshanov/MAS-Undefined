@@ -11,7 +11,7 @@ const formatMarketData = (data) => {
         formattedData.push(formattedItem)
     });
 
-    return formattedItem
+    return formattedData
 }
 
 export const getMarketData = async () => {

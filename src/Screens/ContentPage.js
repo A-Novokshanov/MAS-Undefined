@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as firebase from '@firebase/app'
 import { getAuth, signInWithEmailAndPassword } from '@firebase/auth'
 import {View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView} from 'react-native'
 import { Formik } from 'formik';
 import styles from '../Style/Styles.styles'
 import ListItem from '../Components/ListItem'
-import { SAMPLE_DATA } from '../../assets/data/sampleData'
+import { SAMPLE_DATA } from '../../assets/data/sampleData';
+import {getMarketData} from '../Services/cryptoService';
 
 const ContentPage = () => {
 
     const [data, setData] = useState([]);
+    useEffect(() => {
+        const fetchMarketData = async () => {
+            const marketData = await getMarketData();
+            setData(marketData);
+        }
+
+        fetchMarketData();
+    }, [])
     return (
         <View style={styles.app}>
             <SafeAreaView style={styles.container}>
@@ -20,7 +29,7 @@ const ContentPage = () => {
 
                 <FlatList
                     keyExtractor={(item) => item.id}
-                    data={SAMPLE_DATA}
+                    data={data}
                     renderItem={({ item }) => (
                         <ListItem
                             name={item.name}

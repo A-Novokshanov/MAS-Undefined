@@ -14,6 +14,7 @@ export default class LoginPage extends React.Component {
         await signInWithEmailAndPassword(auth, email, password)
         this.props.navigation.navigate("Content Page")
     }
+
     render() {
         return (
             <View style={styles.app}>
@@ -21,16 +22,17 @@ export default class LoginPage extends React.Component {
                 <Text style={styles.subtitle}>CS 4261 - Programming Assignment 1</Text>
                 <Text style={styles.title}>Cryptocurrency Price Tracker</Text>
                 <Text style={styles.subtitle}>Please Log In</Text>
-                </View>
+            </View>
+            
             <Formik initialValues = 
                 {{title: 'Login',
                 email: '',
                 password: '',
                 error: ''
                 }}
-                onSubmit = {values => this.submitLogin(values.email, values.password).catch(error => setFieldValue('error', error.message)/*setFieldValue('error', error.message)*/)}
+                onSubmit = {(values, {setFieldValue}) => this.submitLogin(values.email, values.password).catch(error => setFieldValue('error', error.message))}
             >
-                {({handleChange, handleBlur, handleSubmit, values}) => (
+                {({handleChange, handleBlur, handleSubmit, values, setFieldValue}) => (
                 <View style={styles.container}>
                     <Text style={styles.container}> E-Mail: </Text>
                     <TextInput 
@@ -51,7 +53,7 @@ export default class LoginPage extends React.Component {
                     <Text style={styles.error}> {values.error}  </Text>
                     <TouchableOpacity 
                     style={styles.button}
-                    onPress={handleSubmit}>
+                    onPress={(handleSubmit)}>
                     <Text style={styles.generic}> Login </Text>
                     </TouchableOpacity>
                 </View>

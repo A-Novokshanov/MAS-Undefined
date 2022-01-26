@@ -94,7 +94,7 @@ export default StyleSheet.create({
         width: 48,
     },
     error: {
-        marginTop: 1,
+        marginTop: 10,
         fontSize: 17,
         fontWeight: "400",
         textAlign: "center",

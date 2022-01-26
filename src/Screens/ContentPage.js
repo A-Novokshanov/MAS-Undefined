@@ -17,7 +17,11 @@ const ContentPage = () => {
             setData(marketData);
         }
 
-        fetchMarketData();
+        const interval = setInterval(() => {
+            fetchMarketData()
+        }, 10000)
+
+        return () => clearInterval(interval)
     }, [])
     return (
         <View style={styles.app}>

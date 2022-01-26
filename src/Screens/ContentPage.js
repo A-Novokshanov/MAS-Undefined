@@ -8,12 +8,7 @@ import ListItem from '../Components/ListItem'
 import { SAMPLE_DATA } from '../../assets/data/sampleData'
 
 const ContentPage = () => {
-    const submitLogin = async (email, password) => {
-        console.log(email + " HELLO " + password)
-        const auth = getAuth();
 
-        await signInWithEmailAndPassword(auth, email, password)
-    };
     const [data, setData] = useState([]);
     return (
         <SafeAreaView style={styles.container}>

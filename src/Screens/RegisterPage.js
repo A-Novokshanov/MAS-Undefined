@@ -8,7 +8,7 @@ import styles from '../Style/Styles.styles';
 export default class RegisterPage extends React.Component{
 
     async submitRegister(email, password) {
-        console.log(email + " HELLO " + password)
+
         const auth = getAuth();
 
         await createUserWithEmailAndPassword(auth, email, password)
@@ -27,9 +27,9 @@ export default class RegisterPage extends React.Component{
                 {{title: 'Login',
                 email: '',
                 password: '',
-                error: '2'
+                error: ''
                 }}
-                onSubmit = {values => this.submitRegister(values.email, values.password).catch(error => console.log("hehe " + error.message)/*setFieldValue('error', error.message)*/)}
+                onSubmit = {values => this.submitRegister(values.email, values.password).catch(error => console.log(error.message)/*setFieldValue('error', error.message)*/)}
             >
                 {({handleChange, handleBlur, handleSubmit, values}) => (
                 <View style={styles.container}>

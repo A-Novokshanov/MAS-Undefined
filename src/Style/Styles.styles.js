@@ -2,13 +2,14 @@ import { StyleSheet, StatusBar } from "react-native";
 
 export default StyleSheet.create({
     app: {
-        backgroundColor:'white',
+        backgroundColor:'#bababa',
         flex: 1
     },
     container: {
         marginTop: 10,
         padding: 5,
-        fontSize: 20
+        fontSize: 20,
+        backgroundColor:'#bababa'
     },
     divider: {
         height: StyleSheet.hairlineWidth,
@@ -49,7 +50,9 @@ export default StyleSheet.create({
         marginTop: 30,
         fontSize: 30,
         fontWeight: "400",
-        color: '#FFD700',
+        color: '#f5c800',
+        backgroundColor: '#bababa',
+        borderRadius: 10,
         textAlign: "center"
     },
     subtitle: {
@@ -67,7 +70,8 @@ export default StyleSheet.create({
         textAlign: "center"
     },
     input: {
-        marginTop: 10
+        marginTop: 10,
+        backgroundColor: '#f7f7f7'
     },
     buttonText: {
         marginTop: 15,
@@ -78,8 +82,8 @@ export default StyleSheet.create({
     button: {
         marginTop: 25,
         fontSize: 17,
-        backgroundColor: '#8c31ad',
-        borderColor: '#8c31ad',
+        backgroundColor: '#5bbffc',
+        borderColor: 'darkblue',
         fontWeight: "400",
         textAlign: "left",
         justifyContent: 'center',

@@ -28,7 +28,7 @@ export default class LoginPage extends React.Component {
                 password: '',
                 error: ''
                 }}
-                onSubmit = {values => this.submitLogin(values.email, values.password).catch(error => console.log(error.message)/*setFieldValue('error', error.message)*/)}
+                onSubmit = {values => this.submitLogin(values.email, values.password).catch(error => setFieldValue('error', error.message)/*setFieldValue('error', error.message)*/)}
             >
                 {({handleChange, handleBlur, handleSubmit, values}) => (
                 <View style={styles.container}>
@@ -57,11 +57,11 @@ export default class LoginPage extends React.Component {
                 </View>
             )}
             </Formik>
-            <TouchableOpacity 
+                <TouchableOpacity 
                     style={styles.button}
                     onPress={() => this.props.navigation.navigate("Register Page")}>
                     <Text style={styles.generic}> Register New Account </Text>
-                    </TouchableOpacity>
+                </TouchableOpacity>
             </View>
         )
     }

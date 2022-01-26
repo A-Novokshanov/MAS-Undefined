@@ -11,26 +11,28 @@ const ContentPage = () => {
 
     const [data, setData] = useState([]);
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.titleWrapper}>
-                <Text style={styles.subtitle}>Markets</Text>
-            </View>
-            <View style={styles.divider} />
+        <View style={styles.app}>
+            <SafeAreaView style={styles.container}>
+                <View style={styles.titleWrapper}>
+                    <Text style={styles.subtitle}>Markets</Text>
+                </View>
+                <View style={styles.divider} />
 
-            <FlatList
-                keyExtractor={(item) => item.id}
-                data={SAMPLE_DATA}
-                renderItem={({ item }) => (
-                    <ListItem
-                        name={item.name}
-                        abbr={item.symbol}
-                        currentPrice={item.current_price}
-                        percentage7day={item.price_change_percentage_7d_in_currency}
-                        logoUrl={item.image}
-                    />
-                )}
-            />
-        </SafeAreaView>
+                <FlatList
+                    keyExtractor={(item) => item.id}
+                    data={SAMPLE_DATA}
+                    renderItem={({ item }) => (
+                        <ListItem
+                            name={item.name}
+                            abbr={item.symbol}
+                            currentPrice={item.current_price}
+                            percentage7day={item.price_change_percentage_7d_in_currency}
+                            logoUrl={item.image}
+                        />
+                    )}
+                />
+            </SafeAreaView>
+        </View>
     )
 }
 

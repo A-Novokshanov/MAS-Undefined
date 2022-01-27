@@ -15,12 +15,12 @@ const ContentPage = () => {
         const marketData = await getMarketData();
         setData(marketData);
     };
-    const firstRender = useRef(true);
+
     useEffect(() => {
         const interval = setInterval(() => {
             fetchMarketData()
         }, 10000)
-
+        
         return () => clearInterval(interval)
     }, [])
     return (

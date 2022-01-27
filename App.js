@@ -1,10 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-
+import { NavigationContainer } from '@react-navigation/native'
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import {createStackNavigator} from '@react-navigation/stack';
+import LoginPage from './src/Screens/LoginPage.js';
+import RegisterPage from './src/Screens/RegisterPage.js';
+import ContentPage from './src/Screens/ContentPage.js';
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -22,22 +27,30 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const Stack = createStackNavigator();
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const LoginStack = () => (
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false
+          }} 
+        initialRouteName="Login">
+        <Stack.Screen name="Login Page" component={LoginPage}/>
+        <Stack.Screen name="Register Page" component={RegisterPage} />
+        <Stack.Screen name="Content Page" component={ContentPage} />
+      </Stack.Navigator>
+    </NavigationContainer>
+)
+
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      Login: LoginStack,
+    },
+    {
+      initialRouteName: "Login"
+    }
+  )
+)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import * as firebase from '@firebase/app'
 import { getAuth, signInWithEmailAndPassword } from '@firebase/auth'
 import {View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView} from 'react-native'
@@ -11,12 +11,12 @@ import {getMarketData} from '../Services/cryptoService';
 const ContentPage = () => {
 
     const [data, setData] = useState([]);
+    const fetchMarketData = async () => {
+        const marketData = await getMarketData();
+        setData(marketData);
+    };
+    const firstRender = useRef(true);
     useEffect(() => {
-        const fetchMarketData = async () => {
-            const marketData = await getMarketData();
-            setData(marketData);
-        }
-
         const interval = setInterval(() => {
             fetchMarketData()
         }, 10000)

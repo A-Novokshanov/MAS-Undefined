@@ -5,12 +5,12 @@ import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
 import { Formik } from 'formik';
 import styles from '../Style/Styles.styles';
 
-export default class RegisterPage extends React.Component{
+export default class RegisterPage extends React.Component {
 
     async submitRegister(email, password) {
 
         const auth = getAuth();
-
+        console.log('test')
         await createUserWithEmailAndPassword(auth, email, password)
         this.props.navigation.navigate("Content Page")
     }
@@ -21,17 +21,18 @@ export default class RegisterPage extends React.Component{
             <View style={styles.container}>
                 <Text style={styles.subtitle}>CS 4261 - Programming Assignment 1</Text>
                 <Text style={styles.title}>Cryptocurrency Price Tracker</Text>
-                <Text style={styles.subtitle}>Register a new account</Text>
-                </View>
+                <Text style={styles.subtitle}>Register a New Account</Text>
+            </View>
+
             <Formik initialValues = 
-                {{title: 'Login',
+                {{title: 'Register',
                 email: '',
                 password: '',
                 error: ''
                 }}
-                onSubmit = {values => this.submitRegister(values.email, values.password).catch(error => console.log(error.message)/*setFieldValue('error', error.message)*/)}
+                onSubmit = {(values, {setFieldValue}) => this.submitRegister(values.email, values.password).catch(error => setFieldValue('error', error.message))}
             >
-                {({handleChange, handleBlur, handleSubmit, values}) => (
+                {({handleChange, handleBlur, handleSubmit, values, setFieldValue}) => (
                 <View style={styles.container}>
                     <Text style={styles.container}> E-Mail: </Text>
                     <TextInput 
@@ -49,10 +50,10 @@ export default class RegisterPage extends React.Component{
                         value={values.password}
                         style={styles.input}
                     />
-                    <Text style={styles.error}>{values.error}  </Text>
+                    <Text style={styles.error}> {values.error} </Text>
                     <TouchableOpacity 
                     style={styles.button}
-                    onPress={handleSubmit}>
+                    onPress={(handleSubmit)}>
                     <Text style={styles.generic}> Register </Text>
                     </TouchableOpacity>
                 </View>

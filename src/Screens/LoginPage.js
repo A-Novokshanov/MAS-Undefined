@@ -50,7 +50,7 @@ export default class LoginPage extends React.Component {
                         value={values.password}
                         style={styles.input}
                     />
-                    <Text style={styles.error}> {values.error}  </Text>
+                    <Text style={styles.error}> {values.error} </Text>
                     <TouchableOpacity 
                     style={styles.button}
                     onPress={(handleSubmit)}>

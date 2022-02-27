@@ -1,10 +1,4 @@
-# Cryptocurrency Price Tracker App!
+Trainer Hiring and Communication Application!
 
-This is the first programming assignment for CS-4261-A.
-The team that worked on this project was Andrew Novokshanov and Duy Nguyen.
-
-## Application Features:
-
-- Persistent Login and Registering Feature
-- Error Messages on Invalid Login
-- Upon logging in, after 10 seconds the content page will load most recent cryptocurrency prices, updating every 10 seconds
+This is the Sprint 3 Prototype for Team Undefined's CS-4261-A project.
+The team that worked on this project was Andrew Novokshanov, Duy Nguyen, Kyle Waldner, and Daniel Tan.

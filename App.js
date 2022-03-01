@@ -7,7 +7,6 @@ import {createStackNavigator} from '@react-navigation/stack';
 import LoginPage from './src/Screens/LoginPage.js';
 import RegisterPage from './src/Screens/RegisterPage.js';
 import ContentPage from './src/Screens/ContentPage.js';
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 
 // TODO: Add SDKs for Firebase products that you want to use

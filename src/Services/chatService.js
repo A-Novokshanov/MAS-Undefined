@@ -28,7 +28,7 @@ export async function newChat(person1Email, person2Email) {
     addChat(chatName, person1uid, person2uid);
 
     const data = {
-        person: [person1uid, person2uid],
+        People: [person1uid, person2uid],
         Messages: []
     };
 

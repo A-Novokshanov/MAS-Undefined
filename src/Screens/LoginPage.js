@@ -19,7 +19,7 @@ export default class LoginPage extends React.Component {
         return (
             <View style={styles.app}>
             <View style={styles.container}>
-                <Text style={styles.subtitle}>CS 4261 - Programming Assignment 1</Text>
+                <Text style={styles.subtitle}>CS 4261 - Programming Assignment 12222</Text>
                 <Text style={styles.title}>Cryptocurrency Price Tracker</Text>
                 <Text style={styles.subtitle}>Please Log In</Text>
             </View>

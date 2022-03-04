@@ -27,7 +27,7 @@ const ContentPage = () => {
         <View style={styles.app}>
             <SafeAreaView style={styles.container}>
                 <View style={styles.titleWrapper}>
-                    <Text style={styles.subtitle}>Markets</Text>
+                    <Text style={styles.subtitle}>Marketssss</Text>
                 </View>
                 <View style={styles.divider} />
 

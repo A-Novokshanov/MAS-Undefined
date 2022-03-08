@@ -1,52 +1,141 @@
 import React, { useState, useEffect, useRef } from 'react';
-import * as firebase from '@firebase/app'
-import { getAuth, signInWithEmailAndPassword } from '@firebase/auth'
-import {View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView} from 'react-native'
-import { Formik } from 'formik';
-import styles from '../Style/Styles.styles'
-import ListItem from '../Components/ListItem'
-import { SAMPLE_DATA } from '../../assets/data/sampleData';
-import {getMarketData} from '../Services/cryptoService';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, StatusBar, Image } from 'react-native';
+import styles from '../Style/Content_style';
 
-const ContentPage = () => {
 
-    const [data, setData] = useState([]);
-    const fetchMarketData = async () => {
-        const marketData = await getMarketData();
-        setData(marketData);
-    };
+const DATA = [
+    {
+        item: "Main dishes",
+        data: [
+            { 
+                name: "John, Doe", 
+                exp: "4", 
+                review: "5.0", 
+                miles: "0.5", 
+            },
+            { 
+                name: "Cool Boy", 
+                exp: "4", 
+                review: "4.8", 
+                miles: "1.5",
+            },
+            { 
+                name: "Damn Daniel", 
+                exp: "9", 
+                review: "4.9", 
+                miles: "3.5", 
+            }
+        ]
+    }
+];
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            fetchMarketData()
-        }, 10000)
-        
-        return () => clearInterval(interval)
-    }, [])
-    return (
-        <View style={styles.app}>
-            <SafeAreaView style={styles.container}>
-                <View style={styles.titleWrapper}>
-                    <Text style={styles.subtitle}>Marketssss</Text>
-                </View>
-                <View style={styles.divider} />
 
-                <FlatList
-                    keyExtractor={(item) => item.id}
-                    data={data}
-                    renderItem={({ item }) => (
-                        <ListItem
-                            name={item.name}
-                            abbr={item.symbol}
-                            currentPrice={item.current_price}
-                            percentage7day={item.price_change_percentage_7d_in_currency}
-                            logoUrl={item.image}
-                        />
-                    )}
+const Item = ({ item, nav }) => (
+    <View>
+        <TouchableOpacity
+            style={styles.list_button}
+            onPress={() => nav.navigate('Trainer', {
+                name: item.name, 
+                exp: item.exp, 
+                review: item.review, 
+                miles: item.miles,
+              })}
+        >
+            <Image
+                style={styles.tinyLogo}
+                source={require('../Icon/pic.png')}
+            />
+            <Text>{item.name}</Text>
+            <Text>{item.exp}+ years exp</Text>
+            <Text>Rating: {item.review}</Text>
+            <Text>{item.miles} miles away</Text>
+        </TouchableOpacity>
+    </View>
+);
+
+
+const ContentPage = ({ navigation }) => {
+
+    const [direction, setDirection] = useState("My Trainers");
+
+    var page;
+
+    if (direction === "My Trainers") {
+        page =
+            <View>
+                <SectionList
+                    contentContainerStyle={styles.listContainer}
+                    sections={DATA}
+                    keyExtractor={(item, index) => item + index}
+                    renderItem={({ item }) => <Item item={item} nav = {navigation}/>}
                 />
-            </SafeAreaView>
-        </View>
+                
+            </View>
+    } else if (direction === "My Schedule") {
+        page =
+            <View>
+                <Text>
+                My Schedule
+                </Text>
+            </View>
+    } else if (direction === "My Profile") {
+        page =
+            <View>
+                <Text>
+                    My Profile
+                </Text>
+            </View>
+    }
+
+
+    return (
+        <SafeAreaView style={styles.container}>
+            <PreviewLayout
+                selectedValue={direction}
+                values={["My Trainers", "My Schedule", "Profile"]}
+                setSelectedValue={setDirection}>
+                {page}
+            </PreviewLayout>
+        </SafeAreaView>
     )
 }
+
+const PreviewLayout = ({
+    label,
+    children,
+    values,
+    selectedValue,
+    setSelectedValue,
+}) => (
+    <View style={{ padding: 10, flex: 1 }}>
+        <Text style={styles.label}>{label}</Text>
+        <View style={styles.row}>
+            {values.map((value) => (
+                <TouchableOpacity
+                    key={value}
+                    onPress={() => setSelectedValue(value)}
+                    style={[
+                        styles.button,
+                        selectedValue === value && styles.selected,
+                    ]}
+                >
+                    <Text
+                        style={[
+                            styles.buttonLabel,
+                            selectedValue === value && styles.selectedLabel,
+                        ]}
+                    >
+                        {value}
+                    </Text>
+                </TouchableOpacity>
+            ))}
+        </View>
+        <View style={[styles.container, { [label]: selectedValue }]}>
+            {children}
+        </View>
+    </View>
+);
+
+
 
 export default ContentPage

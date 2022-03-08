@@ -101,5 +101,14 @@ export default StyleSheet.create({
         fontWeight: "400",
         textAlign: "center",
         color: 'red'
-    }
+    },
+    nav: {
+        fontSize: 17,
+        backgroundColor: '#0096FF',
+        borderColor: 'darkblue',
+        fontWeight: "400",
+        textAlign: "left",
+        justifyContent: 'center',
+        borderRadius: 50
+    },
 })

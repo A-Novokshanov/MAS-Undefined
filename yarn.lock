@@ -2776,7 +2776,7 @@
   "resolved" "https://registry.npmjs.org/absolute-path/-/absolute-path-0.0.0.tgz"
   "version" "0.0.0"
 
-"abstract-leveldown@~0.12.1", "abstract-leveldown@0.12.3":
+"abstract-leveldown@~0.12.1":
   "integrity" "sha1-EWsexcdxDvei1XBnaLvbREC+EHA="
   "resolved" "https://registry.npmjs.org/abstract-leveldown/-/abstract-leveldown-0.12.3.tgz"
   "version" "0.12.3"
@@ -3014,11 +3014,6 @@
   "resolved" "https://registry.npmjs.org/argparse/-/argparse-2.0.1.tgz"
   "version" "2.0.1"
 
-"argsarray@0.0.1":
-  "integrity" "sha1-bnIHtOzbObCviDA/pa4ivajfYcs="
-  "resolved" "https://registry.npmjs.org/argsarray/-/argsarray-0.0.1.tgz"
-  "version" "0.0.1"
-
 "arr-diff@^4.0.0":
   "integrity" "sha1-1kYQdP6/7HHn4VI1dhoyml3HxSA="
   "resolved" "https://registry.npmjs.org/arr-diff/-/arr-diff-4.0.0.tgz"
@@ -3169,16 +3164,6 @@
   "integrity" "sha1-x57Zf380y48robyXkLzDZkdLS3k="
   "resolved" "https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz"
   "version" "0.4.0"
-
-"asyncstorage-down@^3.0.0":
-  "integrity" "sha512-HQzYBNR+y3wtGXGnBhZjv0c1WsMNw6z1pFP7IoHYzeONHtc5CJxf7k9xm1WfyrPH0TUlq65cwY639JY8oQX1lg=="
-  "resolved" "https://registry.npmjs.org/asyncstorage-down/-/asyncstorage-down-3.2.1.tgz"
-  "version" "3.2.1"
-  dependencies:
-    "abstract-leveldown" "0.12.3"
-    "argsarray" "0.0.1"
-    "d64" "^1.0.0"
-    "tiny-queue" "0.2.0"
 
 "at-least-node@^1.0.0":
   "integrity" "sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg=="
@@ -4767,11 +4752,6 @@
   "integrity" "sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk="
   "resolved" "https://registry.npmjs.org/cyclist/-/cyclist-1.0.1.tgz"
   "version" "1.0.1"
-
-"d64@^1.0.0":
-  "integrity" "sha1-QAKofoUMv8n52XBrYPymE6MzbpA="
-  "resolved" "https://registry.npmjs.org/d64/-/d64-1.0.0.tgz"
-  "version" "1.0.0"
 
 "dag-map@~1.0.0":
   "integrity" "sha1-6DefBBAA7VYfxRVHXB7SyF7s6Nc="
@@ -12792,11 +12772,6 @@
   "integrity" "sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q="
   "resolved" "https://registry.npmjs.org/timsort/-/timsort-0.3.0.tgz"
   "version" "0.3.0"
-
-"tiny-queue@0.2.0":
-  "integrity" "sha1-xJ/LXIdVW+G0pd9+uHEB1beLydw="
-  "resolved" "https://registry.npmjs.org/tiny-queue/-/tiny-queue-0.2.0.tgz"
-  "version" "0.2.0"
 
 "tiny-warning@^1.0.2":
   "integrity" "sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA=="

@@ -7,6 +7,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import LoginPage from './src/Screens/LoginPage.js';
 import RegisterPage from './src/Screens/RegisterPage.js';
 import ContentPage from './src/Screens/ContentPage.js';
+import Trainer from './src/Screens/Trainer.js';
 import { initializeApp } from "firebase/app";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -35,10 +36,18 @@ const LoginStack = () => (
         screenOptions={{
           headerShown: false
           }} 
-        initialRouteName="Login">
+        initialRouteName="Content Page">
         <Stack.Screen name="Login Page" component={LoginPage}/>
+        <Stack.Screen name="Trainer" component={Trainer} />
         <Stack.Screen name="Register Page" component={RegisterPage} />
-        <Stack.Screen name="Content Page" component={ContentPage} />
+        <Stack.Screen name="Content Page" component={ContentPage} 
+        options={({ navigation }) => ({
+          title: 'Awesome app',
+          headerLeft: () => (
+            <DrawerButton onPress={() => navigation.toggleDrawer()} />
+          ),
+        })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
 )

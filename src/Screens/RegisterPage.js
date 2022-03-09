@@ -19,8 +19,8 @@ export default class RegisterPage extends React.Component {
         return (
             <View style={styles.app}>
                 <View style={styles.container}>
-                    <Text style={styles.subtitle}>CS 4261 - Programming Assignment 1</Text>
-                    <Text style={styles.title}>AAAAAAA</Text>
+                    <Text style={styles.subtitle}>CS 4261 - Team Undefined</Text>
+                    <Text style={styles.title}>Personal Trainer Portal</Text>
                     <Text style={styles.subtitle}>Register a New Account</Text>
                 </View>
 

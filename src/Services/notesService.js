@@ -28,7 +28,7 @@ export async function getUserNotes() {
     
     const currentUser = firebase.auth().currentUser;
     const currentUID = currentUser.uid;
-
+    
     const res = await db.collection('Notes').doc(currentUID);
     const snapshot = await res.get();
 
@@ -46,17 +46,17 @@ export async function getUserNotes() {
 }
 
 //Function to add a new note
-export async function makeNewNote(requestedUID = null, noteText = "") {
+export async function makeNewNote(target = "", noteText = "") {
 
     const db = firebase.firestore();
     
-    const currentUID = (requestedUID == null) ? currentUser.uid : requestedUID;
+    const currentUID = currentUser.uid //(requestedUID == null) ? currentUser.uid : requestedUID;
     var res = await db.collection('Notes').doc(currentUID);
     const contents = await res.get();
 
     var contentsD = contents.get("Notes");
 
-    contentsD[Object.keys(contentsD).length] = noteText;
+    contentsD[target] = noteText;
 
     const data = {
         Notes: contentsD
@@ -69,11 +69,11 @@ export async function makeNewNote(requestedUID = null, noteText = "") {
 }
 
 //Function to delete User note
-export async function removeNote(requestedUID = null, noteID) {
+export async function removeNote(noteID) {
 
     const db = firebase.firestore();
     
-    const currentUID = (requestedUID == null) ? currentUser.uid : requestedUID;
+    const currentUID = currentUser.uid //(requestedUID == null) ? currentUser.uid : requestedUID;
 
     var res = await db.collection('Notes').doc(currentUID);
 

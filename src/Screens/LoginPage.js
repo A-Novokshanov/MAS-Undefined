@@ -4,7 +4,7 @@ import { getAuth, signInWithEmailAndPassword } from '@firebase/auth'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import { Formik } from 'formik';
 import styles from '../Style/Styles.styles';
-
+import {newNotes, getUserNotes, makeNewNote, removeNote} from '../Services/notesService.js'
 export default class LoginPage extends React.Component {
 
     async submitLogin(email, password) {
@@ -12,6 +12,9 @@ export default class LoginPage extends React.Component {
         const auth = getAuth();
 
         await signInWithEmailAndPassword(auth, email, password)
+        //console.log(firebase.auth().currentUser.uid)
+        const data = await getUserNotes();
+
         this.props.navigation.navigate("Content Page")
     }
 
@@ -19,8 +22,8 @@ export default class LoginPage extends React.Component {
         return (
             <View style={styles.app}>
                 <View style={styles.container}>
-                    <Text style={styles.subtitle}>CS 4261</Text>
-                    <Text style={styles.title}>AAAAAAA</Text>
+                    <Text style={styles.subtitle}>CS 4261 - Team Undefined</Text>
+                    <Text style={styles.title}>Personal Trainer Portal</Text>
                     <Text style={styles.subtitle}>Please Log In</Text>
                 </View>
 

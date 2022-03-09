@@ -100,7 +100,7 @@ export default StyleSheet.create({
         paddingVertical: 6,
         borderRadius: 4,
         backgroundColor: "oldlace",
-        marginTop: 80,
+        marginTop: 30,
         width: 80,
         height: 40
       }

@@ -21,7 +21,7 @@
     "expo-dev-client": "^0.8.2",
     "expo-splash-screen": "~0.14.1",
     "expo-status-bar": "~1.2.0",
-    "firebase": "^9.6.4",
+    "firebase": "^9.6.8",
     "formik": "^2.2.9",
     "nodeify": "^1.0.1",
     "path-browserify": "^0.0.0",

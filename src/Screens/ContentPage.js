@@ -2,28 +2,34 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, StatusBar, Image } from 'react-native';
 import styles from '../Style/Content_style';
 
-
+//TODO: DATA
 const DATA = [
     {
         item: "Main dishes",
         data: [
-            { 
-                name: "John, Doe", 
-                exp: "4", 
-                review: "5.0", 
-                miles: "0.5", 
+            {
+                name: "John Doe",
+                type: "trainer",
+                exp: "4",
+                review: "5.0",
+                miles: "0.5",
+                notes:["John Doe notes1"]
             },
-            { 
-                name: "Cool Boy", 
-                exp: "4", 
-                review: "4.8", 
+            {
+                name: "Cool Boy",
+                exp: "4",
+                type: "trainer",
+                review: "4.8",
                 miles: "1.5",
+                notes:["Cool Boy notes2"]
             },
-            { 
-                name: "Damn Daniel", 
-                exp: "9", 
-                review: "4.9", 
-                miles: "3.5", 
+            {
+                name: "Damn Daniel",
+                exp: "9",
+                type: "trainer",
+                review: "4.9",
+                miles: "3.5",
+                notes:["Damn Daniel notes3"]
             }
         ]
     }
@@ -35,11 +41,12 @@ const Item = ({ item, nav }) => (
         <TouchableOpacity
             style={styles.list_button}
             onPress={() => nav.navigate('Trainer', {
-                name: item.name, 
-                exp: item.exp, 
-                review: item.review, 
+                name: item.name,
+                exp: item.exp,
+                review: item.review,
                 miles: item.miles,
-              })}
+                notes: item.notes
+            })}
         >
             <Image
                 style={styles.tinyLogo}
@@ -67,15 +74,15 @@ const ContentPage = ({ navigation }) => {
                     contentContainerStyle={styles.listContainer}
                     sections={DATA}
                     keyExtractor={(item, index) => item + index}
-                    renderItem={({ item }) => <Item item={item} nav = {navigation}/>}
+                    renderItem={({ item }) => <Item item={item} nav={navigation} />}
                 />
-                
+
             </View>
     } else if (direction === "My Schedule") {
         page =
             <View>
                 <Text>
-                My Schedule
+                    My Schedule
                 </Text>
             </View>
     } else if (direction === "My Profile") {

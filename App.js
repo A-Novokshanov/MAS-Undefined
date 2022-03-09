@@ -2,13 +2,16 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
-import {createAppContainer, createSwitchNavigator} from 'react-navigation';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from '@react-navigation/stack';
 import LoginPage from './src/Screens/LoginPage.js';
 import RegisterPage from './src/Screens/RegisterPage.js';
 import ContentPage from './src/Screens/ContentPage.js';
 import Trainer from './src/Screens/Trainer.js';
 import { initializeApp } from "firebase/app";
+import Notes from './src/Screens/Notes.js';
+import Chat from './src/Screens/Chat.js';
+import Schedule from './src/Screens/Schedule.js';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -31,25 +34,35 @@ const app = initializeApp(firebaseConfig);
 const Stack = createStackNavigator();
 
 const LoginStack = () => (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false
-          }} 
-        initialRouteName="Content Page">
-        <Stack.Screen name="Login Page" component={LoginPage}/>
-        <Stack.Screen name="Trainer" component={Trainer} />
-        <Stack.Screen name="Register Page" component={RegisterPage} />
-        <Stack.Screen name="Content Page" component={ContentPage} 
+  <NavigationContainer>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false
+      }}
+      initialRouteName="Login Page">
+      <Stack.Screen name="Login Page" component={LoginPage} />
+      <Stack.Screen name="Trainer" component={Trainer} />
+      <Stack.Screen name="Register Page" component={RegisterPage} />
+      <Stack.Screen name="Chat" component={Chat} />
+      <Stack.Screen name="Schedule" component={Schedule} />
+      <Stack.Screen name="Content Page" component={ContentPage}
         options={({ navigation }) => ({
-          title: 'Awesome app',
+          title: 'Content page',
           headerLeft: () => (
             <DrawerButton onPress={() => navigation.toggleDrawer()} />
           ),
         })}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+      />
+      <Stack.Screen name="Notes" component={Notes}
+        options={({ navigation }) => ({
+          title: 'Notes',
+          headerLeft: () => (
+            <DrawerButton  onPress={() => navigation.toggleDrawer()} />
+          ),
+        })}
+      />
+    </Stack.Navigator>
+  </NavigationContainer>
 )
 
 export default createAppContainer(

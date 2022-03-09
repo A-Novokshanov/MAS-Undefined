@@ -1,18 +1,30 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, StatusBar, Image } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, Button, Image } from 'react-native'
 import styles from '../Style/Content_style'
 
 const ContentPage = ({ route, navigation }) => {
 
-    const { name, exp, review, miles } = route.params;
+    const { name, exp, review, miles, notes } = route.params;
 
     return (
         <View style={styles.app}>
 
             <SafeAreaView>
+            <View style={{ flexDirection: 'row' }}>
+                    <Button
+                        onPress={() => navigation.navigate('Content Page', {
+                            name: name,
+                            exp: exp,
+                            review: review,
+                            miles: miles,
+                            notes: notes
+                        })}
+                        title={"< " + name}
 
+                    />
+                </View>
 
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom:50 }}>
                     <View style={{ marginLeft:59, width: 150 }}>
                     <Text>Comments like this are just amazing.
                     You can write whatever you want and after that, you can check the result of this.
@@ -40,18 +52,39 @@ const ContentPage = ({ route, navigation }) => {
                             miles: {miles}
                         </Text>
                     </View>
-                    
-
-
-
-
                 </View>
                 
 
                 <TouchableOpacity
                     style={[styles.button, styles.px12]}
+                    onPress={() => navigation.navigate('Chat', {
+                        name: name, 
+                        exp: exp, 
+                        review: review, 
+                        miles: miles,
+                        notes: notes
+                      })}
                 >
-                    <Text > Login </Text>
+                    <Text > Chat </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.button, styles.px12]}
+                >
+                    <Text onPress={() => navigation.navigate('Schedule', {
+                        name: name
+                      })}> View Schedule </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.button, styles.px12]}
+                    onPress={() => navigation.navigate('Notes', {
+                        name: name, 
+                        exp: exp, 
+                        review: review, 
+                        miles: miles,
+                        notes: notes
+                      })}
+                >
+                    <Text > Notes </Text>
                 </TouchableOpacity>
 
 

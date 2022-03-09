@@ -85,5 +85,23 @@ export default StyleSheet.create({
       },
       py12: {
         marginTop:50
+      },
+      item_notes: {
+        backgroundColor: '#E8E8E8',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
+      },
+      title_notes: {
+        fontSize: 32,
+      },
+      send :{
+        paddingHorizontal: 8,
+        paddingVertical: 6,
+        borderRadius: 4,
+        backgroundColor: "oldlace",
+        marginTop: 80,
+        width: 80,
+        height: 40
       }
 })

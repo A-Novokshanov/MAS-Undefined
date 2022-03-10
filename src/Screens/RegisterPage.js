@@ -1,5 +1,4 @@
 import React from 'react';
-import * as firebase from '@firebase/app'
 import { getAuth, createUserWithEmailAndPassword } from '@firebase/auth'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import { Formik } from 'formik';

@@ -1,6 +1,4 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -8,7 +6,9 @@ import LoginPage from './src/Screens/LoginPage.js';
 import RegisterPage from './src/Screens/RegisterPage.js';
 import ContentPage from './src/Screens/ContentPage.js';
 import Trainer from './src/Screens/Trainer.js';
-import { initializeApp } from "firebase/app";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 import Notes from './src/Screens/Notes.js';
 import Chat from './src/Screens/Chat.js';
 import Schedule from './src/Screens/Schedule.js';
@@ -24,13 +24,15 @@ const firebaseConfig = {
   projectId: "mas-undefined",
   storageBucket: "mas-undefined.appspot.com",
   messagingSenderId: "63664304153",
-  appId: "1:63664304153:web:47bb9dea78cb11b814ba88",
-  measurementId: "G-PH3WG6DCCV"
+  appId: "1:63664304153:web:47bb9dea78cb11b814ba88"
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
+if (firebase.apps.length === 0) {
+  app = firebase.initializeApp(firebaseConfig)
+} else {
+  app = firebase.app();
+}
 const Stack = createStackNavigator();
 
 const LoginStack = () => (

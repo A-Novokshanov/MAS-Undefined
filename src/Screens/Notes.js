@@ -7,24 +7,28 @@ import {newNotes, getUserNotes, makeNewNote, removeNote} from '../Services/notes
 
 const Notes = ({ route, navigation }) => {
 
-    const { name, exp, review, miles, notes } = route.params;
+    var { name, exp, review, miles, notes } = route.params;
 
     const [ note, setnotes ] = React.useState(notes);
 
     const setNotes = (newNote) => {
-        note = newNote;
+        notes = newNote;
     }
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log("Anything3")
-            const data = await getUserNotes();
-            console.log(data)
-            console.log("Anything")
+
+            try {
+                const data = await getUserNotes();
+                setNotes(data[name]);
+            }
+            catch(e) {
+                console.log(e)
+            }
+            
         }
-        console.log("Anything2")
+
         fetchData();
-        
       }, []);
 
     const Item = ({ item, nav }) => (
@@ -39,7 +43,9 @@ const Notes = ({ route, navigation }) => {
 
     const submitNotes = async (input_notes) => {
         //TODO: DB
+        console.log("test")
         note = await makeNewNote(name, input_notes);
+        console.log("test2")
         setnotes([...note, String(input_notes)]);
         return note;
     }

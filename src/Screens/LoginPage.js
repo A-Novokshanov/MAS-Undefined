@@ -1,5 +1,5 @@
 import React from 'react';
-import * as firebase from '@firebase/app'
+import firebase from 'firebase/app'
 import { getAuth, signInWithEmailAndPassword } from '@firebase/auth'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import { Formik } from 'formik';
@@ -12,8 +12,6 @@ export default class LoginPage extends React.Component {
         const auth = getAuth();
 
         await signInWithEmailAndPassword(auth, email, password)
-        //console.log(firebase.auth().currentUser.uid)
-        const data = await getUserNotes();
 
         this.props.navigation.navigate("Content Page")
     }

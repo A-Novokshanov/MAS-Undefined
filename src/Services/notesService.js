@@ -1,6 +1,6 @@
-import firebase from 'firebase/app'
-import 'firebase/database';
-import 'firebase/firestore';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 //Function to create a new notes item for a user
 export async function newNotes() {
@@ -14,7 +14,7 @@ export async function newNotes() {
         Notes: {}
     };
 
-    const res = await db.collection('Notes').doc(currentUID).set(data);
+    await db.collection('Notes').doc(currentUID).set(data);
 
     return data;
 
@@ -25,23 +25,20 @@ export async function newNotes() {
 export async function getUserNotes() {
 
     const db = firebase.firestore();
-    
+
     const currentUser = firebase.auth().currentUser;
     const currentUID = currentUser.uid;
-    
     const res = await db.collection('Notes').doc(currentUID);
     const snapshot = await res.get();
 
     if (!snapshot.exists) {
 
-        contentsD = await newNotes();
-        return contentsD;
+        await newNotes();
+        return {};
         
     } else {
-        
-        var contentsD = snapshot.get("Notes");
 
-        return contentsD;
+        return snapshot.data();
     }
 }
 
@@ -49,14 +46,26 @@ export async function getUserNotes() {
 export async function makeNewNote(target = "", noteText = "") {
 
     const db = firebase.firestore();
-    
-    const currentUID = currentUser.uid //(requestedUID == null) ? currentUser.uid : requestedUID;
+
+    const currentUID = firebase.auth().currentUser.uid //(requestedUID == null) ? currentUser.uid : requestedUID;
     var res = await db.collection('Notes').doc(currentUID);
     const contents = await res.get();
-
+    
     var contentsD = contents.get("Notes");
-
-    contentsD[target] = noteText;
+    console.log(contentsD[target])
+    console.log(target in contentsD)
+    try{
+        if (!(target in contentsD)) {
+            
+            contentsD[target] = new Array(noteText);
+        } else {
+            contentsD[target].push(noteText);
+        }
+    } catch(e) {
+        console.log(e)
+    }
+    
+    
 
     const data = {
         Notes: contentsD
@@ -73,7 +82,7 @@ export async function removeNote(noteID) {
 
     const db = firebase.firestore();
     
-    const currentUID = currentUser.uid //(requestedUID == null) ? currentUser.uid : requestedUID;
+    const currentUID = firebase.auth().currentUser.uid //(requestedUID == null) ? currentUser.uid : requestedUID;
 
     var res = await db.collection('Notes').doc(currentUID);
 

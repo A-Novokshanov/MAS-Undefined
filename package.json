@@ -23,6 +23,7 @@
     "expo-status-bar": "~1.2.0",
     "firebase": "^9.4.1",
     "formik": "^2.2.9",
+    "moment": "^2.29.1",
     "nodeify": "^1.0.1",
     "path-browserify": "^0.0.0",
     "react": "17.0.1",

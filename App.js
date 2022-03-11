@@ -12,6 +12,8 @@ import 'firebase/compat/firestore';
 import Notes from './src/Screens/Notes.js';
 import Chat from './src/Screens/Chat.js';
 import Schedule from './src/Screens/Schedule.js';
+import MyClients from './src/Screens/MyClients.js';
+import Clients from './src/Screens/Clients.js';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -41,12 +43,14 @@ const LoginStack = () => (
       screenOptions={{
         headerShown: false
       }}
-      initialRouteName="Login Page">
+      initialRouteName="Content Page">
       <Stack.Screen name="Login Page" component={LoginPage} />
       <Stack.Screen name="Trainer" component={Trainer} />
       <Stack.Screen name="Register Page" component={RegisterPage} />
       <Stack.Screen name="Chat" component={Chat} />
       <Stack.Screen name="Schedule" component={Schedule} />
+      <Stack.Screen name="MyClients" component={MyClients} />
+      <Stack.Screen name="Clients" component={Clients} />
       <Stack.Screen name="Content Page" component={ContentPage}
         options={({ navigation }) => ({
           title: 'Content page',

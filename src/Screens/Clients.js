@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, Button, Image } from 'react-native'
 import styles from '../Style/Content_style'
 
-const Trainer = ({ route, navigation }) => {
+const Clients = ({ route, navigation }) => {
 
-    const { name, exp, review, miles, notes } = route.params;
+    const { name, date_next_meeting, notes } = route.params;
 
     return (
         <View style={styles.app}>
@@ -13,11 +13,7 @@ const Trainer = ({ route, navigation }) => {
             <View style={{ flexDirection: 'row' }}>
                     <Button
                         onPress={() => navigation.navigate('Content Page', {
-                            name: name,
-                            exp: exp,
-                            review: review,
-                            miles: miles,
-                            notes: notes
+                            name: name
                         })}
                         title={"< " + name}
 
@@ -26,9 +22,7 @@ const Trainer = ({ route, navigation }) => {
 
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom:50 }}>
                     <View style={{ marginLeft:59, width: 150 }}>
-                    <Text>Comments like this are just amazing.
-                    You can write whatever you want and after that, you can check the result of this.
-                    It can have more than 3 lines</Text>
+                    <Text>I am super strong and wants weight lifting</Text>
                     </View>
                     <View style={{ marginLeft:59, width: 100 }}>
                         <Image
@@ -43,14 +37,9 @@ const Trainer = ({ route, navigation }) => {
                             {name}
                         </Text>
                         <Text>
-                            exp: {exp}
+                            Meet in {date_next_meeting} days
                         </Text>
-                        <Text>
-                            review: {review}
-                        </Text>
-                        <Text>
-                            miles: {miles}
-                        </Text>
+                        
                     </View>
                 </View>
                 
@@ -58,29 +47,16 @@ const Trainer = ({ route, navigation }) => {
                 <TouchableOpacity
                     style={[styles.button, styles.px12]}
                     onPress={() => navigation.navigate('Chat', {
-                        name: name, 
-                        exp: exp, 
-                        review: review, 
-                        miles: miles,
-                        notes: notes
+                        name: name
                       })}
                 >
                     <Text > Chat </Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                    style={[styles.button, styles.px12]}
-                >
-                    <Text onPress={() => navigation.navigate('Schedule', {
-                        name: name
-                      })}> View Schedule </Text>
-                </TouchableOpacity>
+
                 <TouchableOpacity
                     style={[styles.button, styles.px12]}
                     onPress={() => navigation.navigate('Notes', {
                         name: name, 
-                        exp: exp, 
-                        review: review, 
-                        miles: miles,
                         notes: notes
                       })}
                 >
@@ -94,4 +70,4 @@ const Trainer = ({ route, navigation }) => {
 
 }
 
-export default Trainer
+export default Clients

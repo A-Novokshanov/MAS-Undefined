@@ -1,7 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, Button, Image } from 'react-native'
 import styles from '../Style/Content_style'
-import { Formik } from 'formik';
+import CalendarPicker from 'react-native-calendar-picker';
+
+
+
+const onDateChange = () => (
+    console.log('cioool')
+);
 
 
 const Schedule = ({ route, navigation }) => {
@@ -21,14 +27,9 @@ const Schedule = ({ route, navigation }) => {
                     />
                     
                 </View>
-                <Image
-                        style={{
-                            aspectRatio: 0.7, 
-                            resizeMode: 'contain',
-                            marginLeft: 20
-                        }}
-                        source={require('../Icon/schedule.png')}
-                    />
+                <CalendarPicker
+          onDateChange={onDateChange}
+        />
 
             </SafeAreaView>
         </View>

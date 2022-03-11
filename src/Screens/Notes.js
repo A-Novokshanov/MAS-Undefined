@@ -7,9 +7,9 @@ import {newNotes, getUserNotes, makeNewNote, removeNote} from '../Services/notes
 
 const Notes = ({ route, navigation }) => {
 
-    var { name, exp, review, miles, notes } = route.params;
+    var { name, exp, review, miles } = route.params;
 
-    const [ note, setnotes ] = React.useState(notes);
+    const [ note, setnotes ] = React.useState([]);
 
     // const setNotes = (newNote) => {
     //     notes = newNote;
@@ -47,7 +47,12 @@ const Notes = ({ route, navigation }) => {
             console.log("test")
             await makeNewNote(name, input_notes);
             console.log("test2")
-            setnotes([...note, String(input_notes)]);
+            if (note) {
+                setnotes([...note, String(input_notes)]);
+            } else {
+                setnotes([String(input_notes)])
+            }
+            
         }catch (e) {
             console.log(e)
         }

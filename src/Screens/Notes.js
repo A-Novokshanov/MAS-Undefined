@@ -11,16 +11,16 @@ const Notes = ({ route, navigation }) => {
 
     const [ note, setnotes ] = React.useState(notes);
 
-    const setNotes = (newNote) => {
-        notes = newNote;
-    }
+    // const setNotes = (newNote) => {
+    //     notes = newNote;
+    // }
 
     useEffect(() => {
         const fetchData = async () => {
 
             try {
                 const data = await getUserNotes();
-                setNotes(data[name]);
+                setnotes(data.Notes[name]);
             }
             catch(e) {
                 console.log(e)
@@ -43,11 +43,15 @@ const Notes = ({ route, navigation }) => {
 
     const submitNotes = async (input_notes) => {
         //TODO: DB
-        console.log("test")
-        note = await makeNewNote(name, input_notes);
-        console.log("test2")
-        setnotes([...note, String(input_notes)]);
-        return note;
+        try {
+            console.log("test")
+            await makeNewNote(name, input_notes);
+            console.log("test2")
+            setnotes([...note, String(input_notes)]);
+        }catch (e) {
+            console.log(e)
+        }
+        
     }
     
     const UselessTextInput = (props) => {

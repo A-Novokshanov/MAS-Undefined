@@ -43,7 +43,7 @@ const LoginStack = () => (
       screenOptions={{
         headerShown: false
       }}
-      initialRouteName="Login Page">
+      initialRouteName="MyClients">
       <Stack.Screen name="Login Page" component={LoginPage} />
       <Stack.Screen name="Trainer" component={Trainer} />
       <Stack.Screen name="Register Page" component={RegisterPage} />

@@ -46,14 +46,12 @@ export async function getUserNotes() {
 export async function makeNewNote(target = "", noteText = "") {
 
     const db = firebase.firestore();
-
     const currentUID = firebase.auth().currentUser.uid //(requestedUID == null) ? currentUser.uid : requestedUID;
     var res = await db.collection('Notes').doc(currentUID);
     const contents = await res.get();
     
     var contentsD = contents.get("Notes");
-    console.log(contentsD[target])
-    console.log(target in contentsD)
+
     try{
         if (!(target in contentsD)) {
             

@@ -42,18 +42,13 @@ const Notes = ({ route, navigation }) => {
     );
 
     const submitNotes = async (input_notes) => {
-        //TODO: DB
         try {
             if (note) {
                 setnotes([...note, String(input_notes)]);
             } else {
                 setnotes([String(input_notes)])
             }
-            console.log("test")
-            await makeNewNote(name, input_notes);
-            console.log("test2")
-            
-            
+            await makeNewNote(name, input_notes);            
         }catch (e) {
             console.log(e)
         }

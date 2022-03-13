@@ -118,13 +118,15 @@ export default StyleSheet.create({
         fontSize: 32,
       },
       send :{
+        backgroundColor: "oldlace",
         paddingHorizontal: 8,
         paddingVertical: 6,
         borderRadius: 4,
-        backgroundColor: "oldlace",
-        marginTop: 30,
         width: 80,
-        height: 40
+      },
+      upload :{
+        borderRadius: 4,
+        marginTop: 10,
       },
       pf_button :{
         paddingHorizontal: 7,

@@ -111,7 +111,7 @@ const Notes = ({ route, navigation }) => {
                             <TouchableOpacity
                                 style={styles.send }
                                 onPress={(handleSubmit)}>
-                                <Text style={styles.buttonlabel}> Save </Text>
+                                <Text style={styles.generic}> Save </Text>
                             </TouchableOpacity>
                         </View>
                     )}

@@ -97,7 +97,7 @@ const Chat = ({ route, navigation }) => {
                     onSubmit={(values, { setFieldValue }) => submitNotes(values.input_notes).catch(error => setFieldValue('error', error.message))}
                 >
                     {({ handleChange, handleBlur, handleSubmit, values, setFieldValue }) => (
-                        <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom: 50 }}>
+                        <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom:50, marginLeft: 20 }}>
 
                             <UselessTextInput
                                 multiline
@@ -108,8 +108,13 @@ const Chat = ({ route, navigation }) => {
                                 value={values}
                             />
 
-                            <TouchableOpacity
+                            {/* <TouchableOpacity
                                 style={styles.send}
+                                onPress={(handleSubmit)}>
+                                <Text style={styles.generic}> Send </Text>
+                            </TouchableOpacity> */}
+                            <TouchableOpacity
+                                style={styles.send }
                                 onPress={(handleSubmit)}>
                                 <Text style={styles.generic}> Send </Text>
                             </TouchableOpacity>

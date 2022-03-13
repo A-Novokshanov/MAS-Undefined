@@ -4,6 +4,7 @@ import styles from '../Style/Content_style';
 import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
 import Profile from './Profile';
+import Message from './Message';
 
 //TODO: DATA
 const DATA = [
@@ -75,11 +76,11 @@ let disable_dates = [
 
 const MyClients = ({ navigation }) => {
 
-    const [direction, setDirection] = useState("My Clients");
+    const [direction, setDirection] = useState("Clients");
 
     var page;
 
-    if (direction === "My Clients") {
+    if (direction === "Clients") {
         page =
             <View>
                 <SectionList
@@ -90,7 +91,7 @@ const MyClients = ({ navigation }) => {
                 />
 
             </View>
-    } else if (direction === "My Schedule") {
+    } else if (direction === "Schedule") {
         page =
             <View>
                 <CalendarPicker
@@ -99,10 +100,15 @@ const MyClients = ({ navigation }) => {
                     disabledDates={disable_dates}
                 />
             </View>
-    } else if (direction === "My Profile") {
+    } else if (direction === "Profile") {
         page =
             <View>
                 <Profile name = {"User"}/>
+            </View>
+    }else if (direction === "Message") {
+        page =
+            <View>
+                <Message name = {"User"}/>
             </View>
     }
 
@@ -114,7 +120,7 @@ const MyClients = ({ navigation }) => {
 
             <PreviewLayout
                 selectedValue={direction}
-                values={["My Clients", "My Schedule", "My Profile"]}
+                values={["Clients", "Schedule", "Message", "Profile"]}
                 setSelectedValue={setDirection}>
                 {page}
             </PreviewLayout>
@@ -137,7 +143,7 @@ const PreviewLayout = ({
                     key={value}
                     onPress={() => setSelectedValue(value)}
                     style={[
-                        styles.button,
+                        styles.tab_button,
                         selectedValue === value && styles.selected,
                     ]}
                 >

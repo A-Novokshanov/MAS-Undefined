@@ -33,6 +33,17 @@ export default StyleSheet.create({
         minWidth: "30%",
         textAlign: "center",
       },
+      tab_button: {
+        paddingHorizontal: 8,
+        paddingVertical: 6,
+        borderRadius: 4,
+        backgroundColor: "oldlace",
+        alignSelf: "flex-start",
+        marginHorizontal: "1%",
+        marginBottom: 6,
+        minWidth: "22%",
+        textAlign: "center",
+      },
       selected: {
         backgroundColor: "coral",
         borderWidth: 0,
@@ -125,5 +136,20 @@ export default StyleSheet.create({
         marginBottom: 6,
         minWidth: "90%",
         textAlign: "center",
-      }
+      },
+      message_button :{
+        paddingHorizontal: 7,
+        paddingVertical: 20,
+        borderRadius: 3,
+        borderWidth: 1,
+        alignSelf: "flex-start",
+        marginHorizontal: "1%",
+        minWidth: "90%",
+        textAlign: "center",
+      },
+      mag_label: {
+        fontSize: 24,
+        marginLeft:25,
+        marginRight:120,
+      },
 })

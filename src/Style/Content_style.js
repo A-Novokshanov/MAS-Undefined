@@ -14,6 +14,14 @@ export default StyleSheet.create({
         flexDirection: "row",
         flexWrap: "wrap",
       },
+      subtitle: {
+        marginLeft: 20,
+        fontSize: 20,
+        fontWeight: "bold",
+        color: '#0D3D56',
+        textAlign: "left",
+        marginBottom: 10
+    },
       button: {
         paddingHorizontal: 8,
         paddingVertical: 6,
@@ -83,6 +91,9 @@ export default StyleSheet.create({
       px12: {
         marginLeft:150,
       },
+      px6: {
+        marginLeft:10,
+      },
       py12: {
         marginTop:50
       },
@@ -103,5 +114,16 @@ export default StyleSheet.create({
         marginTop: 30,
         width: 80,
         height: 40
+      },
+      pf_button :{
+        paddingHorizontal: 7,
+        paddingVertical: 11,
+        borderRadius: 3,
+        borderWidth: 1,
+        alignSelf: "flex-start",
+        marginHorizontal: "1%",
+        marginBottom: 6,
+        minWidth: "90%",
+        textAlign: "center",
       }
 })

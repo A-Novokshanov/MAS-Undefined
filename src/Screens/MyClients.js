@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeArea
 import styles from '../Style/Content_style';
 import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
+import Profile from './Profile';
 
 //TODO: DATA
 const DATA = [
@@ -101,9 +102,7 @@ const MyClients = ({ navigation }) => {
     } else if (direction === "My Profile") {
         page =
             <View>
-                <Text>
-                    My Profile
-                </Text>
+                <Profile name = {"User"}/>
             </View>
     }
 
@@ -115,7 +114,7 @@ const MyClients = ({ navigation }) => {
 
             <PreviewLayout
                 selectedValue={direction}
-                values={["My Clients", "My Schedule"]}
+                values={["My Clients", "My Schedule", "My Profile"]}
                 setSelectedValue={setDirection}>
                 {page}
             </PreviewLayout>

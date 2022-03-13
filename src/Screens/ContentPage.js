@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeArea
 import styles from '../Style/Content_style';
 import moment from 'moment';
 import CalendarPicker from 'react-native-calendar-picker';
+import Profile from './Profile';
 
 
 //TODO: DATA
@@ -117,9 +118,7 @@ const ContentPage = ({ navigation }) => {
     } else if (direction === "My Profile") {
         page =
             <View>
-                <Text>
-                    My Profile
-                </Text>
+                <Profile name = {"User"}/>
             </View>
     }
 
@@ -128,7 +127,7 @@ const ContentPage = ({ navigation }) => {
         <SafeAreaView style={styles.container}>
             <PreviewLayout
                 selectedValue={direction}
-                values={["My Trainers", "My Schedule"]}
+                values={["My Trainers", "My Schedule",  "My Profile"]}
                 setSelectedValue={setDirection}>
                 {page}
             </PreviewLayout>

@@ -6,8 +6,8 @@ import { Formik } from 'formik';
 
 //TODO: Chat DATA
 const DATA = [
-    "Hi",
-    "-Hello"
+    "-Hi, how are you doing?",
+    "I want to schedule a workout."
 ];
 
 const Chat = ({ route, navigation }) => {

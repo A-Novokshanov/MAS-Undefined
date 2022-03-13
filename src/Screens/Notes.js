@@ -79,7 +79,7 @@ const Notes = ({ route, navigation }) => {
                             miles: miles,
                             notes: note
                         })}
-                        title={"< My Notes for " + name}
+                        title={"< " + name + "'s Notes"}
                     />
                 </View>
                 <FlatList

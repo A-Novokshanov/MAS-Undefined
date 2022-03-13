@@ -52,6 +52,14 @@ const Profile = ({ name }) => {
                 >
                     <Text > Phone number </Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.pf_button]}
+                    onPress={() => navigation.navigate('Notes', {
+                        name: name,
+                    })}
+                >
+                    <Text > Feedbacks </Text>
+                </TouchableOpacity>
 
                 <Text style={[styles.subtitle, styles.px6]}>
                 Support

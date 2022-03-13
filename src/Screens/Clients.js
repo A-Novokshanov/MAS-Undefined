@@ -22,7 +22,7 @@ const Clients = ({ route, navigation }) => {
 
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom:50 }}>
                     <View style={{ marginLeft:59, width: 150 }}>
-                    <Text>I am super strong and wants weight lifting</Text>
+                    <Text>Hello! My name is Duy Nguyen and I have been in the fitness industry since 2018!</Text>
                     </View>
                     <View style={{ marginLeft:59, width: 100 }}>
                         <Image
@@ -52,7 +52,13 @@ const Clients = ({ route, navigation }) => {
                 >
                     <Text > Chat </Text>
                 </TouchableOpacity>
-
+                <TouchableOpacity
+                    style={[styles.button, styles.px12]}
+                >
+                    <Text onPress={() => navigation.navigate('Schedule', {
+                        name: name
+                      })}> View Schedule </Text>
+                </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.button, styles.px12]}
                     onPress={() => navigation.navigate('Notes', {

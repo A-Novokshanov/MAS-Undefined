@@ -42,7 +42,7 @@ const Schedule = ({ route, navigation }) => {
                 <View style={{ flexDirection: 'row' }}>
                     <Button
                         onPress={() => navigation.navigate('Content Page')}
-                        title={"< My Schedule with " + name}
+                        title={"< " + name + "'s Schedule"}
                     />
 
                 </View>

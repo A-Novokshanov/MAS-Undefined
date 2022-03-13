@@ -49,7 +49,25 @@ const Message = ({ name }) => {
                     <Text>                    Hello, my name is ...</Text>
 
                 </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.message_button, { flexDirection: 'row', flexWrap: 'wrap', marginBottom: 10 }]}
+                    onPress={() => navigation.navigate('Chat', {
+                        name: name,
+                    })}
+                >
+                    <Image
+                            style={{
+                                width: 50,
+                                height: 50,
+                                borderRadius: 10,
+                            }}
+                            source={require('../Icon/pic.png')}
+                        />
+                        
+                        <Text style={styles.mag_label}>Waldner, Kyle</Text>
+                    <Text>                    I want to schedule a workout.</Text>
 
+                </TouchableOpacity>
 
 
             </SafeAreaView>

@@ -111,4 +111,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 50
     },
+    py12: {
+        marginTop:12
+    },
 })

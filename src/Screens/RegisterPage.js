@@ -1,6 +1,6 @@
 import React from 'react';
 import { getAuth, createUserWithEmailAndPassword } from '@firebase/auth'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Switch } from 'react-native'
 import { Formik } from 'formik';
 import styles from '../Style/Styles.styles';
 
@@ -28,7 +28,8 @@ export default class RegisterPage extends React.Component {
                         title: 'Register',
                         email: '',
                         password: '',
-                        error: ''
+                        error: '',
+                        trianer: false
                     }}
                     onSubmit={(values, { setFieldValue }) => this.submitRegister(values.email, values.password).catch(error => setFieldValue('error', error.message))}
                 >
@@ -50,6 +51,16 @@ export default class RegisterPage extends React.Component {
                                 value={values.password}
                                 style={styles.input}
                             />
+                            <Text style={[styles.py12]}>
+                                <Switch
+                                    onValueChange={value =>
+                                        setFieldValue('trianer', value)
+                                    }
+                                    value={values.trianer}
+                                />
+                                I am a trainer
+                            </Text>
+                            
                             <Text style={styles.error}> {values.error} </Text>
                             <TouchableOpacity
                                 style={styles.button}

@@ -108,6 +108,9 @@ export default StyleSheet.create({
       py12: {
         marginTop:50
       },
+      py6: {
+        marginTop:10
+      },
       item_notes: {
         backgroundColor: '#E8E8E8',
         padding: 20,

@@ -15,6 +15,9 @@ import Schedule from './src/Screens/Schedule.js';
 import MyClients from './src/Screens/MyClients.js';
 import Clients from './src/Screens/Clients.js';
 import Trainer_init from './src/Screens/Trainer_init.js';
+import Trainer_init_2 from './src/Screens/Trainer_init_2.js';
+import Update_info from './src/Screens/Update_info.js';
+import Reviews from './src/Screens/Reviews.js';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -44,14 +47,17 @@ const LoginStack = () => (
       screenOptions={{
         headerShown: false
       }}
-      initialRouteName="Login Page">
+      initialRouteName="Register Page">
       <Stack.Screen name="Login Page" component={LoginPage} />
       <Stack.Screen name="Trainer" component={Trainer} />
       <Stack.Screen name="Register Page" component={RegisterPage} />
       <Stack.Screen name="Chat" component={Chat} />
       <Stack.Screen name="Schedule" component={Schedule} />
       <Stack.Screen name="MyClients" component={MyClients} />
+      <Stack.Screen name="Update_info" component={Update_info} />
+      <Stack.Screen name="Reivews" component={Reviews} />
       <Stack.Screen name="Trainer_init" component={Trainer_init} />
+      <Stack.Screen name="Trainer_init_2" component={Trainer_init_2} />
       <Stack.Screen name="Clients" component={Clients} />
       <Stack.Screen name="Content Page" component={ContentPage}
         options={({ navigation }) => ({

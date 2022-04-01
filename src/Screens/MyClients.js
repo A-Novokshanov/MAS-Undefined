@@ -74,7 +74,7 @@ let disable_dates = [
 
 
 
-const MyClients = ({ navigation }) => {
+const MyClients = ({ navigation, route }) => {
 
     const [direction, setDirection] = useState("Clients");
 
@@ -103,7 +103,12 @@ const MyClients = ({ navigation }) => {
     } else if (direction === "Profile") {
         page =
             <View>
-                <Profile name = {"User"}/>
+                <Profile 
+                    name = {route.params.profile.name? route.params.profile.name : "User"} 
+                    is_trainer = {route.params.profile.is_trainer? route.params.profile.is_trainer : false}
+                    profile = {route.params.profile}
+                    navigation = {navigation}
+                />
             </View>
     }else if (direction === "Message") {
         page =

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, Button, Image } from 'react-native'
 import styles from '../Style/Content_style'
 
-const Profile = ({ name }) => {
+const Profile = ({ navigation, name, is_trainer, profile }) => {
 
 
     return (
@@ -15,8 +15,9 @@ const Profile = ({ name }) => {
 
                 <TouchableOpacity
                     style={[styles.pf_button]}
-                    onPress={() => navigation.navigate('Chat', {
-                        name: name,
+                    onPress={() => navigation.navigate('Update_info', {
+                        c_type: "Name",
+                        value : profile.name
                     })}
                 >
                     <Text > Name </Text>
@@ -24,42 +25,53 @@ const Profile = ({ name }) => {
                 <TouchableOpacity
                     style={[styles.pf_button]}
                 >
-                    <Text onPress={() => navigation.navigate('Schedule', {
-                        name: name
+                    <Text onPress={() => navigation.navigate('Update_info', {
+                        c_type: "Email",
+                        value : profile.email
                     })}> Email </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.pf_button]}
-                    onPress={() => navigation.navigate('Notes', {
-                        name: name,
+                    onPress={() => navigation.navigate('Update_info', {
+                        c_type: "Password",
+                        value : profile.password
                     })}
                 >
                     <Text > Password </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.pf_button]}
-                    onPress={() => navigation.navigate('Notes', {
-                        name: name,
+                    onPress={() => navigation.navigate('Update_info', {
+                        c_type: "Payment",
+                        value : profile.payment
                     })}
                 >
                     <Text > Payment </Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                    style={[styles.pf_button]}
-                    onPress={() => navigation.navigate('Notes', {
-                        name: name,
-                    })}
-                >
-                    <Text > Phone number </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={[styles.pf_button]}
-                    onPress={() => navigation.navigate('Notes', {
-                        name: name,
-                    })}
-                >
-                    <Text > Feedbacks </Text>
-                </TouchableOpacity>
+                
+                {is_trainer ? 
+                    <View>
+                        <TouchableOpacity
+                            style={[styles.pf_button]}
+                            onPress={() => navigation.navigate('Reivews', {
+                                profile: profile,
+                                is_trainer : true
+                            })}
+                        >
+                            <Text > View my reviews </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.pf_button]}
+                            onPress={() => navigation.navigate('Trainer', {
+                                profile : profile,
+                                preview : true
+                            })}
+                        >
+                            <Text > Check my Profile Page </Text>
+                        </TouchableOpacity>
+                    </View> : <div></div>}
+                
+                
 
                 <Text style={[styles.subtitle, styles.px6]}>
                 Support

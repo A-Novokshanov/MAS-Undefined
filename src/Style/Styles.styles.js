@@ -8,8 +8,10 @@ export default StyleSheet.create({
     container: {
         marginTop: 10,
         padding: 5,
-        fontSize: 20,
-        backgroundColor:'white'
+        fontSize: 15,
+        borderColor: 'darkblue',
+        borderRadius: 50
+
     },
     divider: {
         height: StyleSheet.hairlineWidth,

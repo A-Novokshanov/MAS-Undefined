@@ -14,6 +14,7 @@ import Chat from './src/Screens/Chat.js';
 import Schedule from './src/Screens/Schedule.js';
 import MyClients from './src/Screens/MyClients.js';
 import Clients from './src/Screens/Clients.js';
+import Trainer_init from './src/Screens/Trainer_init.js';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -50,6 +51,7 @@ const LoginStack = () => (
       <Stack.Screen name="Chat" component={Chat} />
       <Stack.Screen name="Schedule" component={Schedule} />
       <Stack.Screen name="MyClients" component={MyClients} />
+      <Stack.Screen name="Trainer_init" component={Trainer_init} />
       <Stack.Screen name="Clients" component={Clients} />
       <Stack.Screen name="Content Page" component={ContentPage}
         options={({ navigation }) => ({

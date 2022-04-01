@@ -11,7 +11,7 @@ export default class RegisterPage extends React.Component {
         const auth = getAuth();
         console.log('test')
         await createUserWithEmailAndPassword(auth, email, password)
-        this.props.navigation.navigate("Content Page")
+        this.props.navigation.navigate("Trainer_init")
     }
 
     render() {

@@ -6,12 +6,20 @@ import styles from '../Style/Styles.styles';
 
 export default class RegisterPage extends React.Component {
 
-    async submitRegister(email, password) {
+    async submitRegister(email, password, is_trianer) {
 
         const auth = getAuth();
-        console.log('test')
-        await createUserWithEmailAndPassword(auth, email, password)
-        this.props.navigation.navigate("Trainer_init", {profile : {email : email}})
+        console.log('test');
+        await createUserWithEmailAndPassword(auth, email, password);
+        let temp_data = {
+            email : email,
+            name : "User",
+            password : password,
+            payment : "",
+            phone: ""
+        }
+        is_trianer ? this.props.navigation.navigate("Trainer_init", {profile : {email : email}})
+            : this.props.navigation.navigate("Content Page", {profile : temp_data})
     }
 
     render() {
@@ -29,9 +37,9 @@ export default class RegisterPage extends React.Component {
                         email: '',
                         password: '',
                         error: '',
-                        trianer: false
+                        is_trianer: false
                     }}
-                    onSubmit={(values, { setFieldValue }) => this.submitRegister(values.email, values.password).catch(error => setFieldValue('error', error.message))}
+                    onSubmit={(values, { setFieldValue }) => this.submitRegister(values.email, values.password, values.is_trianer).catch(error => setFieldValue('error', error.message))}
                 >
                     {({ handleChange, handleBlur, handleSubmit, values, setFieldValue }) => (
                         <View style={styles.container}>
@@ -54,9 +62,9 @@ export default class RegisterPage extends React.Component {
                             <Text style={[styles.py12]}>
                                 <Switch
                                     onValueChange={value =>
-                                        setFieldValue('trianer', value)
+                                        setFieldValue('is_trianer', value)
                                     }
-                                    value={values.trianer}
+                                    value={values.is_trianer}
                                 />
                                 I am a trainer
                             </Text>

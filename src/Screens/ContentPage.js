@@ -44,10 +44,7 @@ const Item = ({ item, nav }) => (
         <TouchableOpacity
             style={styles.list_button}
             onPress={() => nav.navigate('Trainer', {
-                name: item.name,
-                exp: item.exp,
-                review: item.review,
-                miles: item.miles
+                profile : item
             })}
         >
             <Image
@@ -89,7 +86,7 @@ const onDateChange = () => (
 
 
 
-const ContentPage = ({ navigation }) => {
+const ContentPage = ({ navigation, route }) => {
 
     const [direction, setDirection] = useState("My Trainers");
 
@@ -118,7 +115,12 @@ const ContentPage = ({ navigation }) => {
     } else if (direction === "My Profile") {
         page =
             <View>
-                <Profile name = {"User"}/>
+                <Profile 
+                    name = {"User"}
+                    is_trainer = {route.params.profile.is_trainer? route.params.profile.is_trainer : false}
+                    profile = {route.params.profile}
+                    navigation = {navigation}
+                />
             </View>
     }
 

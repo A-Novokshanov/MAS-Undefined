@@ -10,14 +10,14 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
 
             <SafeAreaView>
                 <Text style={[styles.subtitle, styles.px6]}>
-                    Hi, {name}
+                    Hi, {profile.name}
                 </Text>
 
                 <TouchableOpacity
                     style={[styles.pf_button]}
                     onPress={() => navigation.navigate('Update_info', {
                         c_type: "Name",
-                        value : profile.name
+                        value: profile.name
                     })}
                 >
                     <Text > Name </Text>
@@ -27,14 +27,14 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                 >
                     <Text onPress={() => navigation.navigate('Update_info', {
                         c_type: "Email",
-                        value : profile.email
+                        value: profile.email
                     })}> Email </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.pf_button]}
                     onPress={() => navigation.navigate('Update_info', {
                         c_type: "Password",
-                        value : profile.password
+                        value: profile.password
                     })}
                 >
                     <Text > Password </Text>
@@ -43,19 +43,29 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                     style={[styles.pf_button]}
                     onPress={() => navigation.navigate('Update_info', {
                         c_type: "Payment",
-                        value : profile.payment
+                        value: profile.payment
                     })}
                 >
                     <Text > Payment </Text>
                 </TouchableOpacity>
-                
-                {is_trainer ? 
+
+                <TouchableOpacity
+                    style={[styles.pf_button]}
+                    onPress={() => navigation.navigate('Update_info', {
+                        c_type: "phone",
+                        value: profile.phone
+                    })}
+                >
+                    <Text > Phone Number </Text>
+                </TouchableOpacity>
+
+                {is_trainer ?
                     <View>
                         <TouchableOpacity
                             style={[styles.pf_button]}
                             onPress={() => navigation.navigate('Reivews', {
                                 profile: profile,
-                                is_trainer : true
+                                is_trainer: true
                             })}
                         >
                             <Text > View my reviews </Text>
@@ -63,18 +73,19 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                         <TouchableOpacity
                             style={[styles.pf_button]}
                             onPress={() => navigation.navigate('Trainer', {
-                                profile : profile,
-                                preview : true
+                                profile: profile,
+                                preview: true
                             })}
                         >
                             <Text > Check my Profile Page </Text>
                         </TouchableOpacity>
-                    </View> : <div></div>}
-                
-                
+                    </View> : <View></View>
+                }
+
+
 
                 <Text style={[styles.subtitle, styles.px6]}>
-                Support
+                    Support
                 </Text>
                 <TouchableOpacity
                     style={[styles.pf_button]}
@@ -88,11 +99,12 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                     style={[styles.pf_button]}
                     onPress={() => navigation.navigate('Notes', {
                         name: name,
-                    })}
+                    })
+                    }
                 >
                     <Text > Learn about our App </Text>
                 </TouchableOpacity>
-                
+
 
 
             </SafeAreaView>

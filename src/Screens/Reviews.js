@@ -7,10 +7,10 @@ import Stars from './Stars';
 
 
 //TODO: Reviews DATA
-const DATA = [
+var DATA = [
     {
         clients: "Daniel Tan",
-        date : "03/25",
+        date: "03/25",
         rate: 5,
         comment: "I had a meeting with Duy last Friday, during which Duy showed me how to correctly... do some workouts. We also talked about some dietary plans that Duy believes will help me. Overall, Duy was a pleasure to work with, and I would recommend him to anyone!"
     },
@@ -20,10 +20,17 @@ const Reviews = ({ route, navigation }) => {
 
     const { profile, is_trainer } = route.params;
 
+    route.params.temp_data? DATA.push({
+        clients: route.params.temp_data.anonymous? "Anonymous User" : "User name",
+        date: (new Date().toLocaleString().split(',')[0]).toString(),
+        rate: route.params.temp_data.rate,
+        comment: route.params.temp_data.comments
+    }) : DATA = DATA;
+
     const [note, setnotes] = React.useState(DATA)
 
     const Item = ({ item, nav }) => (
-        
+
         <View style={styles.item_notes}>
 
             <Text>
@@ -33,7 +40,7 @@ const Reviews = ({ route, navigation }) => {
                 {item.date}
             </Text>
             <Text style={{ marginTop: 10 }}>
-                <Stars rate = {item.rate}/>
+                <Stars rate={item.rate} />
             </Text>
             <Text>
                 {item.comment}
@@ -68,15 +75,23 @@ const Reviews = ({ route, navigation }) => {
             <SafeAreaView>
                 <View style={{ flexDirection: 'row' }}>
                     <Button
-                        onPress={() => navigation.back()}
+                        onPress={() => navigation.goBack()}
                         title={"< Reviews for " + profile.name}
                     />
                 </View>
                 <FlatList
-                    style={{ height: 400 }}
+                    style={{ height: 600 }}
                     data={note}
                     renderItem={renderItem}
                 />
+                {is_trainer || route.params.temp_data ? <View></View> :
+                    <TouchableOpacity 
+                        style={[styles.review_button]}
+                        onPress={() => navigation.navigate("New_Review", {profile: profile})}
+                    >
+                        <Text style={styles.generic}> Create New Review </Text>
+                    </TouchableOpacity>
+                }
 
             </SafeAreaView>
         </View>

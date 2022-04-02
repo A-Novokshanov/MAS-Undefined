@@ -99,8 +99,14 @@ export default StyleSheet.create({
         marginRight:20,
         marginLeft:20,
       },
+      px50: {
+        marginLeft:30,
+      },
       px12: {
         marginLeft:150,
+      },
+      px_review: {
+        marginLeft:250,
       },
       px6: {
         marginLeft:10,
@@ -140,6 +146,18 @@ export default StyleSheet.create({
         marginHorizontal: "1%",
         marginBottom: 6,
         minWidth: "90%",
+        textAlign: "center",
+      },
+      review_button :{
+        backgroundColor: "oldlace",
+        paddingHorizontal: 7,
+        paddingVertical: 11,
+        borderRadius: 3,
+        borderWidth: 1,
+        marginHorizontal: "1%",
+        marginBottom: 6,
+        marginLeft: 50,
+        width : 300,
         textAlign: "center",
       },
       message_button :{

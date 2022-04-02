@@ -104,12 +104,9 @@ const Trainer = ({ route, navigation }) => {
                 <TouchableOpacity
                     disabled = {preview}
                     style={[styles.button, styles.px12]}
-                    onPress={() => navigation.navigate('Notes', {
-                        name: profile.name, 
-                        exp: profile.exp, 
-                        review: profile.review, 
-                        miles: profile.miles,
-                        notes: profile.notes
+                    onPress={() => navigation.navigate('Reviews', {
+                        profile : profile,
+                        is_trianer: false
                       })}
                 >
                     <Text > View Reviews </Text>

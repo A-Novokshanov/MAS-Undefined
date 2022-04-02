@@ -63,7 +63,7 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                     <View>
                         <TouchableOpacity
                             style={[styles.pf_button]}
-                            onPress={() => navigation.navigate('Reivews', {
+                            onPress={() => navigation.navigate('Reviews', {
                                 profile: profile,
                                 is_trainer: true
                             })}

@@ -33,7 +33,7 @@ const New_review = ({ route, navigation }) => {
                 profile: profile,
                 is_trainer: true,
                 temp_data : data
-            })
+            });
         } catch (e) {
             console.log(e)
         }

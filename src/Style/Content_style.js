@@ -194,7 +194,12 @@ export default StyleSheet.create({
     marginLeft: 10,
   },
   filter_page: {
-    height : 400,
+    height : 350,
     backgroundColor: "oldlace",
+},
+address_page: {
+  marginTop: 10,
+  height : 50,
+  backgroundColor: "white",
 },
 })

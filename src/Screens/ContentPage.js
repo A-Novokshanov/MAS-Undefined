@@ -98,6 +98,8 @@ const ContentPage = ({ navigation, route }) => {
 
     const [show_filter, setshow_filter] = useState(false);
 
+    const [show_address, setshow_address] = useState(false);
+
     const [range_value, setRange_value] = useState(0);
 
     const [price_range, setprice_range] = useState(0);
@@ -108,6 +110,7 @@ const ContentPage = ({ navigation, route }) => {
 
 
     const _onPressButton = () => {
+        //TODO: UPDATE Filter
         console.log(range_value, price_range, special, isFriendly)
     }
 
@@ -122,7 +125,10 @@ const ContentPage = ({ navigation, route }) => {
                             <Text style={styles.filter_text}>Filter</Text>
                         </View>
                     </TouchableHighlight>
-                    <TouchableHighlight onPress={() => Alert.alert('Button with adjusted color pressed')} >
+                    <TouchableHighlight onPress={() => {
+                        setshow_filter(false);
+                        setshow_address(!show_address);
+                    }} >
                         <View style={styles.content_but}>
                             <Text style={styles.filter_text}>Address</Text>
                         </View>
@@ -192,6 +198,20 @@ const ContentPage = ({ navigation, route }) => {
 
                     </View>
 
+                    :
+                    <View></View>
+                }
+                {show_address ?
+                <View style={styles.address_page}>
+                    <View style={{ flexDirection: 'row' }}>
+                        <TextInput style={styles.content_but} placeholder="Enter Address"  />
+                        <TouchableHighlight onPress={console.log("address")}>
+                            <View style={styles.send}>
+                                <Text>Search</Text>
+                            </View>
+                        </TouchableHighlight>
+                    </View>
+                    </View>
                     :
                     <View></View>
                 }

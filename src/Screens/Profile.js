@@ -74,7 +74,7 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                             style={[styles.pf_button]}
                             onPress={() => navigation.navigate('Trainer', {
                                 profile: profile,
-                                preview: true
+                                is_trainer: true
                             })}
                         >
                             <Text > Check my Profile Page </Text>

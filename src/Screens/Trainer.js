@@ -4,7 +4,7 @@ import styles from '../Style/Content_style'
 
 const Trainer = ({ route, navigation }) => {
 
-    const { name, exp, review, miles, notes, profile, preview } = route.params;
+    const { name, exp, review, miles, notes, profile, is_trainer } = route.params;
 
     return (
         <View style={styles.app}>
@@ -22,7 +22,7 @@ const Trainer = ({ route, navigation }) => {
                         title={"< " + profile.name}
 
                     />
-                    {preview? 
+                    {is_trainer? 
                     <TouchableOpacity
                         style={[styles.button, styles.px12, styles.py6]}
                         onPress={() => navigation.navigate('Trainer_init', {
@@ -81,7 +81,7 @@ const Trainer = ({ route, navigation }) => {
 
                 <TouchableOpacity
                     style={[styles.button, styles.px12]}
-                    disabled = {preview}
+                    disabled = {is_trainer}
                     onPress={() => navigation.navigate('Chat', {
                         name: profile.name, 
                         exp: profile.exp, 
@@ -94,7 +94,7 @@ const Trainer = ({ route, navigation }) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.button, styles.px12]}
-                    disabled = {preview}
+                    disabled = {is_trainer}
                     onPress={() => navigation.navigate('Schedule', {
                         name: profile.name
                       })}
@@ -102,7 +102,7 @@ const Trainer = ({ route, navigation }) => {
                     <Text > View Availability </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    disabled = {preview}
+                    disabled = {is_trainer}
                     style={[styles.button, styles.px12]}
                     onPress={() => navigation.navigate('Reviews', {
                         profile : profile,
@@ -112,7 +112,7 @@ const Trainer = ({ route, navigation }) => {
                     <Text > View Reviews </Text>
                 </TouchableOpacity>
                 
-                {preview? <Text style={styles.subtitle}>----------PREVIEW SCREEN----------</Text>: <View></View>}
+                {is_trainer? <Text style={styles.subtitle}>----------PREVIEW SCREEN----------</Text>: <View></View>}
 
             </SafeAreaView>
         </View>

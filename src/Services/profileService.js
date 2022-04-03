@@ -6,14 +6,14 @@ import 'firebase/compat/firestore';
 export async function makeProfile(username = "default", paypal = '') {
 
     const db = firebase.firestore();
-    
+
     const currentUser = firebase.auth().currentUser;
     const currentUID = currentUser.uid;
 
     const data = {
-        Username: username,
-        Email: currentUser.email,
-        Payment: paypal,
+        username: username,
+        email: currentUser.email,
+        payment: paypal,
         UID: currentUID,
         accountType: 'client'
     };
@@ -51,9 +51,9 @@ export async function editProfile(username = "default", paypal = '') {
     const currentUID = currentUser.uid;
 
     const data = {
-        Username: username,
-        Email: currentUser.email,
-        Payment: paypal,
+        username: username,
+        email: currentUser.email,
+        payment: paypal,
         UID: currentUID,
         accountType: 'client'
     };

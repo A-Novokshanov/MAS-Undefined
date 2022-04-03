@@ -33,7 +33,7 @@ export async function makeTrainerProfile(input) {
 }
 
 //Method to get trainer's profile data
-export async function getProfile() {
+export async function getTrainerProfile() {
 
     const db = firebase.firestore();
 
@@ -73,7 +73,7 @@ export async function viewTrainerProfiles() {
 }
 
 //Function to edit trainer's Profile Data
-export async function editProfile(username, paypal, howLong, eprice, beginnerF, spec, certID, profileDesc, ratingsDict) {
+export async function editTrainerProfile(username, paypal, howLong, eprice, beginnerF, spec, certID, profileDesc, ratingsDict) {
 
     const currentUser = firebase.auth().currentUser;
     const currentUID = currentUser.uid;

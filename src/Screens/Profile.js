@@ -1,8 +1,36 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, Button, Image } from 'react-native'
 import styles from '../Style/Content_style'
 
+import {getProfile} from '../Services/profileService.js'
+import {getTrainerProfile} from '../Services/trainerProfileService.js'
+
 const Profile = ({ navigation, name, is_trainer, profile }) => {
+
+  // console.log("profile screen")
+  // console.log(profile)
+  // console.log(is_trainer)
+
+  const [profile_data, setProfile] = useState(profile);
+
+  useEffect(() => {
+    const fetchData = async () => {
+
+      try {
+        if (is_trainer) {
+          const data = await getTrainerProfile()
+          setProfile(data)
+        } else {
+          const data = await getProfile()
+          setProfile(data)
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    }
+
+    fetchData();
+  }, []);
 
 
     return (
@@ -10,31 +38,31 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
 
             <SafeAreaView>
                 <Text style={[styles.subtitle, styles.px6]}>
-                    Hi, {profile.name}
+                    Hi, {profile_data.name || profile_data.username}
                 </Text>
 
                 <TouchableOpacity
                     style={[styles.pf_button]}
                     onPress={() => navigation.navigate('Update_info', {
                         c_type: "Name",
-                        value: profile.name
+                        value: profile_data.name
                     })}
                 >
-                    <Text > Name </Text>
+                  <Text > Name: {profile_data.name || profile_data.username} </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.pf_button]}
                 >
                     <Text onPress={() => navigation.navigate('Update_info', {
-                        c_type: "Email",
-                        value: profile.email
-                    })}> Email </Text>
+                        c_type: "email",
+                        value: profile_data.email
+                    })}> Email: {profile_data.email}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.pf_button]}
                     onPress={() => navigation.navigate('Update_info', {
                         c_type: "Password",
-                        value: profile.password
+                        value: profile_data.password
                     })}
                 >
                     <Text > Password </Text>
@@ -43,7 +71,7 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                     style={[styles.pf_button]}
                     onPress={() => navigation.navigate('Update_info', {
                         c_type: "Payment",
-                        value: profile.payment
+                        value: profile_data.payment
                     })}
                 >
                     <Text > Payment </Text>
@@ -53,7 +81,7 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                     style={[styles.pf_button]}
                     onPress={() => navigation.navigate('Update_info', {
                         c_type: "phone",
-                        value: profile.phone
+                        value: profile_data.phone
                     })}
                 >
                     <Text > Phone Number </Text>
@@ -64,7 +92,7 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                         <TouchableOpacity
                             style={[styles.pf_button]}
                             onPress={() => navigation.navigate('Reviews', {
-                                profile: profile,
+                                profile: profile_data,
                                 is_trainer: true
                             })}
                         >
@@ -73,7 +101,7 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                         <TouchableOpacity
                             style={[styles.pf_button]}
                             onPress={() => navigation.navigate('Trainer', {
-                                profile: profile,
+                                profile: profile_data,
                                 is_trainer: true
                             })}
                         >

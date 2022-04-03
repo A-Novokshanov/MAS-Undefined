@@ -3,14 +3,11 @@ import { getAuth, createUserWithEmailAndPassword } from '@firebase/auth'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Switch } from 'react-native'
 import { Formik } from 'formik';
 import styles from '../Style/Styles.styles';
-<<<<<<< HEAD
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
-=======
 import {newNotes, getUserNotes, makeNewNote, removeNote} from '../Services/notesService.js'
 import {makeTrainerProfile} from '../Services/trainerProfileService.js'
 import {makeProfile} from '../Services/profileService.js'
->>>>>>> 4a92d662ddcfa6231819119d9936eaf744e4582a
 
 export default class RegisterPage extends React.Component {
 

@@ -10,7 +10,8 @@ export async function makeTrainerProfile(input) {
     const currentUser = firebase.auth().currentUser;
     const currentUID = currentUser.uid;
 
-    const data = {
+  const data = {
+    name: input.name || '',
         Username: input.username || 'default',
         Email: currentUser.email,
         Payment: input.paypal || '',
@@ -22,7 +23,8 @@ export async function makeTrainerProfile(input) {
         specialization: input.spec || '',
         description: input.profileDesc || '',
         certificate: input.certID || -1,
-        ratings : {average: 0}
+      ratings : {average: 0},
+      miles: input.miles || "4.2"
     };
 
     await db.collection('TrainerProfile').doc(currentUID).set(data);

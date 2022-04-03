@@ -46,16 +46,35 @@ export async function getProfile() {
 
         await makeProfile();
         return {};
-        
+
     } else {
 
         return snapshot.data();
     }
 }
 
+
+export async function viewTrainerProfiles() {
+
+    const db = firebase.firestore();
+
+  // const res = await db.collection('TrainerProfile').doc("NcfnczhEdhqMzYbOx4A5");
+  const res = await db.collection('TrainerProfile')
+
+  const snapshot = await res.get();
+
+
+
+  const return_list = snapshot.docs.map((doc) => {
+    return doc.data()
+  })
+
+  return return_list
+}
+
 //Function to edit trainer's Profile Data
 export async function editProfile(username, paypal, howLong, eprice, beginnerF, spec, certID, profileDesc, ratingsDict) {
-    
+
     const currentUser = firebase.auth().currentUser;
     const currentUID = currentUser.uid;
 

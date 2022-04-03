@@ -14,7 +14,7 @@ var DATA = [
         clients: "Daniel Tan",
         date: "03/25",
         rate: 5,
-        comment: "I had a meeting with Duy last Friday, during which Duy showed me how to correctly... do some workouts. We also talked about some dietary plans that Duy believes will help me. Overall, Duy was a pleasure to work with, and I would recommend him to anyone!"
+        comment: "I had a meeting with him last Friday, during which he showed me how to correctly... do some workouts. We also talked about some dietary plans that he believes will help me. Overall, he was a pleasure to work with, and I would recommend him to anyone!"
     },
 ];
 

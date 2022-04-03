@@ -14,15 +14,30 @@ export async function viewRatings(name) {
 
 
 
-  const return_list = snapshot.docs.map((doc) => {
+  const ratings_object = snapshot.docs.map((doc) => {
     return doc.data()
   }).find((doc) => {
     return doc.name === name;
   })
 
-  if (return_list == null)
-    return []
-  return return_list.ratings
+  console.log(ratings_object.ratings)
+
+  const ratings_list = Object.keys(ratings_object.ratings).map((uuid) => {
+    console.log(uuid)
+    if (uuid === 'average') {
+      return null
+    }
+    return ratings_object.ratings[uuid];
+  }).filter((ob) => {
+    return ob
+  })
+
+
+
+  console.log(ratings_list)
+  console.log("_____________________--------------------")
+
+  return ratings_list
 }
 
 

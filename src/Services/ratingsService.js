@@ -3,15 +3,26 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 //Function to view ratings of a trainer
-export async function viewRatings(uid) {
+export async function viewRatings(name) {
 
     const db = firebase.firestore();
-    
-    const res = await db.collection('TrainerProfile').doc(uid);
-    const snapshot = await res.get();
 
-    return snapshot.get(ratings);
+  // const res = await db.collection('TrainerProfile').doc("NcfnczhEdhqMzYbOx4A5");
+  const res = await db.collection('TrainerProfile')
 
+  const snapshot = await res.get();
+
+
+
+  const return_list = snapshot.docs.map((doc) => {
+    return doc.data()
+  }).find((doc) => {
+    return doc.name === name;
+  })
+
+  if (return_list == null)
+    return []
+  return return_list.ratings
 }
 
 

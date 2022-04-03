@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeArea
 import styles2 from '../Style/Content_style';
 import styles from '../Style/Styles.styles';
 import { Formik } from 'formik';
-
+import {makeTrainerProfile} from '../Services/trainerProfileService.js'
 
 
 const Trainer_init_2 = ({ navigation, route }) => {
@@ -16,8 +16,13 @@ const Trainer_init_2 = ({ navigation, route }) => {
             temp = {
                 ...temp, 
                 introduction : input_notes,
-                is_trainer: true
+              is_trainer: true
             }
+
+
+          await makeTrainerProfile(temp);
+
+          
             console.log(temp);
             navigation.navigate("MyClients", {
                 profile : temp

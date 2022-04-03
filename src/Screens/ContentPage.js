@@ -8,17 +8,22 @@ import Slider from '@react-native-community/slider';
 import SelectDropdown from 'react-native-select-dropdown';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
+import {searchProfiles} from '../Services/searchService.js'
+
 
 //TODO: DATA
 const DATA = [
     {
-        item: "Main dishes",
+        item: "Main dishes", // TODO: is this needed?
         data: [
             {
                 name: "John Doe",
                 type: "trainer",
                 exp: "4",
-                review: "5.0",
+              review: "5.0",
+              ratings: {
+                average: 3
+              },
                 miles: "0.5"
 
             },
@@ -26,7 +31,10 @@ const DATA = [
                 name: "Cool Boy",
                 exp: "4",
                 type: "trainer",
-                review: "4.8",
+              review: "4.8",
+              ratings: {
+                average: 3
+              },
                 miles: "1.5"
 
             },
@@ -34,7 +42,10 @@ const DATA = [
                 name: "Damn Daniel",
                 exp: "9",
                 type: "trainer",
-                review: "4.9",
+              review: "4.9",
+              ratings: {
+                average: 3
+              },
                 miles: "3.5"
             }
         ]
@@ -59,7 +70,7 @@ const Item = ({ item, nav }) => (
             />
             <Text>{item.name}</Text>
             <Text>{item.exp}+ years exp</Text>
-            <Text>Rating: {item.review}</Text>
+            <Text>Rating: {item.ratings.average}</Text>
             <Text>{item.miles} miles away</Text>
         </TouchableOpacity>
     </View>
@@ -94,6 +105,8 @@ const onDateChange = () => (
 
 const ContentPage = ({ navigation, route }) => {
 
+  const [contentData, setContentData] = useState([]);
+
     const [direction, setDirection] = useState("My Trainers");
 
     const [show_filter, setshow_filter] = useState(false);
@@ -106,7 +119,30 @@ const ContentPage = ({ navigation, route }) => {
 
     const [special, setSpecial] = useState("Select a Specialization");
 
-    const [isFriendly, setisFriendly] = useState(false);
+  const [isFriendly, setisFriendly] = useState(false);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await searchProfiles(price_range, special, isFriendly, null);
+        console.log(data)
+
+        const wrapper = [
+          {
+            item: "Main dishes",
+            data: data
+          }
+        ]
+
+        setContentData(wrapper);
+      } catch (e) {
+        console.log(e)
+      }
+    }
+
+    fetchData();
+  }, []);
 
 
     const _onPressButton = () => {
@@ -217,7 +253,7 @@ const ContentPage = ({ navigation, route }) => {
                 }
                 <SectionList
                     contentContainerStyle={styles.listContainer}
-                    sections={DATA}
+                    sections={contentData}
                     keyExtractor={(item, index) => item + index}
                     renderItem={({ item }) => <Item item={item} nav={navigation} />}
                 />

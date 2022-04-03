@@ -14,22 +14,27 @@ const Update_info = (mainProps) => {
   const navigation = mainProps.navigation
   const route = mainProps.route
 
+
+  const [value, setValue] = React.useState(route.params.input_notes);
+
   console.log("in update info")
   console.log(mainProps)
     
   const update_profile = async (input_notes, c_type, is_trainer) => {
-        try {
+    try {
+
+      console.log('update profile is called')
             c_type = c_type.toLowerCase();
             console.log(input_notes); // the actual data
           console.log(c_type); // the attribute type
           console.log("in the update profile method")
 
           //TODO: Update info, new data = input notes, c_type = the type of info
-
+          setValue(input_notes)
           if (is_trainer) {
-            await editProfile(c_type, input_notes)
-          } else {
             await editTrainerProfile(c_type, input_notes)
+          } else {
+            await editProfile(c_type, input_notes)
           }
 
 
@@ -37,7 +42,7 @@ const Update_info = (mainProps) => {
                 CommonActions.reset({
                   index: 0,
                   routes: [
-                    { name: 'Login Page' },
+                    { name: 'Content Page' },
                   ],
                 })
               );

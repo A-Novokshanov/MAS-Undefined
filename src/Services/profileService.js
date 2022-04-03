@@ -46,6 +46,7 @@ export async function getProfile(requestedUID = null) {
 
 //Function to edit client's Profile Data
 export async function editProfile(attribute, value) {
+  const db = firebase.firestore();
 
     const currentUser = firebase.auth().currentUser;
     const currentUID = currentUser.uid;
@@ -54,7 +55,16 @@ export async function editProfile(attribute, value) {
 
   data[attribute] = value;
 
-    await db.collection('UserProfile').doc(currentUID).set(data);
+  console.log(data);
+  console.log("updated data?")
+
+  await db.collection('UserProfile').doc(currentUID).set(data);
+
+
+  const myprofnow = await db.collection('UserProfile').doc(currentUID).get()
+  console.log(myprofnow.data());
+
+
 
     return data;
 

@@ -9,6 +9,7 @@ import SelectDropdown from 'react-native-select-dropdown';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 import {searchProfiles} from '../Services/searchService.js'
+import {getProfile} from '../Services/profileService.js'
 
 
 //TODO: DATA
@@ -105,6 +106,9 @@ const onDateChange = () => (
 
 const ContentPage = ({ navigation, route }) => {
 
+
+  const [myProfile, setMyProfile] = useState(route.params ? route.params.profile : {is_trainer: false});
+
   const [contentData, setContentData] = useState([]);
 
     const [direction, setDirection] = useState("My Trainers");
@@ -136,6 +140,10 @@ const ContentPage = ({ navigation, route }) => {
         ]
 
         setContentData(wrapper);
+
+
+        const profile_data = await getProfile();
+        setMyProfile(profile_data);
       } catch (e) {
         console.log(e)
       }
@@ -273,8 +281,8 @@ const ContentPage = ({ navigation, route }) => {
             <View>
                 <Profile
                     name={"User"}
-                    is_trainer={route.params.profile.is_trainer ? route.params.profile.is_trainer : false}
-                    profile={route.params.profile}
+                    is_trainer={myProfile.is_trainer ? true : false}
+                    profile={myProfile}
                     navigation={navigation}
                 />
             </View>

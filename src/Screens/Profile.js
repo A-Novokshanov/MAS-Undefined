@@ -45,7 +45,8 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                     style={[styles.pf_button]}
                     onPress={() => navigation.navigate('Update_info', {
                         c_type: "Name",
-                        value: profile_data.name
+                      value: profile_data.name,
+                      is_trainer: is_trainer
                     })}
                 >
                   <Text > Name: {profile_data.name || profile_data.username} </Text>
@@ -55,14 +56,16 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                 >
                     <Text onPress={() => navigation.navigate('Update_info', {
                         c_type: "email",
-                        value: profile_data.email
+                        value: profile_data.email,
+                      is_trainer: is_trainer
                     })}> Email: {profile_data.email}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.pf_button]}
                     onPress={() => navigation.navigate('Update_info', {
                         c_type: "Password",
-                        value: profile_data.password
+                        value: profile_data.password,
+                      is_trainer: is_trainer
                     })}
                 >
                     <Text > Password </Text>
@@ -71,7 +74,8 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                     style={[styles.pf_button]}
                     onPress={() => navigation.navigate('Update_info', {
                         c_type: "Payment",
-                        value: profile_data.payment
+                        value: profile_data.payment,
+                      is_trainer: is_trainer
                     })}
                 >
                     <Text > Payment </Text>
@@ -81,7 +85,8 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                     style={[styles.pf_button]}
                     onPress={() => navigation.navigate('Update_info', {
                         c_type: "phone",
-                        value: profile_data.phone
+                        value: profile_data.phone,
+                      is_trainer: is_trainer
                     })}
                 >
                     <Text > Phone Number </Text>

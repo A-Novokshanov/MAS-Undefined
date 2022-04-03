@@ -4,20 +4,33 @@ import styles2 from '../Style/Content_style';
 import styles from '../Style/Styles.styles';
 import { Formik } from 'formik';
 import { CommonActions } from '@react-navigation/native';
+import {editProfile} from '../Services/profileService.js'
+import {editTrainerProfile} from '../Services/trainerProfileService.js'
 
 
 
+const Update_info = (mainProps) => {
 
-const Update_info = ({ navigation, route }) => {
+  const navigation = mainProps.navigation
+  const route = mainProps.route
 
+  console.log("in update info")
+  console.log(mainProps)
     
-    const update_profile = async (input_notes, c_type) => {
+  const update_profile = async (input_notes, c_type, is_trainer) => {
         try {
             c_type = c_type.toLowerCase();
-            console.log(input_notes);
-            console.log(c_type);
+            console.log(input_notes); // the actual data
+          console.log(c_type); // the attribute type
+          console.log("in the update profile method")
 
-            //TODO: Update info, new data = input notes, c_type = the type of info
+          //TODO: Update info, new data = input notes, c_type = the type of info
+
+          if (is_trainer) {
+            await editProfile(c_type, input_notes)
+          } else {
+            await editTrainerProfile(c_type, input_notes)
+          }
 
 
             navigation.dispatch(
@@ -64,7 +77,7 @@ const Update_info = ({ navigation, route }) => {
                         password: '',
                         error: ''
                     }}
-                    onSubmit={(values, { setFieldValue }) => update_profile(values.input_notes, route.params.c_type).catch(error => setFieldValue('error', error.message))}
+                        onSubmit={(values, { setFieldValue }) => update_profile(values.input_notes, route.params.c_type, route.params.is_trainer).catch(error => setFieldValue('error', error.message))}
                 >
                     {({ handleChange, handleBlur, handleSubmit, values, setFieldValue }) => (
                         <View>

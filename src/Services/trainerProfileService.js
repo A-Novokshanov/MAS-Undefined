@@ -73,25 +73,14 @@ export async function viewTrainerProfiles() {
 }
 
 //Function to edit trainer's Profile Data
-export async function editTrainerProfile(username, paypal, howLong, eprice, beginnerF, spec, certID, profileDesc, ratingsDict) {
+export async function editTrainerProfile(attribute, value) {
 
     const currentUser = firebase.auth().currentUser;
     const currentUID = currentUser.uid;
 
-    const data = {
-        Username: username,
-        Email: currentUser.email,
-        Payment: paypal,
-        UID: currentUID,
-        accountType: 'trainer',
-        trainerLength: howLong,
-        price: eprice,
-        friendly: beginnerF,
-        specialization: spec,
-        description: profileDesc,
-        certificate: certID,
-        ratings: ratingsDict
-    };
+  const data = await getTrainerProfile()
+
+  data[attribute] = value
 
     await db.collection('TrainerProfile').doc(currentUID).set(data);
 

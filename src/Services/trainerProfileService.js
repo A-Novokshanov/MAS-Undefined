@@ -22,7 +22,8 @@ export async function makeTrainerProfile(input) {
         friendly: input.beginnerF || false,
         specialization: input.spec || '',
         description: input.profileDesc || '',
-        certificate: input.certID || -1,
+    certificate: input.certID || -1,
+    exp: input.exp || 0,
       ratings : {average: 0},
       miles: input.miles || "4.2"
     };

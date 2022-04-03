@@ -125,7 +125,7 @@ const ContentPage = ({ navigation, route }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await searchProfiles();
+        const data = await searchProfiles(price_range, special, isFriendly, null);
         console.log(data)
 
         const wrapper = [

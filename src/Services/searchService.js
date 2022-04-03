@@ -41,7 +41,9 @@ export async function searchProfiles(max_price = null, specalization = null, fri
 
 
   let result_docs = trainer_profile_docs;
-  if (max_price) {
+  console.log(max_price)
+  console.log("max price &&&")
+  if (max_price && max_price !== 0) {
     console.log("filter max price")
     // filter
     result_docs = trainer_profile_docs.filter((trainer_profile) => {
@@ -49,7 +51,7 @@ export async function searchProfiles(max_price = null, specalization = null, fri
     })
   }
 
-  if (specalization) {
+  if (specalization && specalization !== "Select a Specialization") {
     console.log("filter specalization")
     result_docs = trainer_profile_docs.filter((trainer_profile) => {
       // if they can only select one specialization
@@ -57,7 +59,7 @@ export async function searchProfiles(max_price = null, specalization = null, fri
     })
   }
 
-  if (friendly !== null) {
+  if (friendly === true) {
     console.log("filter friendly")
     result_docs = trainer_profile_docs.filter((trainer_profile) => {
       // if they can only select one specialization

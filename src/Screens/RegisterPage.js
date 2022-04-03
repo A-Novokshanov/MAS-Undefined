@@ -3,6 +3,8 @@ import { getAuth, createUserWithEmailAndPassword } from '@firebase/auth'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Switch } from 'react-native'
 import { Formik } from 'formik';
 import styles from '../Style/Styles.styles';
+import BouncyCheckbox from "react-native-bouncy-checkbox";
+
 import {newNotes, getUserNotes, makeNewNote, removeNote} from '../Services/notesService.js'
 import {makeTrainerProfile} from '../Services/trainerProfileService.js'
 import {makeProfile} from '../Services/profileService.js'
@@ -71,13 +73,25 @@ export default class RegisterPage extends React.Component {
                                 style={styles.input}
                             />
                             <Text style={[styles.py12]}>
-                                <Switch
+                                {/* <Switch
                                     onValueChange={value =>
                                         setFieldValue('is_trianer', value)
                                     }
                                     value={values.is_trianer}
+                                /> */}
+                                <BouncyCheckbox
+                                    onPress={(isChecked) => {
+                                        console.log(isChecked);
+        
+                                        setFieldValue('is_trianer', isChecked)
+                                    }}
+                                    textStyle={{
+                                        height: 20,
+                                        textDecorationLine: "none",
+                                    }}
+                                    text="I am a trainer"
                                 />
-                                I am a trainer
+                                
                             </Text>
                             
                             <Text style={styles.error}> {values.error} </Text>

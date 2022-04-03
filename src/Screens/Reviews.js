@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, Button, Image } from 'react-native'
 import styles from '../Style/Content_style'
 import { Formik } from 'formik';
 import Stars from './Stars';
+import { viewRatings, addRating } from '../Services/ratingsService.js'
+import {newNotes, getUserNotes, makeNewNote, removeNote} from '../Services/notesService.js'
 
 
 
@@ -18,7 +20,27 @@ var DATA = [
 
 const Reviews = ({ route, navigation }) => {
 
-    const { profile, is_trainer } = route.params;
+  const { profile, is_trainer } = route.params;
+
+
+  const [note, setnotes] = React.useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await viewRatings(profile.name);
+        setnotes(data);
+      } catch (e) {
+        console.log("hi there");
+        console.log("asdf")
+        console.log(e)
+      }
+    }
+
+    fetchData();
+  }, []);
+
+
 
     route.params.temp_data? DATA.push({
         clients: route.params.temp_data.anonymous? "Anonymous User" : "User name",
@@ -27,7 +49,7 @@ const Reviews = ({ route, navigation }) => {
         comment: route.params.temp_data.comments
     }) : DATA = DATA;
 
-    const [note, setnotes] = React.useState(DATA)
+
 
     const Item = ({ item, nav }) => (
 

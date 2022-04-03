@@ -19,7 +19,7 @@ import 'firebase/compat/firestore';
 
  */
 
-export async function searchProfiles(max_price = null, specalization = null, friendly = false, average_rating = null) {
+export async function searchProfiles(max_price = null, specalization = null, friendly = null, average_rating = null) {
   const db = firebase.firestore();
 
   const collection_name = 'TrainerProfile'
@@ -30,11 +30,19 @@ export async function searchProfiles(max_price = null, specalization = null, fri
 
   */
 
-  const trainer_profile_docs = await db.collection(collection_name).get();
+  const res = await db.collection(collection_name)
+  const snapshot = await res.get();
+  const trainer_profile_docs = snapshot.docs.map((doc) => {
+    return doc.data()
+  })
+
+  console.log(trainer_profile_docs)
+  console.log("original docs")
 
 
   let result_docs = trainer_profile_docs;
   if (max_price) {
+    console.log("filter max price")
     // filter
     result_docs = trainer_profile_docs.filter((trainer_profile) => {
       return trainer_profile.price <= max_price;
@@ -42,6 +50,7 @@ export async function searchProfiles(max_price = null, specalization = null, fri
   }
 
   if (specalization) {
+    console.log("filter specalization")
     result_docs = trainer_profile_docs.filter((trainer_profile) => {
       // if they can only select one specialization
       return specalization === trainer_profile.specialization;
@@ -49,6 +58,7 @@ export async function searchProfiles(max_price = null, specalization = null, fri
   }
 
   if (friendly !== null) {
+    console.log("filter friendly")
     result_docs = trainer_profile_docs.filter((trainer_profile) => {
       // if they can only select one specialization
       return friendly === trainer_profile.friendly;
@@ -56,6 +66,7 @@ export async function searchProfiles(max_price = null, specalization = null, fri
   }
 
   if (average_rating) {
+    console.log("filter average rating")
     result_docs = trainer_profile_docs.filter((trainer_profile) => {
       // if they can only select one specialization
       return average_rating >= trainer_profile.ratings.average

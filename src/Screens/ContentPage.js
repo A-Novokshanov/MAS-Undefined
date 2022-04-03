@@ -8,7 +8,7 @@ import Slider from '@react-native-community/slider';
 import SelectDropdown from 'react-native-select-dropdown';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
-import {viewTrainerProfiles} from '../Services/trainerProfileService.js'
+import {searchProfiles} from '../Services/searchService.js'
 
 
 //TODO: DATA
@@ -125,7 +125,7 @@ const ContentPage = ({ navigation, route }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await viewTrainerProfiles();
+        const data = await searchProfiles();
         console.log(data)
 
         const wrapper = [

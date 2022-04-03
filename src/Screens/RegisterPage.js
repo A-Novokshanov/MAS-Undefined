@@ -3,14 +3,25 @@ import { getAuth, createUserWithEmailAndPassword } from '@firebase/auth'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Switch } from 'react-native'
 import { Formik } from 'formik';
 import styles from '../Style/Styles.styles';
+import {newNotes, getUserNotes, makeNewNote, removeNote} from '../Services/notesService.js'
+import {makeTrainerProfile} from '../Services/trainerProfileService.js'
+import {makeProfile} from '../Services/profileService.js'
 
 export default class RegisterPage extends React.Component {
 
-    async submitRegister(email, password, is_trianer) {
+    async submitRegister(email, password, is_trainer) {
 
         const auth = getAuth();
-        console.log('test');
-        await createUserWithEmailAndPassword(auth, email, password);
+      console.log('test');
+
+      // TODO: - 2 collections, one for trainers, one for clients
+      await createUserWithEmailAndPassword(auth, email, password);
+
+      if (!is_trainer) {
+        await makeProfile(email, '');
+      }
+
+
         let temp_data = {
             email : email,
             name : "User",
@@ -18,8 +29,8 @@ export default class RegisterPage extends React.Component {
             payment : "",
             phone: ""
         }
-        is_trianer ? this.props.navigation.navigate("Trainer_init", {profile : {email : email}})
-            : this.props.navigation.navigate("Content Page", {profile : temp_data})
+        is_trainer ? this.props.navigation.navigate("Trainer_init", {profile : {email : email}}) // grab the data for a trainer
+            : this.props.navigation.navigate("Content Page", {profile : temp_data})  
     }
 
     render() {

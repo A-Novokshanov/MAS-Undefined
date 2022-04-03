@@ -3,25 +3,25 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 //Method to make new trainer profile
-export async function makeTrainerProfile(username = "default", paypal = '', howLong = '', eprice = '', beginnerF = false, spec = '', certID = -1, profileDesc = '') {
+export async function makeTrainerProfile(input) {
 
     const db = firebase.firestore();
-    
+
     const currentUser = firebase.auth().currentUser;
     const currentUID = currentUser.uid;
 
     const data = {
-        Username: username,
+        Username: input.username || 'default',
         Email: currentUser.email,
-        Payment: paypal,
+        Payment: input.paypal || '',
         UID: currentUID,
         accountType: 'trainer',
-        trainerLength: howLong,
-        price: eprice,
-        friendly: beginnerF,
-        specialization: spec,
-        description: profileDesc,
-        certificate: certID,
+      trainerLength: input.howLong || '',
+        price: input.eprice || '',
+        friendly: input.beginnerF || false,
+        specialization: input.spec || '',
+        description: input.profileDesc || '',
+        certificate: input.certID || -1,
         ratings : {average: 0}
     };
 

@@ -31,8 +31,7 @@ const Reviews = ({ route, navigation }) => {
         const data = await viewRatings(profile.name);
         setnotes(data);
       } catch (e) {
-        console.log("hi there");
-        console.log("asdf")
+
         console.log(e)
       }
     }

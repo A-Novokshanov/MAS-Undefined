@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeArea
 import styles from '../Style/Content_style'
 import { Formik } from 'formik';
 import Stars from './Stars';
+import { addRating } from '../Services/ratingsService';
 
 
 
@@ -29,11 +30,14 @@ const New_review = ({ route, navigation }) => {
                 rate :temp_rate
             };
             console.log(data);
+            addRating(profile.name, data.anonymous, data.rate, data.comments)
+
             navigation.navigate('Reviews', {
                 profile: profile,
                 is_trainer: true,
                 temp_data : data
             });
+
         } catch (e) {
             console.log(e)
         }

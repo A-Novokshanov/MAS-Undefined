@@ -79,9 +79,9 @@ export async function editTrainerProfile(attribute, value) {
     const currentUser = firebase.auth().currentUser;
     const currentUID = currentUser.uid;
 
-  const data = await getTrainerProfile()
+    const data = await getTrainerProfile()
 
-  data[attribute] = value
+    data[attribute] = value
 
     await db.collection('TrainerProfile').doc(currentUID).set(data);
 

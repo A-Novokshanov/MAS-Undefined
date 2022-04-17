@@ -130,7 +130,7 @@ const ContentPage = ({ navigation, route }) => {
     const fetchData = async () => {
       try {
         const data = await searchProfiles(price_range, special, isFriendly, null);
-        console.log(data)
+        //console.log(data)
 
         const wrapper = [
           {
@@ -200,7 +200,7 @@ const ContentPage = ({ navigation, route }) => {
                             <SelectDropdown
                                 data={countries}
                                 onSelect={(selectedItem, index) => {
-                                    console.log(selectedItem, index);
+                                    //console.log(selectedItem, index);
                                     setSpecial(selectedItem)
                                 }}
                                 defaultButtonText={special}
@@ -223,7 +223,7 @@ const ContentPage = ({ navigation, route }) => {
                         <Text style={styles.filter_text}>Beginner Friendly-
                             <BouncyCheckbox
                                 onPress={(isChecked) => {
-                                    console.log(isChecked);
+                                    //console.log(isChecked);
                                     setisFriendly(isChecked);
                                 }}
                                 textStyle={{

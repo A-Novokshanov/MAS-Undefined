@@ -38,18 +38,18 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
 
             <SafeAreaView>
                 <Text style={[styles.subtitle, styles.px6]}>
-                    Hi, {profile_data.name || profile_data.username}
+                    Hi, {profile_data.username}
                 </Text>
 
                 <TouchableOpacity
                     style={[styles.pf_button]}
                     onPress={() => navigation.navigate('Update_info', {
-                        c_type: "Name",
-                      value: profile_data.name,
+                        c_type: "username",
+                      value: profile_data.username,
                       is_trainer: is_trainer
                     })}
                 >
-                  <Text > Name: {profile_data.name || profile_data.username} </Text>
+                  <Text > Name: {profile_data.username} </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.pf_button]}

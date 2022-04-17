@@ -6,6 +6,8 @@ import { Formik } from 'formik';
 import { CommonActions } from '@react-navigation/native';
 import {editProfile} from '../Services/profileService.js'
 import {editTrainerProfile} from '../Services/trainerProfileService.js'
+import { changePassword } from '../Services/passwordService';
+import { changeEmail } from '../Services/emailService';
 
 
 
@@ -24,18 +26,23 @@ const Update_info = (mainProps) => {
     try {
 
       console.log('update profile is called')
-            c_type = c_type.toLowerCase();
-            console.log(input_notes); // the actual data
-          console.log(c_type); // the attribute type
-          console.log("in the update profile method")
+      c_type = c_type.toLowerCase();
+      if(c_type == 'password') {
+        await changePassword(input_notes)
+      } else {
+        if (c_type == 'email'){
+          await changeEmail(input_notes)
+        }
+        setValue(input_notes)
+        if (is_trainer) {
+          await editTrainerProfile(c_type, input_notes)
+        } else {
+            await editProfile(c_type, input_notes)
+        }
+      }
 
           //TODO: Update info, new data = input notes, c_type = the type of info
-          setValue(input_notes)
-          if (is_trainer) {
-            await editTrainerProfile(c_type, input_notes)
-          } else {
-            await editProfile(c_type, input_notes)
-          }
+          
 
 
             navigation.dispatch(

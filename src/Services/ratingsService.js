@@ -3,58 +3,34 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 //Function to view ratings of a trainer
-export async function viewRatings(name) {
+export async function viewRatings(uid) {
 
     const db = firebase.firestore();
 
-    // const res = await db.collection('TrainerProfile').doc("NcfnczhEdhqMzYbOx4A5");
-    const res = await db.collection('TrainerProfile')
+    const res = await db.collection('TrainerProfile').doc(uid);
 
     const snapshot = await res.get();
 
-    const ratings_object = snapshot.docs.map((doc) => {
-      return doc.data()
-    }).find((doc) => {
-      return doc.name === name;
-    })
-    console.log("Here I am")
-    console.log(ratings_object.ratings)
+    const ratings_object = snapshot.get('ratings')
 
-    console.log(Object.keys(ratings_object.ratings))
     temp = {}
-    for (let i = 0; i < Object.keys(ratings_object.ratings).length; i++) {
-      cur = Object.keys(ratings_object.ratings)[i]
+    for (let i = 0; i < Object.keys(ratings_object).length; i++) {
+      cur = Object.keys(ratings_object)[i]
       if (cur == 'average') {
-        temp[cur] = ratings_object.ratings[cur]
+        temp[cur] = ratings_object[cur]
       }
       else {
         temp2 = {}
-        for (let j = 0; j < Object.keys(ratings_object.ratings[cur]).length; j++) {
-          cur2 = Object.keys(ratings_object.ratings[i])[j]
-          temp2[cur2] = ratings_object.ratings[cur][cur2]
+        for (let j = 0; j < Object.keys(ratings_object[cur]).length; j++) {
+          cur2 = Object.keys(ratings_object[cur])[j]
+          temp2[cur2] = ratings_object[cur][cur2]
         }
         temp[cur] = temp2
       }
     }
-    console.log(temp)
     console.log("_____________________--------------------")
 
     return temp
-
-    const ratings_list = Object.keys(ratings_object.ratings).map((uuid) => {
-      console.log(uuid)
-      if (uuid === 'average') {
-        return null
-      }
-      return ratings_object.ratings[uuid];
-    }).filter((ob) => {
-      return ob
-    })
-
-    console.log(ratings_list)
-    console.log("_____________________--------------------")
-
-    return ratings_list
 }
 
 
@@ -69,27 +45,22 @@ export async function addRating(uid, anon = false, rating, review) {
 
     const currentUser = firebase.auth().currentUser;
     const currentUID = currentUser.uid;
+    const res = await db.collection('UserProfile').doc(currentUID);
+    const snapshot = await res.get();
 
-    if (!anon) {
-        const res = await db.collection('UserProfile').doc(currentUID);
-        const snapshot = await res.get();
-
-        username = snapshot.get('username');
-        if (username == 'default') {
-          username = 'Anonymous'
-        }
-    } else{
-        username = 'Anonymous';
+    var username = 'Anonymous';
+    name = snapshot.get('username')
+    if (!anon && (name != 'default')) {
+        username = name;
     }
 
     var ratings = await viewRatings(uid)
-    console.log("ratings")
-    console.log(ratings)
+
     try{
         if (!(currentUID in ratings)) {
             ratings['average'] = (ratings['average'] + rating) / (Object.keys(ratings).length)
         } else {
-            ratings['average'] = (ratings['average'] - ratings[currentUID]['rating'] + rating) / (Object.keys(ratings).length - 1)
+            ratings['average'] = (ratings['average'] * (Object.keys(ratings).length - 1) - ratings[currentUID]['rating'] + rating) / (Object.keys(ratings).length - 1)
         }
     } catch(e) {
         console.log(e)

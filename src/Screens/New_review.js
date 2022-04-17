@@ -29,8 +29,8 @@ const New_review = ({ route, navigation }) => {
                 anonymous: input_notes.anonymous,
                 rate :temp_rate
             };
-            console.log(data);
-            addRating(profile.name, data.anonymous, data.rate, data.comments)
+            
+            addRating(profile.UID, data.anonymous, data.rate, data.comments)
 
             navigation.navigate('Reviews', {
                 profile: profile,

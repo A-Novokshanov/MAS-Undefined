@@ -28,7 +28,7 @@ const Reviews = ({ route, navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await viewRatings(profile.name);
+        const data = await viewRatings(profile.UID);
         setnotes(data);
       } catch (e) {
 

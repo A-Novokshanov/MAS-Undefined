@@ -8,53 +8,11 @@ import Slider from '@react-native-community/slider';
 import SelectDropdown from 'react-native-select-dropdown';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
-import {searchProfiles} from '../Services/searchService.js'
-import {getProfile} from '../Services/profileService.js'
+import { searchProfiles } from '../Services/searchService.js'
+import { getProfile } from '../Services/profileService.js'
 
-
-//TODO: DATA
-const DATA = [
-    {
-        item: "Main dishes", // TODO: is this needed?
-        data: [
-            {
-                name: "John Doe",
-                type: "trainer",
-                exp: "4",
-              review: "5.0",
-              ratings: {
-                average: 3
-              },
-                miles: "0.5"
-
-            },
-            {
-                name: "Cool Boy",
-                exp: "4",
-                type: "trainer",
-              review: "4.8",
-              ratings: {
-                average: 3
-              },
-                miles: "1.5"
-
-            },
-            {
-                name: "Damn Daniel",
-                exp: "9",
-                type: "trainer",
-              review: "4.9",
-              ratings: {
-                average: 3
-              },
-                miles: "3.5"
-            }
-        ]
-    }
-];
 
 const countries = ["General", "Yoga", "Weight-Lifting"]
-
 
 
 const Item = ({ item, nav }) => (
@@ -98,22 +56,22 @@ let disable_dates = [
     date.setDate(date.getDate() + 2), date.setDate(date.getDate() + 2),
 ]
 
-const onDateChange = () => (
-    console.log('coool')
-);
+
 
 
 
 const ContentPage = ({ navigation, route }) => {
 
 
-  const [myProfile, setMyProfile] = useState(route.params ? route.params.profile : {is_trainer: false});
+    const [myProfile, setMyProfile] = useState(route.params ? route.params.profile : { is_trainer: false });
 
-  const [contentData, setContentData] = useState([]);
+    const [contentData, setContentData] = useState([]);
 
     const [direction, setDirection] = useState("My Trainers");
 
     const [show_filter, setshow_filter] = useState(false);
+
+    const [selected_date, setSelected_date] = useState();
 
     const [show_address, setshow_address] = useState(false);
 
@@ -123,35 +81,37 @@ const ContentPage = ({ navigation, route }) => {
 
     const [special, setSpecial] = useState("Select a Specialization");
 
-  const [isFriendly, setisFriendly] = useState(false);
+    const [isFriendly, setisFriendly] = useState(false);
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await searchProfiles(price_range, special, isFriendly, null);
-        //console.log(data)
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await searchProfiles(price_range, special, isFriendly, null);
+                //console.log(data)
 
-        const wrapper = [
-          {
-            item: "Main dishes",
-            data: data
-          }
-        ]
+                const wrapper = [
+                    {
+                        item: "Main dishes",
+                        data: data
+                    }
+                ]
+                setContentData(wrapper);
+                const profile_data = await getProfile();
+                setMyProfile(profile_data);
+            } catch (e) {
+                console.log(e)
+            }
+        }
 
-        setContentData(wrapper);
+        fetchData();
+    }, []);
 
 
-        const profile_data = await getProfile();
-        setMyProfile(profile_data);
-      } catch (e) {
-        console.log(e)
-      }
-    }
-
-    fetchData();
-  }, []);
-
+    const onDateChange = (date) => (
+        
+        console.log(date)
+    )
 
     const _onPressButton = () => {
         //TODO: UPDATE Filter
@@ -246,15 +206,15 @@ const ContentPage = ({ navigation, route }) => {
                     <View></View>
                 }
                 {show_address ?
-                <View style={styles.address_page}>
-                    <View style={{ flexDirection: 'row' }}>
-                        <TextInput style={styles.content_but} placeholder="Enter Address"  />
-                        <TouchableHighlight onPress={console.log("address")}>
-                            <View style={styles.send}>
-                                <Text>Search</Text>
-                            </View>
-                        </TouchableHighlight>
-                    </View>
+                    <View style={styles.address_page}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <TextInput style={styles.content_but} placeholder="Enter Address" />
+                            <TouchableHighlight onPress={console.log("address")}>
+                                <View style={styles.send}>
+                                    <Text>Search</Text>
+                                </View>
+                            </TouchableHighlight>
+                        </View>
                     </View>
                     :
                     <View></View>
@@ -271,7 +231,7 @@ const ContentPage = ({ navigation, route }) => {
         page =
             <View>
                 <CalendarPicker
-                    onDateChange={onDateChange}
+                    onDateChange={(e) => onDateChange(e)}
                     customDatesStyles={customDatesStyles}
                     disabledDates={disable_dates}
                 />
@@ -332,7 +292,23 @@ const ContentPage = ({ navigation, route }) => {
                 values={["My Trainers", "My Schedule", "My Profile"]}
                 setSelectedValue={setDirection}>
                 {page}
+
             </PreviewLayout>
+            <View
+                style={[
+                    styles.box,
+                    {
+                        width: "auto",
+                        minWidth: 50,
+                        height: 65,
+                        backgroundColor: "grey"
+                    },
+                ]}
+            >
+                <Text style={styles.label}>
+                    ads currently not avaliable
+                </Text>
+            </View>
         </SafeAreaView>
     )
 }

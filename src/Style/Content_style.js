@@ -111,6 +111,9 @@ export default StyleSheet.create({
   px6: {
     marginLeft: 10,
   },
+  px8: {
+    marginLeft: 13,
+  },
   py12: {
     marginTop: 50
   },
@@ -182,6 +185,19 @@ export default StyleSheet.create({
   content_but: {
     borderWidth: 1,
     width: 180,
+    fontSize: 20,
+    marginRight: 20
+  },
+  content_but2: {
+    marginTop: 10,
+    borderWidth: 1,
+    width: 380,
+    fontSize: 20,
+    marginRight: 20
+  },
+  content_but3: {
+    borderWidth: 1,
+    width: 380,
     fontSize: 20,
     marginRight: 20
   },

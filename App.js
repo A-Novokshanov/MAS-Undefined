@@ -19,6 +19,7 @@ import Trainer_init_2 from './src/Screens/Trainer_init_2.js';
 import Update_info from './src/Screens/Update_info.js';
 import Reviews from './src/Screens/Reviews.js';
 import New_review from './src/Screens/New_review.js';
+import Payment from './src/Screens/Payment.js';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -48,7 +49,7 @@ const LoginStack = () => (
       screenOptions={{
         headerShown: false
       }}
-      initialRouteName="Register Page">
+      initialRouteName="Login Page">
       <Stack.Screen name="Login Page" component={LoginPage} />
       <Stack.Screen name="Trainer" component={Trainer} />
       <Stack.Screen name="Register Page" component={RegisterPage} />
@@ -61,6 +62,7 @@ const LoginStack = () => (
       <Stack.Screen name="Trainer_init_2" component={Trainer_init_2} />
       <Stack.Screen name="Clients" component={Clients} />
       <Stack.Screen name="New_Review" component={New_review} />
+      <Stack.Screen name="Payment" component={Payment} />
       <Stack.Screen name="Content Page" component={ContentPage}
         options={({ navigation }) => ({
           title: 'Content page',
@@ -78,6 +80,7 @@ const LoginStack = () => (
         })}
       />
     </Stack.Navigator>
+    
   </NavigationContainer>
 )
 
@@ -90,4 +93,5 @@ export default createAppContainer(
       initialRouteName: "Login"
     }
   )
+  
 )

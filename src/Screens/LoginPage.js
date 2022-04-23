@@ -1,12 +1,23 @@
+//React dependency
 import React from 'react';
-import firebase from 'firebase/app'
-import { getAuth, signInWithEmailAndPassword } from '@firebase/auth'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import { Formik } from 'formik';
 import styles from '../Style/Styles.styles';
-import {newNotes, getUserNotes, makeNewNote, removeNote} from '../Services/notesService.js'
-export default class LoginPage extends React.Component {
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 
+//firebase dependency
+import { getAuth, signInWithEmailAndPassword } from '@firebase/auth';
+
+
+/**
+ * Screen for the Login page
+ */
+export default class LoginPage extends React.Component {
+    /**
+     * Handle login button, pass email and password to firebase for auth check
+     * @param {*} email 
+     * @param {*} password 
+     * @return navigate to Content page
+     */
     async submitLogin(email, password) {
 
         const auth = getAuth();
@@ -24,7 +35,14 @@ export default class LoginPage extends React.Component {
                     <Text style={styles.title}>Personal Trainer Portal</Text>
                     <Text style={styles.subtitle}>Please Log In</Text>
                 </View>
-
+                {
+                    /**
+                     * Form for login, 
+                     * @email input stores in values.email
+                     * @password input stores in values.password
+                     * @return submitLogin(email, password)
+                     */
+                }
                 <Formik initialValues=
                     {{
                         title: 'Login',
@@ -61,6 +79,11 @@ export default class LoginPage extends React.Component {
                         </View>
                     )}
                 </Formik>
+                {
+                    /**
+                     * @Button navigate to Register Page
+                     */
+                }
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => this.props.navigation.navigate("Register Page")}>

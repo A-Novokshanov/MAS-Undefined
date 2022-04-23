@@ -1,6 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, Button, Image } from 'react-native'
-import styles from '../Style/Content_style'
+import { View, Text, TouchableOpacity, SafeAreaView, Button, Image } from 'react-native';
+import styles from '../Style/Content_style';
+
+/**
+ * Only for the users who is a trainer, shows all the customer that the trainer has
+ * @route to get the paras from the props
+ * @navigation navigation tool
+ * @returns client screen
+ */
 
 const Clients = ({ route, navigation }) => {
 

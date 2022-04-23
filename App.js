@@ -1,14 +1,13 @@
+//React libs
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from '@react-navigation/stack';
+// Screen components
 import LoginPage from './src/Screens/LoginPage.js';
 import RegisterPage from './src/Screens/RegisterPage.js';
 import ContentPage from './src/Screens/ContentPage.js';
 import Trainer from './src/Screens/Trainer.js';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
 import Notes from './src/Screens/Notes.js';
 import Chat from './src/Screens/Chat.js';
 import Schedule from './src/Screens/Schedule.js';
@@ -20,9 +19,11 @@ import Update_info from './src/Screens/Update_info.js';
 import Reviews from './src/Screens/Reviews.js';
 import New_review from './src/Screens/New_review.js';
 import Payment from './src/Screens/Payment.js';
+//Firebase libs
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -41,14 +42,35 @@ if (firebase.apps.length === 0) {
 } else {
   app = firebase.app();
 }
+
+/**
+ * App screen stack and page controller
+ * (Trainer/Client)Login Page : LoginPage.js - Login related content
+ * (Trainer/Client)Payment: Payment.js
+ * (Trainer/Client)Content Page: ContentPage.js
+ * (Trainer/Client)Register Page: RegisterPage.js - Register realated content
+ * (Trainer/Client)Chat: Chat.js - The chat screen between the client and trainer
+ * (Trainer/Client)Schedule: Schedule.js - The Schedule component 
+ * (Trainer/Client)Update_info: Update_info.js
+ * (Trainer/Client)Reviews: Review.js
+ * (Trainer)Trainer_init: Trainer_init.js
+ * (Trainer)Trainer_init_2: Trainer_init_2.js
+ * (Trainer)Clients: Clients.js
+ * (Trainer)MyClients: MyClients.js - The screen that shows all the clients of a trainer
+ * (Client)New_Review: New_Review.js
+ * (Client)Trainer: Trainer.js - The page about the trainer's profile
+ */
 const Stack = createStackNavigator();
+
 
 const LoginStack = () => (
   <NavigationContainer>
+    
     <Stack.Navigator
       screenOptions={{
         headerShown: false
       }}
+      //Initial page set to Login page
       initialRouteName="Login Page">
       <Stack.Screen name="Login Page" component={LoginPage} />
       <Stack.Screen name="Trainer" component={Trainer} />
@@ -63,22 +85,8 @@ const LoginStack = () => (
       <Stack.Screen name="Clients" component={Clients} />
       <Stack.Screen name="New_Review" component={New_review} />
       <Stack.Screen name="Payment" component={Payment} />
-      <Stack.Screen name="Content Page" component={ContentPage}
-        options={({ navigation }) => ({
-          title: 'Content page',
-          headerLeft: () => (
-            <DrawerButton onPress={() => navigation.toggleDrawer()} />
-          ),
-        })}
-      />
-      <Stack.Screen name="Notes" component={Notes}
-        options={({ navigation }) => ({
-          title: 'Notes',
-          headerLeft: () => (
-            <DrawerButton  onPress={() => navigation.toggleDrawer()} />
-          ),
-        })}
-      />
+      <Stack.Screen name="Content Page" component={ContentPage} />
+      <Stack.Screen name="Notes" component={Notes} />
     </Stack.Navigator>
     
   </NavigationContainer>

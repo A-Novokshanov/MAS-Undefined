@@ -4,18 +4,24 @@ import styles from '../Style/Content_style'
 import { Formik } from 'formik';
 
 
-//TODO: Chat DATA
+//Init chat data for the chat screen
 const DATA = [
     "-Hi, how are you doing?",
     "I want to schedule a workout."
 ];
 
+/**
+ * Shows the chatroom for the trainer and client
+ * @route to get the paras from the props
+ * @navigation navigation tool
+ * @returns chat screen
+ */
 const Chat = ({ route, navigation }) => {
-
-    const { name, exp, review, miles, notes } = route.params;
-
+    //paras from the parents
+    const { name, exp, review, miles } = route.params;
+    //chat data controller
     const [note, setnotes] = React.useState(DATA)
-
+    //sectionlist component
     const Item = ({ item, nav }) => (
         <View style={styles.item_notes}>
             {
@@ -45,16 +51,16 @@ const Chat = ({ route, navigation }) => {
             }
         </View>
     );
-
+    //sectionlist components
     const renderItem = ({ item }) => (
         <Item item={item} />
     );
-
+    //submit handler for chat
     const submitNotes = async (input_notes) => {
         //TODO: DB
         setnotes([...note, String(input_notes)])
     }
-
+    //input field for chat
     const UselessTextInput = (props) => {
         return (
             <TextInput
@@ -64,7 +70,7 @@ const Chat = ({ route, navigation }) => {
             />
         );
     }
-
+    //Rendering items
     return (
 
         <View style={styles.app}>
@@ -98,7 +104,6 @@ const Chat = ({ route, navigation }) => {
                 >
                     {({ handleChange, handleBlur, handleSubmit, values, setFieldValue }) => (
                         <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom:50, marginLeft: 20 }}>
-
                             <UselessTextInput
                                 multiline
                                 numberOfLines={4}
@@ -107,12 +112,6 @@ const Chat = ({ route, navigation }) => {
                                 onBlur={handleBlur('input_notes')}
                                 value={values}
                             />
-
-                            {/* <TouchableOpacity
-                                style={styles.send}
-                                onPress={(handleSubmit)}>
-                                <Text style={styles.generic}> Send </Text>
-                            </TouchableOpacity> */}
                             <TouchableOpacity
                                 style={styles.send }
                                 onPress={(handleSubmit)}>

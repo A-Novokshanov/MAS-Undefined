@@ -1,22 +1,32 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, Switch, Button, Image } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, SafeAreaView, Switch, Button, Image } from 'react-native'
 import styles from '../Style/Content_style'
 import { Formik } from 'formik';
-import Stars from './Stars';
 import { addRating } from '../Services/ratingsService';
 
-
-
-//TODO: Submit review DATA
-
+/**
+ * The screen for create a new review 
+ * @route to get the paras from the props
+ * @navigation navigation tool
+ * @returns new review screen
+ */
 const New_review = ({ route, navigation }) => {
-
+    // the trainer's profile
     const { profile } = route.params;
-
+    /**
+     * rate state controller
+     * [0,0,0,0,0] = 0
+     * [1,0,0,0,0] = 1
+     * [1,1,0,0,0] = 2
+     * [1,1,1,0,0] = 3
+     * [1,1,1,1,0] = 4
+     * [1,1,1,1,1] = 5
+     */
     const [rate, setrate] = React.useState([0, 0, 0, 0, 0])
-
+    //submit handler for creating a new review
     const submitNotes = async (input_notes) => {
         try {
+            //calculate the rate
             let temp_rate = 0;
             for (let i = 4; i >= 0; i--) {
                 if (rate[i] == 1) {
@@ -24,14 +34,15 @@ const New_review = ({ route, navigation }) => {
                     break;
                 }
             }
+            //stores the comments, rate and anonymous in to the data
             let data = {
                 comments : input_notes.input_notes,
                 anonymous: input_notes.anonymous,
                 rate :temp_rate
             };
-            
+            //firebase add the new review
             addRating(profile.UID, data.anonymous, data.rate, data.comments)
-
+            //navigate to the reviews
             navigation.navigate('Reviews', {
                 profile: profile,
                 is_trainer: true,
@@ -43,7 +54,7 @@ const New_review = ({ route, navigation }) => {
         }
 
     }
-
+    //comment input
     const UselessTextInput = (props) => {
         return (
             <TextInput

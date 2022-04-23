@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, StatusBar, Image } from 'react-native';
+import React, { useState} from 'react';
+import { View, Text, TouchableOpacity, SafeAreaView, SectionList, Image } from 'react-native';
 import styles from '../Style/Content_style';
 import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
 import Profile from './Profile';
 import Message from './Message';
 
-//TODO: DATA
+//Init data for the trainer's customer
 const DATA = [
     {
         item: "",
@@ -27,7 +27,7 @@ const DATA = [
     }
 ];
 
-
+//sectionlist's component
 const Item = ({ item, nav }) => (
     <View>
         <TouchableOpacity
@@ -47,10 +47,14 @@ const Item = ({ item, nav }) => (
     </View>
 );
 
+/**
+ * Component init for CalendarPicker
+ * The disabled date will be stored in the disable_dates
+ * The colored date will be stored in the customDatesStyles
+ */
 const onDateChange = () => (
     console.log('cioool')
 );
-
 let today = moment();
 let day = today.clone().startOf('month');
 let customDatesStyles = [];
@@ -62,9 +66,7 @@ while (day.add(5, 'day').isSame(today, 'month')) {
         allowDisabled: true, // allow custom style to apply to disabled dates
     });
 }
-
 let date = new Date();
-
 let disable_dates = [
     date.setDate(date.getDate() + 1), date.setDate(date.getDate() + 2),
     date.setDate(date.getDate() + 3), date.setDate(date.getDate() + 2),
@@ -73,11 +75,22 @@ let disable_dates = [
 ]
 
 
-
+/**
+ * ContentPage contains the main screen for the trainers app, 
+ * the function includes:
+ * (Trainer)nav bar on the top of the screen,
+ * (Trainer)SectionList for all the paid customer
+ * @navigation pass by the parents, navigation function
+ * @route used to get the props parameters
+ * @returns 
+ */
 const MyClients = ({ navigation, route }) => {
-
+    //state controller to track the nav tab, init with My Trainers
     const [direction, setDirection] = useState("Clients");
-
+    /**
+     * Rendering pages will be stored in the page and changed when the nav bar changed
+     * direction = My trainer, my schedule and my profile
+    */
     var page;
 
     if (direction === "Clients") {
@@ -103,21 +116,56 @@ const MyClients = ({ navigation, route }) => {
     } else if (direction === "Profile") {
         page =
             <View>
-                <Profile 
-                    name = {route.params.profile.name? route.params.profile.name : "User"} 
-                    is_trainer = {route.params.profile.is_trainer? route.params.profile.is_trainer : false}
-                    profile = {route.params.profile}
-                    navigation = {navigation}
+                <Profile
+                    name={route.params.profile.name ? route.params.profile.name : "User"}
+                    is_trainer={route.params.profile.is_trainer ? route.params.profile.is_trainer : false}
+                    profile={route.params.profile}
+                    navigation={navigation}
                 />
             </View>
-    }else if (direction === "Message") {
+    } else if (direction === "Message") {
         page =
             <View>
-                <Message name = {"User"}/>
+                <Message name={"User"} />
             </View>
     }
 
-
+    //controller for the nav bar
+    const PreviewLayout = ({
+        label,
+        children,
+        values,
+        selectedValue,
+        setSelectedValue,
+    }) => (
+        <View style={{ padding: 10, flex: 1 }}>
+            <Text style={styles.label}>{label}</Text>
+            <View style={styles.row}>
+                {values.map((value) => (
+                    <TouchableOpacity
+                        key={value}
+                        onPress={() => setSelectedValue(value)}
+                        style={[
+                            styles.tab_button,
+                            selectedValue === value && styles.selected,
+                        ]}
+                    >
+                        <Text
+                            style={[
+                                styles.buttonLabel,
+                                selectedValue === value && styles.selectedLabel,
+                            ]}
+                        >
+                            {value}
+                        </Text>
+                    </TouchableOpacity>
+                ))}
+            </View>
+            <View style={[styles.container, { [label]: selectedValue }]}>
+                {children}
+            </View>
+        </View>
+    );
 
 
     return (
@@ -133,41 +181,6 @@ const MyClients = ({ navigation, route }) => {
     )
 }
 
-const PreviewLayout = ({
-    label,
-    children,
-    values,
-    selectedValue,
-    setSelectedValue,
-}) => (
-    <View style={{ padding: 10, flex: 1 }}>
-        <Text style={styles.label}>{label}</Text>
-        <View style={styles.row}>
-            {values.map((value) => (
-                <TouchableOpacity
-                    key={value}
-                    onPress={() => setSelectedValue(value)}
-                    style={[
-                        styles.tab_button,
-                        selectedValue === value && styles.selected,
-                    ]}
-                >
-                    <Text
-                        style={[
-                            styles.buttonLabel,
-                            selectedValue === value && styles.selectedLabel,
-                        ]}
-                    >
-                        {value}
-                    </Text>
-                </TouchableOpacity>
-            ))}
-        </View>
-        <View style={[styles.container, { [label]: selectedValue }]}>
-            {children}
-        </View>
-    </View>
-);
 
 
 

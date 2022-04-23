@@ -1,19 +1,23 @@
-import React, {useState, useEffect} from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, Button, Image } from 'react-native'
+import React, {useEffect} from 'react';
+import { View, Text, TextInput, TouchableOpacity, FlatList, SafeAreaView, Button } from 'react-native'
 import styles from '../Style/Content_style'
 import { Formik } from 'formik'
-import {newNotes, getUserNotes, makeNewNote, removeNote} from '../Services/notesService.js'
+import {getUserNotes, makeNewNote} from '../Services/notesService.js'
 
-
+/**
+ * Shows note for the trianer use
+ * @route to get the paras from the props
+ * @navigation navigation tool
+ * @returns chat screen
+ */
 const Notes = ({ route, navigation }) => {
-
+    //params pass by the parents
     var { name, exp, review, miles } = route.params;
-
+    //note state controller
     const [ note, setnotes ] = React.useState([]);
-
+    //fetch the note from the firebase
     useEffect(() => {
         const fetchData = async () => {
-
             try {
                 const data = await getUserNotes();
                 setnotes(data.Notes[name]);
@@ -26,17 +30,17 @@ const Notes = ({ route, navigation }) => {
 
         fetchData();
       }, []);
-
+    //components for note sectionlist
     const Item = ({ item, nav }) => (
         <View style={styles.item_notes}>
             <Text>{item}</Text>
         </View>
     );
-
+    //components for note sectionlist
     const renderItem = ({ item }) => (
         <Item item={item} />
     );
-
+    //the submit handler for the notes, push the new notes to the firebase
     const submitNotes = async (input_notes) => {
         try {
             if (note) {
@@ -50,7 +54,7 @@ const Notes = ({ route, navigation }) => {
         }
         
     }
-    
+    //text input for the notes
     const UselessTextInput = (props) => {
         return (
           <TextInput

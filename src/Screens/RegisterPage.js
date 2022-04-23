@@ -1,38 +1,43 @@
 import React from 'react';
 import { getAuth, createUserWithEmailAndPassword } from '@firebase/auth'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Switch } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity } from 'react-native'
 import { Formik } from 'formik';
 import styles from '../Style/Styles.styles';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { makeProfile } from '../Services/profileService.js';
 
-import {newNotes, getUserNotes, makeNewNote, removeNote} from '../Services/notesService.js'
-import {makeTrainerProfile} from '../Services/trainerProfileService.js'
-import {makeProfile} from '../Services/profileService.js'
-
+/**
+ * Screen for the Login page
+ */
 export default class RegisterPage extends React.Component {
-
+    /**
+     * Handle submitRegister, create a new user on firebase
+     * @email email
+     * @password password
+     * @return navigate to Content page
+     */
     async submitRegister(email, password, is_trainer) {
-
+        //getAuth for the firebase
         const auth = getAuth();
-      console.log('test');
 
-      // TODO: - 2 collections, one for trainers, one for clients
-      await createUserWithEmailAndPassword(auth, email, password);
+        // TODO: - 2 collections, one for trainers, one for clients
+        await createUserWithEmailAndPassword(auth, email, password);
+        //if its a client, make the profile for the client on the firebase
+        if (!is_trainer) {
+            await makeProfile(email, '');
+        }
 
-      if (!is_trainer) {
-        await makeProfile(email, '');
-      }
-
-
+        //set the init profile for client
         let temp_data = {
-            email : email,
-            name : "User",
-            password : password,
-            payment : "",
+            email: email,
+            name: "User",
+            password: password,
+            payment: "",
             phone: ""
         }
-        is_trainer ? this.props.navigation.navigate("Trainer_init", {profile : {email : email}}) // grab the data for a trainer
-            : this.props.navigation.navigate("Content Page", {profile : temp_data})  
+        //is_trainer is true then nav to trainer_init, otherwise to content page
+        is_trainer ? this.props.navigation.navigate("Trainer_init", { profile: { email: email } }) // grab the data for a trainer
+            : this.props.navigation.navigate("Content Page", { profile: temp_data })
     }
 
     render() {
@@ -73,16 +78,11 @@ export default class RegisterPage extends React.Component {
                                 style={styles.input}
                             />
                             <Text style={[styles.py12]}>
-                                {/* <Switch
-                                    onValueChange={value =>
-                                        setFieldValue('is_trianer', value)
-                                    }
-                                    value={values.is_trianer}
-                                /> */}
+                                
                                 <BouncyCheckbox
                                     onPress={(isChecked) => {
                                         console.log(isChecked);
-        
+
                                         setFieldValue('is_trianer', isChecked)
                                     }}
                                     textStyle={{
@@ -91,9 +91,9 @@ export default class RegisterPage extends React.Component {
                                     }}
                                     text="I am a trainer"
                                 />
-                                
+
                             </Text>
-                            
+
                             <Text style={styles.error}> {values.error} </Text>
                             <TouchableOpacity
                                 style={styles.button}

@@ -41,12 +41,10 @@ const New_review = ({ route, navigation }) => {
                 rate :temp_rate
             };
             //firebase add the new review
-            addRating(profile.UID, data.anonymous, data.rate, data.comments)
+            await addRating(profile.UID, data.anonymous, data.rate, data.comments)
             //navigate to the reviews
-            navigation.navigate('Reviews', {
-                profile: profile,
-                is_trainer: true,
-                temp_data : data
+            navigation.navigate('Trainer', {
+                profile: profile
             });
 
         } catch (e) {

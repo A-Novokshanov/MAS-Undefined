@@ -1,53 +1,44 @@
-import React, {useState, useEffect} from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, Button, Image } from 'react-native'
+import React, { useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, FlatList, SafeAreaView, Button } from 'react-native'
 import styles from '../Style/Content_style'
-import { Formik } from 'formik';
 import Stars from './Stars';
-import { viewRatings, addRating } from '../Services/ratingsService.js'
-import {newNotes, getUserNotes, makeNewNote, removeNote} from '../Services/notesService.js'
+import { viewRatings } from '../Services/ratingsService.js'
 
-
-
-//TODO: Reviews DATA
-var DATA = [
-    {
-        clients: "Daniel Tan",
-        date: "03/25",
-        rate: 5,
-        comment: "I had a meeting with him last Friday, during which he showed me how to correctly... do some workouts. We also talked about some dietary plans that he believes will help me. Overall, he was a pleasure to work with, and I would recommend him to anyone!"
-    },
-];
-
+/**
+ * Shows note for the trianer use
+ * @route to get the paras from the props
+ * @navigation navigation tool
+ * @returns chat screen
+ */
 const Reviews = ({ route, navigation }) => {
 
-  const { profile, is_trainer } = route.params;
+    const { profile, is_trainer } = route.params;
+    const [note, setnotes] = React.useState([]);
+    var DATA = []
 
-
-  const [note, setnotes] = React.useState([]);
-
-  useEffect(() => {
     const fetchData = async () => {
-      try {
-        const data = await viewRatings(profile.UID);
-        setnotes(data);
-      } catch (e) {
+        try {
+            const data = await viewRatings(profile.UID);
+            for (const e in data) {
+                if (e === "average") {
+                    continue
+                }
+                DATA.push({
+                    clients: data[e].name,
+                    date: "04/23",
+                    rate: data[e].rating,
+                    comment: data[e].review
+                })
+            }
 
-        console.log(e)
-      }
+            setnotes(DATA);
+        } catch (e) {
+            console.log(e)
+        }
     }
-
-    fetchData();
-  }, []);
-
-
-
-    route.params.temp_data? DATA.push({
-        clients: route.params.temp_data.anonymous? "Anonymous User" : "User name",
-        date: (new Date().toLocaleString().split(',')[0]).toString(),
-        rate: route.params.temp_data.rate,
-        comment: route.params.temp_data.comments
-    }) : DATA = DATA;
-
+    useEffect(() => {
+        fetchData();
+    }, []);
 
 
     const Item = ({ item, nav }) => (
@@ -106,9 +97,9 @@ const Reviews = ({ route, navigation }) => {
                     renderItem={renderItem}
                 />
                 {is_trainer || route.params.temp_data ? <View></View> :
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         style={[styles.review_button]}
-                        onPress={() => navigation.navigate("New_Review", {profile: profile})}
+                        onPress={() => navigation.navigate("New_Review", { profile: profile })}
                     >
                         <Text style={styles.generic}> Create New Review </Text>
                     </TouchableOpacity>

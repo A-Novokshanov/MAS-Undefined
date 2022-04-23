@@ -1,36 +1,40 @@
-import React, {useState, useEffect} from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, Button, Image } from 'react-native'
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native'
 import styles from '../Style/Content_style'
+import { getProfile } from '../Services/profileService.js'
+import { getTrainerProfile } from '../Services/trainerProfileService.js'
 
-import {getProfile} from '../Services/profileService.js'
-import {getTrainerProfile} from '../Services/trainerProfileService.js'
-
+/**
+ * the profile screen for both trainer and clients
+ * @navigation navigation tool
+ * @_name the user's name
+ * @is_trianer whether the user is trainer
+ * @profile the user's profile
+ * @returns the profile screen
+ */
 const Profile = ({ navigation, name, is_trainer, profile }) => {
 
-  // console.log("profile screen")
-  // console.log(profile)
-  // console.log(is_trainer)
+    //init the user's profile data
+    const [profile_data, setProfile] = useState(profile);
+    //fetch the newest data for the user
+    useEffect(() => {
+        const fetchData = async () => {
 
-  const [profile_data, setProfile] = useState(profile);
-
-  useEffect(() => {
-    const fetchData = async () => {
-
-      try {
-        if (is_trainer) {
-          const data = await getTrainerProfile()
-          setProfile(data)
-        } else {
-          const data = await getProfile()
-          setProfile(data)
+            try {
+                if (is_trainer) {
+                    const data = await getTrainerProfile()
+                    setProfile(data)
+                } else {
+                    const data = await getProfile()
+                    setProfile(data)
+                }
+            } catch (e) {
+                console.log(e)
+            }
         }
-      } catch (e) {
-        console.log(e)
-      }
-    }
 
-    fetchData();
-  }, []);
+        fetchData();
+    }, []);
 
 
     return (
@@ -45,11 +49,11 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                     style={[styles.pf_button]}
                     onPress={() => navigation.navigate('Update_info', {
                         c_type: "username",
-                      value: profile_data.username,
-                      is_trainer: is_trainer
+                        value: profile_data.username,
+                        is_trainer: is_trainer
                     })}
                 >
-                  <Text > Name: {profile_data.username} </Text>
+                    <Text > Name: {profile_data.username} </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.pf_button]}
@@ -57,7 +61,7 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                     <Text onPress={() => navigation.navigate('Update_info', {
                         c_type: "email",
                         value: profile_data.email,
-                      is_trainer: is_trainer
+                        is_trainer: is_trainer
                     })}> Email: {profile_data.email}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -65,7 +69,7 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                     onPress={() => navigation.navigate('Update_info', {
                         c_type: "Password",
                         value: profile_data.password,
-                      is_trainer: is_trainer
+                        is_trainer: is_trainer
                     })}
                 >
                     <Text > Password </Text>
@@ -75,7 +79,7 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                     onPress={() => navigation.navigate('Update_info', {
                         c_type: "Payment",
                         value: profile_data.payment,
-                      is_trainer: is_trainer
+                        is_trainer: is_trainer
                     })}
                 >
                     <Text > Payment </Text>
@@ -86,7 +90,7 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                     onPress={() => navigation.navigate('Update_info', {
                         c_type: "phone",
                         value: profile_data.phone,
-                      is_trainer: is_trainer
+                        is_trainer: is_trainer
                     })}
                 >
                     <Text > Phone Number </Text>

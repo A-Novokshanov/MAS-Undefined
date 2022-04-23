@@ -1,23 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, Button, TouchableHighlight, Image } from 'react-native';
-
+import React from 'react';
+import { View, Text, TouchableOpacity, SafeAreaView, Button, TouchableHighlight, Image } from 'react-native';
 import styles from '../Style/Content_style';
 import styles2 from '../Style/Styles.styles';
 
-import CalendarPicker from 'react-native-calendar-picker';
-import moment from 'moment';
-
-
-const onDateChange = (date) => (
-    console.log(date)
-);
-
-
+/**
+ * Shows payment screens
+ * @route to get the paras from the props
+ * @navigation navigation tool
+ * @returns payment screen
+ */
 const Payment = ({ route, navigation }) => {
-
+    //params passed by the parents
     const { name, date } = route.params;
-
-    const [selected_date, setSelected_date] = useState();
 
     return (
 

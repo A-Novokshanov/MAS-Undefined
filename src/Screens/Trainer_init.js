@@ -1,20 +1,28 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, Button, Image } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, SafeAreaView} from 'react-native'
 import styles2 from '../Style/Content_style';
 import styles from '../Style/Styles.styles';
 import { Formik } from 'formik';
 
 
-
+/**
+ * The screen for the first part of trainer init
+ * @route to get the paras from the props
+ * @navigation navigation tool
+ * @returns the first part of trainer init
+ */
 const Trainer_init = ({ navigation, route }) => {
-
+    //params from the parents
     const { profile } = route.params;
 
+    //submit handler for the page
     const submitInfo = async (values, profile) => { 
-        console.log(values);
-        console.log(profile);
+        //pass the entered content to Trainer_init_2
         navigation.navigate("Trainer_init_2", {
-            profile : {...values, introduction : profile.introduction}
+            profile : {
+                ...values, 
+                introduction : profile.introduction
+            }
         })
     }
 

@@ -1,10 +1,16 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, Button, Image } from 'react-native'
+import { View, Text, TouchableOpacity, SafeAreaView, Button, Image } from 'react-native'
 import styles from '../Style/Content_style'
 
+/**
+ * The screen for a trainer 
+ * @route to get the paras from the props
+ * @navigation navigation tool
+ * @returns a trainer screen
+ */
 const Trainer = ({ route, navigation }) => {
-
-    const { name, exp, review, miles, notes, profile, is_trainer } = route.params;
+    //params from the parents
+    const { profile, is_trainer } = route.params;
 
     return (
         <View style={styles.app}>

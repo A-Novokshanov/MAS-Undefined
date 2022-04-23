@@ -1,12 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, Button, Image } from 'react-native'
-import styles from '../Style/Content_style'
-import { Formik } from 'formik';
+import { View, Text, Image } from 'react-native'
 
-
+/**
+ * Component for stars
+ * @route to get the paras from the props
+ * @rate rate from 0-5
+ * @returns return the img with stars
+ */
 const Stars = ({ route, rate }) => {
 
-
+    //add stars img to the page[]
     let page = [];
     for (let i = 0; i < Math.ceil(rate); i++) {
         page.push(

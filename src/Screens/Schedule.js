@@ -1,19 +1,24 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, Button, Image } from 'react-native'
+import React from 'react';
+import { View, SafeAreaView, Button } from 'react-native'
 import styles from '../Style/Content_style'
 import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
 
-
-
-
+/**
+ * The screen for the schedule in the trainer's page
+ * @route to get the paras from the props
+ * @navigation navigation tool
+ * @returns schedule screen
+ */
 const Schedule = ({ route, navigation }) => {
+    //params from the parents
+    const { name } = route.params;
 
-    const { name, exp, review, miles, notes } = route.params;
-
-    const [selected_date, setSelected_date] = useState();
-
-
+    /**
+     * Component init for CalendarPicker
+     * The disabled date will be stored in the disable_dates
+     * The colored date will be stored in the customDatesStyles
+     */
     let today = moment();
     let day = today.clone().startOf('month');
     let customDatesStyles = [];
@@ -25,23 +30,20 @@ const Schedule = ({ route, navigation }) => {
             allowDisabled: true, // allow custom style to apply to disabled dates
         });
     }
-
     let date = new Date();
-
-    let disable_dates= [
-        date.setDate(date.getDate() + 1),date.setDate(date.getDate() + 2),
-        date.setDate(date.getDate() + 3),date.setDate(date.getDate() + 2),
-        date.setDate(date.getDate() + 3),date.setDate(date.getDate() + 2),
-        date.setDate(date.getDate() + 2),date.setDate(date.getDate() + 2),
+    let disable_dates = [
+        date.setDate(date.getDate() + 1), date.setDate(date.getDate() + 2),
+        date.setDate(date.getDate() + 3), date.setDate(date.getDate() + 2),
+        date.setDate(date.getDate() + 3), date.setDate(date.getDate() + 2),
+        date.setDate(date.getDate() + 2), date.setDate(date.getDate() + 2),
     ]
-
     const onDateChange = (date) => (
         navigation.navigate('Payment', {
             date: date,
             name: name
         })
     );
-    
+
 
     return (
 

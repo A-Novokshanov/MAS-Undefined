@@ -5,7 +5,7 @@ import Stars from './Stars';
 import { viewRatings } from '../Services/ratingsService.js'
 
 /**
- * Shows note for the trianer use
+ * Shows note for the trainer use
  * @route to get the paras from the props
  * @navigation navigation tool
  * @returns chat screen

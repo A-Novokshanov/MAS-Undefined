@@ -66,7 +66,8 @@ export async function addRating(uid, anon = false, rating, review) {
         console.log(e)
     }
 
-    ratings[currentUID] = {name: username, rating: rating, review: review}
+    const curDate = new Date()
+    ratings[currentUID] = {name: username, rating: rating, review: review, date: curDate}
 
     const data = {
         ratings : ratings

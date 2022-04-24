@@ -36,7 +36,7 @@ const Item = ({ item, nav }) => (
             />
             <Text>{item.name}</Text>
             <Text>{item.exp}+ years exp</Text>
-            <Text>Rating: {item.ratings.average}</Text>
+            <Text>Rating: {Math.round(item.ratings.average * 100) / 100}</Text>
             <Text>{item.miles} miles away</Text>
         </TouchableOpacity>
     </View>

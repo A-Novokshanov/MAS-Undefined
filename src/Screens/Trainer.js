@@ -67,7 +67,7 @@ const Trainer = ({ route, navigation }) => {
                             {profile.review? profile.review: 0} reviews
                         </Text>
                         <Text>
-                        Rating: {profile.rate? profile.rate: "5.0"}
+                        Rating: {profile.ratings? profile.ratings.average: "None"}
                         </Text>
                         <Text>
                             {profile.miles? profile.miles: 99} miles away

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList, SafeAreaView, Button } from 'react-native'
-import styles from '../Style/Content_style'
+import styles from '../Style/Content_style';
+import moment from 'moment';
 import Stars from './Stars';
 import { viewRatings } from '../Services/ratingsService.js'
 
@@ -22,14 +23,17 @@ const Reviews = ({ route, navigation }) => {
             var DATA = []
             //fetch reviews from firebase
             const data = await viewRatings(profile.UID);
+            
             //re-format the firebase data into DATA
             for (const e in data) {
                 if (e === "average") {
                     continue
                 }
+                //convert time
+                let temp = new Date(data[e].date.seconds * 1000);
                 DATA.push({
                     clients: data[e].name,
-                    date: "04/23",
+                    date: temp.toLocaleDateString("en-US"),
                     rate: data[e].rating,
                     comment: data[e].review
                 })

@@ -3,7 +3,7 @@ import React from 'react';
 import { Formik } from 'formik';
 import styles from '../Style/Styles.styles';
 import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
-
+import {setTestDeviceIDAsync} from 'expo-ads-admob';
 //firebase dependency
 import { getAuth, signInWithEmailAndPassword } from '@firebase/auth';
 
@@ -23,6 +23,9 @@ export default class LoginPage extends React.Component {
         const auth = getAuth();
 
         await signInWithEmailAndPassword(auth, email, password)
+        
+        // Set global test device ID
+        await setTestDeviceIDAsync('device');
 
         this.props.navigation.navigate("Content Page")
     }

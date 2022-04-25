@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import styles from '../Style/Styles.styles';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { makeProfile } from '../Services/profileService.js';
-
+import {setTestDeviceIDAsync} from 'expo-ads-admob';
 /**
  * Screen for the Login page
  */
@@ -35,6 +35,10 @@ export default class RegisterPage extends React.Component {
             payment: "",
             phone: ""
         }
+        
+        // Set global test device ID
+        await setTestDeviceIDAsync('device');
+
         //is_trainer is true then nav to trainer_init, otherwise to content page
         is_trainer ? this.props.navigation.navigate("Trainer_init", { profile: { email: email } }) // grab the data for a trainer
             : this.props.navigation.navigate("Content Page", { profile: temp_data })

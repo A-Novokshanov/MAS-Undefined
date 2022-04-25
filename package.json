@@ -11,6 +11,7 @@
     "postinstall": "rn-nodeify --install fs,dgram,process,path,console --hack"
   },
   "dependencies": {
+    "@react-native-admob/admob": "^2.0.1",
     "@react-native-community/checkbox": "^0.5.12",
     "@react-native-community/slider": "^4.2.1",
     "@react-native-firebase/app": "^14.2.3",
@@ -20,6 +21,7 @@
     "@react-navigation/stack": "^6.0.11",
     "axios": "^0.25.0",
     "expo": "~44.0.2",
+    "expo-ads-admob": "~12.0.0",
     "expo-cli": "^5.0.3",
     "expo-dev-client": "^0.8.2",
     "expo-splash-screen": "~0.14.1",
@@ -29,6 +31,7 @@
     "moment": "^2.29.1",
     "nodeify": "^1.0.1",
     "path-browserify": "^0.0.0",
+    "path-to-regexp": "^6.2.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",

@@ -2,7 +2,7 @@
 import React from 'react';
 import { Formik } from 'formik';
 import styles from '../Style/Styles.styles';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 
 //firebase dependency
 import { getAuth, signInWithEmailAndPassword } from '@firebase/auth';
@@ -30,11 +30,6 @@ export default class LoginPage extends React.Component {
     render() {
         return (
             <View style={styles.app}>
-                <View style={styles.container}>
-                    <Text style={styles.subtitle}>CS 4261 - Team Undefined</Text>
-                    <Text style={styles.title}>Personal Trainer Portal</Text>
-                    <Text style={styles.subtitle}>Please Log In</Text>
-                </View>
                 {
                     /**
                      * Form for login, 
@@ -43,6 +38,20 @@ export default class LoginPage extends React.Component {
                      * @return submitLogin(email, password)
                      */
                 }
+                <View style={styles.home_style}>
+                    <Text style={styles.title}>TrainSmart!</Text>
+                    <Text style={styles.subtitle}>Presented By Team Undefined</Text>
+                    <Image
+                        style={{
+                            width: 150,
+                            height: 150,
+                            alignSelf:"center",
+                            marginTop: 25
+                        }}
+                        source={require('../Icon/home.png')}
+                    />
+                </View>
+
                 <Formik initialValues=
                     {{
                         title: 'Login',
@@ -53,28 +62,32 @@ export default class LoginPage extends React.Component {
                     onSubmit={(values, { setFieldValue }) => this.submitLogin(values.email, values.password).catch(error => setFieldValue('error', error.message))}
                 >
                     {({ handleChange, handleBlur, handleSubmit, values, setFieldValue }) => (
-                        <View style={styles.container}>
-                            <Text style={styles.container}> E-Mail: </Text>
+                        <View>
+                            <Text style={styles.subtitle2}>Please Login!</Text>
                             <TextInput
-                                placeholder="Input E-Mail"
+                                placeholder="E-Mail"
                                 onChangeText={handleChange('email')}
                                 onBlur={handleBlur('email')}
                                 value={values.email}
-                                style={styles.input}
+                                style={styles.home_but}
                             />
-                            <Text style={styles.container}> Password: </Text>
                             <TextInput
-                                placeholder="Input Password"
+                                placeholder="Password"
                                 onChangeText={handleChange('password')}
                                 onBlur={handleBlur('password')}
                                 value={values.password}
-                                style={styles.input}
+                                style={styles.home_but}
                             />
                             <Text style={styles.error}> {values.error} </Text>
                             <TouchableOpacity
                                 style={styles.button}
                                 onPress={(handleSubmit)}>
                                 <Text style={styles.generic}> Login </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={() => this.props.navigation.navigate("Register Page")}>
+                                <Text style={styles.generic}> Register New Account </Text>
                             </TouchableOpacity>
                         </View>
                     )}
@@ -84,11 +97,7 @@ export default class LoginPage extends React.Component {
                      * @Button navigate to Register Page
                      */
                 }
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => this.props.navigation.navigate("Register Page")}>
-                    <Text style={styles.generic}> Register New Account </Text>
-                </TouchableOpacity>
+
             </View>
         )
     }

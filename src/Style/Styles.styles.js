@@ -3,7 +3,20 @@ import { StyleSheet, StatusBar } from "react-native";
 export default StyleSheet.create({
     app: {
         backgroundColor:'white',
-        flex: 1
+        flex: 1,
+        alignItems: 'center',
+        
+    },
+    home_style:{
+        marginTop: 60,
+    },
+    home_but: {
+        borderWidth: 1,
+        width: 350,
+        fontSize: 25,
+        borderRadius : 10,
+        marginTop: 20,
+        padding: 10
     },
     container: {
         marginTop: 10,
@@ -50,20 +63,31 @@ export default StyleSheet.create({
     },
     title: {
         marginTop: 30,
-        fontSize: 25,
+        fontSize: 65,
         fontWeight: "400",
-        color: '#C02F1D',
+        color: 'black',
         fontWeight: 'bold',
         backgroundColor: 'white',
         textAlign: "center"
     },
     subtitle: {
-        marginTop: 30,
-        marginLeft: 20,
+        marginTop: 10,
         fontSize: 20,
         fontWeight: "bold",
+        color: 'grey',
+        textAlign: "center"
+    },
+    subtitle2: {
+        marginTop: 10,
+        fontSize: 25,
         color: '#0D3D56',
-        textAlign: "left"
+        
+    },
+    subtitle3: {
+        fontSize: 20,
+        fontWeight: "bold",
+        color: 'grey',
+        textAlign: "center"
     },
     generic: {
         marginTop: 25,
@@ -89,9 +113,9 @@ export default StyleSheet.create({
         backgroundColor: '#0096FF',
         borderColor: 'darkblue',
         fontWeight: "400",
-        textAlign: "left",
-        justifyContent: 'center',
-        borderRadius: 50
+        alignSelf: 'center',
+        borderRadius: 50,
+        width: 300
     },
     image: {
         height: 48,

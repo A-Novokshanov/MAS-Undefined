@@ -1,6 +1,6 @@
 import React from 'react';
 import { getAuth, createUserWithEmailAndPassword } from '@firebase/auth'
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import { Formik } from 'formik';
 import styles from '../Style/Styles.styles';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
@@ -43,10 +43,18 @@ export default class RegisterPage extends React.Component {
     render() {
         return (
             <View style={styles.app}>
-                <View style={styles.container}>
-                    <Text style={styles.subtitle}>CS 4261 - Team Undefined</Text>
-                    <Text style={styles.title}>Personal Trainer Portal</Text>
-                    <Text style={styles.subtitle}>Register a New Account</Text>
+                <View style={styles.home_style}>
+                    <Text style={styles.title}>TrainSmart!</Text>
+                    <Text style={styles.subtitle}>Presented By Team Undefined</Text>
+                    <Image
+                        style={{
+                            width: 150,
+                            height: 150,
+                            alignSelf:"center",
+                            marginTop: 25
+                        }}
+                        source={require('../Icon/home.png')}
+                    />
                 </View>
 
                 <Formik initialValues=
@@ -61,40 +69,36 @@ export default class RegisterPage extends React.Component {
                 >
                     {({ handleChange, handleBlur, handleSubmit, values, setFieldValue }) => (
                         <View style={styles.container}>
-                            <Text style={styles.container}> E-Mail: </Text>
+                            <Text style={styles.subtitle2}>Register a New Account!</Text>
                             <TextInput
                                 placeholder="Input E-Mail"
                                 onChangeText={handleChange('email')}
                                 onBlur={handleBlur('email')}
                                 value={values.email}
-                                style={styles.input}
+                                style={styles.home_but}
                             />
-                            <Text style={styles.container}> Password: </Text>
                             <TextInput
                                 placeholder="Input Password"
                                 onChangeText={handleChange('password')}
                                 onBlur={handleBlur('password')}
                                 value={values.password}
-                                style={styles.input}
+                                style={styles.home_but}
                             />
-                            <Text style={[styles.py12]}>
+                            <Text style={{ marginTop: 15 }}>
                                 
                                 <BouncyCheckbox
                                     onPress={(isChecked) => {
-                                        console.log(isChecked);
-
                                         setFieldValue('is_trianer', isChecked)
                                     }}
-                                    textStyle={{
-                                        height: 20,
-                                        textDecorationLine: "none",
-                                    }}
+                                    
+                                    size={40}
+                                    textStyle={styles.subtitle3}
                                     text="I am a trainer"
                                 />
 
                             </Text>
-
-                            <Text style={styles.error}> {values.error} </Text>
+                            {values.error?<Text style={styles.error}> {values.error} </Text>:<View></View>}
+                            
                             <TouchableOpacity
                                 style={styles.button}
                                 onPress={(handleSubmit)}>

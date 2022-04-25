@@ -11,8 +11,8 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 //Backend dependency
 import { searchProfiles } from '../Services/searchService.js'
 import { getProfile } from '../Services/profileService.js'
-//Ads dependency
-import {AdMobBanner} from "expo-ads-admob";
+import Ads from './Ads';
+
 
 
 //Specialization const data
@@ -324,26 +324,8 @@ const ContentPage = ({ navigation, route }) => {
                 {page}
 
             </PreviewLayout>
-            {
-                //ads function
-            }
-            <View
-                style={[
-                    styles.box,
-                    {
-                        width: 500,
-                        minWidth: 50,
-                        height: 65,
-                        backgroundColor: "grey"
-                    },
-                ]}
-            >
-                <AdMobBanner
-                    bannerSize="fullBanner"
-                    adUnitID="ca-app-pub-3940256099942544/6300978111"
-                    servePersonalizedAds
-                    onDidFailToReceiveAdWithError={this.bannerError} />
-            </View>
+            <Ads/>
+            
         </SafeAreaView>
     )
 }

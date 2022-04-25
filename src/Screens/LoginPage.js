@@ -4,6 +4,7 @@ import { Formik } from 'formik';
 import styles from '../Style/Styles.styles';
 import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import {setTestDeviceIDAsync} from 'expo-ads-admob';
+import Ads from './Ads';
 //firebase dependency
 import { getAuth, signInWithEmailAndPassword } from '@firebase/auth';
 
@@ -100,7 +101,7 @@ export default class LoginPage extends React.Component {
                      * @Button navigate to Register Page
                      */
                 }
-
+                <Ads/>
             </View>
         )
     }

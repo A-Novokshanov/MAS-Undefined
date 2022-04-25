@@ -5,6 +5,7 @@ import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
 import Profile from './Profile';
 import Message from './Message';
+import Ads from './Ads';
 
 //Init data for the trainer's customer
 const DATA = [
@@ -177,6 +178,7 @@ const MyClients = ({ navigation, route }) => {
                 setSelectedValue={setDirection}>
                 {page}
             </PreviewLayout>
+            <Ads></Ads>
         </SafeAreaView>
     )
 }

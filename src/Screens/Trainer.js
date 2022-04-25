@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView, Button, Image } from 'react-native'
 import styles from '../Style/Content_style'
+import Ads from './Ads';
 
 /**
  * The screen for a trainer 
@@ -13,7 +14,7 @@ const Trainer = ({ route, navigation }) => {
     const { profile, is_trainer } = route.params;
 
     return (
-        <View style={styles.app}>
+        <View style={styles.container}>
 
             <SafeAreaView>
             <View style={{ flexDirection: 'row' }}>
@@ -119,8 +120,9 @@ const Trainer = ({ route, navigation }) => {
                 </TouchableOpacity>
                 
                 {is_trainer? <Text style={styles.subtitle}>----------PREVIEW SCREEN----------</Text>: <View></View>}
-
+                
             </SafeAreaView>
+            <Ads></Ads>
         </View>
     )
 

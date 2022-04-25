@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, Button, Image } from 'react-native'
 import styles from '../Style/Content_style'
 import { Formik } from 'formik';
+import Ads from './Ads';
 
 
 //Init chat data for the chat screen
@@ -73,7 +74,7 @@ const Chat = ({ route, navigation }) => {
     //Rendering items
     return (
 
-        <View style={styles.app}>
+        <View style={styles.container}>
 
             <SafeAreaView>
                 <View style={{ flexDirection: 'row' }}>
@@ -120,8 +121,9 @@ const Chat = ({ route, navigation }) => {
                         </View>
                     )}
                 </Formik>
-
+                
             </SafeAreaView>
+            <Ads/>
         </View>
     )
 

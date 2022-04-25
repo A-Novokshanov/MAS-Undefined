@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, FlatList, SafeAreaView, Button
 import styles from '../Style/Content_style'
 import { Formik } from 'formik'
 import {getUserNotes, makeNewNote} from '../Services/notesService.js'
+import Ads from './Ads';
 
 /**
  * Shows note for the trianer use
@@ -67,7 +68,7 @@ const Notes = ({ route, navigation }) => {
 
     return (
         
-        <View style={styles.app}>
+        <View style={styles.container}>
 
             <SafeAreaView>
                 <View style={{ flexDirection: 'row' }}>
@@ -118,6 +119,7 @@ const Notes = ({ route, navigation }) => {
                 </Formik>
 
             </SafeAreaView>
+            <Ads></Ads>
         </View>
     )
 

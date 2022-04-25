@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView, Button, Image } from 'react-native';
 import styles from '../Style/Content_style';
+import Ads from './Ads';
 
 /**
  * Only for the users who is a trainer, shows all the customer that the trainer has
@@ -14,7 +15,7 @@ const Clients = ({ route, navigation }) => {
     const { name, date_next_meeting, notes } = route.params;
 
     return (
-        <View style={styles.app}>
+        <View style={styles.container}>
 
             <SafeAreaView>
             <View style={{ flexDirection: 'row' }}>
@@ -78,6 +79,7 @@ const Clients = ({ route, navigation }) => {
 
 
             </SafeAreaView>
+            <Ads></Ads>
         </View>
     )
 

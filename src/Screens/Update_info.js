@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, SafeAreaView, Button } from 'react-native'
 import styles from '../Style/Styles.styles';
+import styles2 from '../Style/Content_style';
 import { Formik } from 'formik';
 import { CommonActions } from '@react-navigation/native';
 
@@ -9,6 +10,7 @@ import { editProfile } from '../Services/profileService.js'
 import { editTrainerProfile } from '../Services/trainerProfileService.js'
 import { changePassword } from '../Services/passwordService';
 import { changeEmail } from '../Services/emailService';
+import Ads from './Ads';
 
 
 /**
@@ -75,7 +77,7 @@ const Update_info = (mainProps) => {
   }
 
   return (
-    <View style={styles.app}>
+    <View style={styles2.container}>
 
       <SafeAreaView>
         <View style={{ flexDirection: 'row' }}>
@@ -123,6 +125,7 @@ const Update_info = (mainProps) => {
 
 
       </SafeAreaView>
+      <Ads></Ads>
     </View>
   )
 

@@ -3,6 +3,7 @@ import { View, SafeAreaView, Button } from 'react-native'
 import styles from '../Style/Content_style'
 import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
+import Ads from './Ads';
 
 /**
  * The screen for the schedule in the trainer's page
@@ -47,7 +48,7 @@ const Schedule = ({ route, navigation }) => {
 
     return (
 
-        <View style={styles.app}>
+        <View style={styles.container}>
 
             <SafeAreaView>
                 <View style={{ flexDirection: 'row' }}>
@@ -64,6 +65,7 @@ const Schedule = ({ route, navigation }) => {
                 />
 
             </SafeAreaView>
+            <Ads></Ads>
         </View>
     )
 

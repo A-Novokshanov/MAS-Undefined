@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView, Button, TouchableHighlight, Image } from 'react-native';
 import styles from '../Style/Content_style';
 import styles2 from '../Style/Styles.styles';
+import Ads from './Ads';
 
 /**
  * Shows payment screens
@@ -15,7 +16,7 @@ const Payment = ({ route, navigation }) => {
 
     return (
 
-        <View style={styles.app}>
+        <View style={styles.container}>
 
             <SafeAreaView>
                 <View style={{ flexDirection: 'row' }}>
@@ -152,6 +153,7 @@ const Payment = ({ route, navigation }) => {
 
 
             </SafeAreaView>
+            <Ads></Ads>
         </View>
     )
 

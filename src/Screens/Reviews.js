@@ -4,6 +4,7 @@ import styles from '../Style/Content_style';
 import moment from 'moment';
 import Stars from './Stars';
 import { viewRatings } from '../Services/ratingsService.js'
+import Ads from './Ads';
 
 /**
  * Shows note for the trainer use
@@ -76,7 +77,7 @@ const Reviews = ({ route, navigation }) => {
 
     return (
 
-        <View style={styles.app}>
+        <View style={styles.container}>
 
             <SafeAreaView>
                 <View style={{ flexDirection: 'row' }}>
@@ -101,6 +102,7 @@ const Reviews = ({ route, navigation }) => {
                 }
 
             </SafeAreaView>
+            <Ads></Ads>
         </View>
     )
 

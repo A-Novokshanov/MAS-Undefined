@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, SafeAreaView, Switch, Button, 
 import styles from '../Style/Content_style'
 import { Formik } from 'formik';
 import { addRating } from '../Services/ratingsService';
+import Ads from './Ads';
 
 /**
  * The screen for create a new review 
@@ -65,7 +66,7 @@ const New_review = ({ route, navigation }) => {
 
     return (
 
-        <View style={styles.app}>
+        <View style={styles.container}>
 
             <SafeAreaView>
                 <View style={{ flexDirection: 'row' }}>
@@ -261,6 +262,7 @@ const New_review = ({ route, navigation }) => {
 
 
             </SafeAreaView>
+            <Ads></Ads>
         </View>
     )
 

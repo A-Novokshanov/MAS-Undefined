@@ -8,7 +8,7 @@ export default StyleSheet.create({
         
     },
     home_style:{
-        marginTop: 60,
+        marginTop: 5,
     },
     home_but: {
         borderWidth: 1,
@@ -62,7 +62,7 @@ export default StyleSheet.create({
         paddingHorizontal: 10,
     },
     title: {
-        marginTop: 30,
+        marginTop: 20,
         fontSize: 65,
         fontWeight: "400",
         color: 'black',
@@ -71,7 +71,7 @@ export default StyleSheet.create({
         textAlign: "center"
     },
     subtitle: {
-        marginTop: 10,
+        marginTop: 0,
         fontSize: 20,
         fontWeight: "bold",
         color: 'grey',
@@ -108,7 +108,7 @@ export default StyleSheet.create({
         textAlign: "center"
     },
     button: {
-        marginTop: 25,
+        marginTop: 5,
         fontSize: 17,
         backgroundColor: '#0096FF',
         borderColor: 'darkblue',
@@ -122,7 +122,7 @@ export default StyleSheet.create({
         width: 48,
     },
     error: {
-        marginTop: 10,
+        marginTop: 5,
         fontSize: 17,
         fontWeight: "400",
         textAlign: "center",

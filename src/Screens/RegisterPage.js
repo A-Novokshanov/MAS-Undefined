@@ -52,10 +52,10 @@ export default class RegisterPage extends React.Component {
                     <Text style={styles.subtitle}>Presented By Team Undefined</Text>
                     <Image
                         style={{
-                            width: 150,
-                            height: 150,
+                            width: 55,
+                            height: 55,
                             alignSelf:"center",
-                            marginTop: 25
+                            marginTop: 15
                         }}
                         source={require('../Icon/home.png')}
                     />
@@ -92,7 +92,7 @@ export default class RegisterPage extends React.Component {
                                 
                                 <BouncyCheckbox
                                     onPress={(isChecked) => {
-                                        setFieldValue('is_trianer', isChecked)
+                                        setFieldValue('is_trainer', isChecked)
                                     }}
                                     
                                     size={40}

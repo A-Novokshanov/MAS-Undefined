@@ -47,10 +47,10 @@ export default class LoginPage extends React.Component {
                     <Text style={styles.subtitle}>Presented By Team Undefined</Text>
                     <Image
                         style={{
-                            width: 150,
-                            height: 150,
+                            width: 125,
+                            height: 125,
                             alignSelf:"center",
-                            marginTop: 25
+                            marginTop: 15
                         }}
                         source={require('../Icon/home.png')}
                     />

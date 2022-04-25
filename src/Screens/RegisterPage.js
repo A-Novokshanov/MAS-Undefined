@@ -113,7 +113,6 @@ export default class RegisterPage extends React.Component {
                     onPress={() => this.props.navigation.navigate("Login Page")}>
                     <Text style={styles.generic}> Return to Login Page </Text>
                 </TouchableOpacity>
-                <Ads/>
             </View>
         )
     }

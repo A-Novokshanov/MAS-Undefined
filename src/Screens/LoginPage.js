@@ -101,7 +101,6 @@ export default class LoginPage extends React.Component {
                      * @Button navigate to Register Page
                      */
                 }
-                <Ads/>
             </View>
         )
     }

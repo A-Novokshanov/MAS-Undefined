@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, Button, Image } from 'react-native'
 import styles from '../Style/Content_style'
 import { Formik } from 'formik';
+import { getChat, makeNewMessage, newChat } from '../Services/chatService.js';
 import Ads from './Ads';
 
 
 //Init chat data for the chat screen
 const DATA = [
     "-Hi, how are you doing?",
-    "I want to schedule a workout."
+  "I want to schedule a workout.",
+  "oh thats cool",
+  "neat"
 ];
 
 /**
@@ -19,14 +22,44 @@ const DATA = [
  */
 const Chat = ({ route, navigation }) => {
     //paras from the parents
-    const { name, exp, review, miles } = route.params;
+  const { name, exp, review, miles } = route.params;
+  // route.params.profile.UID is the trainer's uid
+  const trainerId = route.params.profile.UID
+
+  const [note, setnotes] = React.useState([])
+  const [chatId, setChatId] = React.useState(null)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const chat_doc = await getChat(trainerId);
+      console.log("the chat doc we found: ", chat_doc)
+      if (chat_doc) {
+        console.log("this ", chat_doc, " is boolean true")
+        setnotes(chat_doc.messages)
+        /* 
+
+          msg:
+ { message : hi,
+   is_trainer: boolean}
+*/
+        console.log("id of the old chat doc ", chat_doc.id);
+        setChatId(chat_doc.id)
+      } else {
+        const id = await newChat(trainerId);
+        console.log("id of newly created chat: ", id)
+        setChatId(id);
+      }
+    };
+
+    fetchData();
+  }, []);
+
     //chat data controller
-    const [note, setnotes] = React.useState(DATA)
     //sectionlist component
     const Item = ({ item, nav }) => (
         <View style={styles.item_notes}>
             {
-                item.charAt(0) === '-' ?
+                item.is_trainer ?
                     <Text>
                         <Image
                             style={{
@@ -36,10 +69,10 @@ const Chat = ({ route, navigation }) => {
                             }}
                             source={require('../Icon/pic.png')}
                         />
-                        {item.slice(1)}
+                        {item.message}
                     </Text> :
                     <Text style={{ textAlign: 'right' }}>
-                        {item}
+                        {item.message}
                         <Image
                             style={{
                                 width: 20,
@@ -57,9 +90,14 @@ const Chat = ({ route, navigation }) => {
         <Item item={item} />
     );
     //submit handler for chat
-    const submitNotes = async (input_notes) => {
-        //TODO: DB
-        setnotes([...note, String(input_notes)])
+  const submitNotes = async (input_notes) => {
+    setnotes([...note, input_notes])
+      //TODO: DB
+      console.log(input_notes)
+      const new_chats = [...note, input_notes]
+      console.log("new chats: ")
+      console.log(new_chats)
+      makeNewMessage(chatId, trainerId, String(input_notes))
     }
     //input field for chat
     const UselessTextInput = (props) => {

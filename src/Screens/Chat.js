@@ -31,12 +31,17 @@ const Chat = ({ route, navigation }) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      // setRefresh(false)
       const chat_doc = await getChat(trainerId);
       console.log("the chat doc we found: ", chat_doc)
       if (chat_doc) {
         console.log("this ", chat_doc, " is boolean true")
-        setnotes(chat_doc.messages)
-        /* 
+        setnotes(chat_doc.messages.map((chat_ob) => {
+          if (chat_ob.is_trainer)
+            return `-${chat_ob.message}`;
+          return chat_ob.message
+        }));
+        /*
 
           msg:
  { message : hi,
@@ -59,7 +64,8 @@ const Chat = ({ route, navigation }) => {
     const Item = ({ item, nav }) => (
         <View style={styles.item_notes}>
             {
-                item.is_trainer ?
+
+              item.charAt(0) === '-' ?
                     <Text>
                         <Image
                             style={{
@@ -69,10 +75,10 @@ const Chat = ({ route, navigation }) => {
                             }}
                             source={require('../Icon/pic.png')}
                         />
-                        {item.message}
+                      {item.substring(1)}
                     </Text> :
                     <Text style={{ textAlign: 'right' }}>
-                        {item.message}
+                        {item}
                         <Image
                             style={{
                                 width: 20,
@@ -91,13 +97,16 @@ const Chat = ({ route, navigation }) => {
     );
     //submit handler for chat
   const submitNotes = async (input_notes) => {
-    setnotes([...note, input_notes])
-      //TODO: DB
-      console.log(input_notes)
-      const new_chats = [...note, input_notes]
-      console.log("new chats: ")
-      console.log(new_chats)
-      makeNewMessage(chatId, trainerId, String(input_notes))
+    console.log("in submit notes:::::::::::::::::::::::::;")
+    setnotes([...note, String(input_notes)])
+    console.log(input_notes)
+    console.log(note)
+    const new_notes = note
+    // new_notes.push({message: input_notes, is_trainer:false})
+    // console.log(new_notes)
+    // setnotes(new_notes)
+
+    makeNewMessage(chatId, trainerId, String(input_notes))
     }
     //input field for chat
     const UselessTextInput = (props) => {
@@ -127,11 +136,14 @@ const Chat = ({ route, navigation }) => {
                         title={"< " + name}
                     />
                 </View>
-                <FlatList
-                    style={{ height: 400 }}
-                    data={note}
-                    renderItem={renderItem}
+              <FlatList
+                data={note}
+                renderItem={renderItem}
+                style={{ height: 400 }}
                 />
+              {/* { */}
+              {/*   note.map((chat_obj, index) => <Item key={index} item={chat_obj} />) */}
+              {/* } */}
                 <Formik initialValues=
                     {{
                         title: 'Login',

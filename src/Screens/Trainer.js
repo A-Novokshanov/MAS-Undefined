@@ -44,7 +44,7 @@ const Trainer = ({ route, navigation }) => {
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom:50 }}>
                     <View style={{ marginLeft:30, width: 200 }}>
                     <Text>
-                        {profile.introduction? profile.introduction : 
+                        {profile.description? profile.description : 
                         "Comments like this are just amazing. You can write whatever you want and after that, you can check the result of this. It can have more than 3 lines"}
                             
                     </Text>

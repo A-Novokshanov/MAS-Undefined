@@ -21,7 +21,7 @@ const Trainer_init = ({ navigation, route }) => {
         navigation.navigate("Trainer_init_2", {
             profile : {
                 ...values, 
-                introduction : profile.introduction
+                description : profile.description
             }
         })
     }

@@ -23,7 +23,7 @@ const Trainer_init_2 = ({ navigation, route }) => {
             //re-format the profile
             temp = {
                 ...temp,
-                introduction: input_notes,
+                description: input_notes,
                 is_trainer: true
             }
 
@@ -61,9 +61,9 @@ const Trainer_init_2 = ({ navigation, route }) => {
                 </Text>
                 <Formik initialValues=
                     {{
-                        introduction: profile.introduction
+                        description: profile.description
                     }}
-                    onSubmit={(values, { setFieldValue }) => submit_profile(values.introduction, profile).catch(error => setFieldValue('error', error.message))}
+                    onSubmit={(values, { setFieldValue }) => submit_profile(values.description, profile).catch(error => setFieldValue('error', error.message))}
                 >
                     {({ handleChange, handleBlur, handleSubmit, values, setFieldValue }) => (
                         <View>
@@ -72,9 +72,9 @@ const Trainer_init_2 = ({ navigation, route }) => {
                                 multiline
                                 numberOfLines={4}
                                 style={{ backgroundColor: '#E8E8E8', height: 200, borderRadius: 20 }}
-                                onChangeText={handleChange('introduction')}
-                                onBlur={handleBlur('introduction')}
-                                value={values.introduction}
+                                onChangeText={handleChange('description')}
+                                onBlur={handleBlur('description')}
+                                value={values.description}
                             />
 
                             <TouchableOpacity

@@ -21,7 +21,7 @@ export async function makeTrainerProfile(input) {
         price: input.eprice || '',
         friendly: input.beginnerF || false,
         specialization: input.spec || '',
-        description: input.profileDesc || '',
+        description: input.description || '',
     certificate: input.certID || -1,
     exp: input.exp || 0,
       ratings : {average: 0},

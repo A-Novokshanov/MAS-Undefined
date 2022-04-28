@@ -12,7 +12,7 @@ import Ads from './Ads';
 
 const Clients = ({ route, navigation }) => {
 
-    const { name, date_next_meeting, notes } = route.params;
+    const { name, date_next_meeting, notes, profile } = route.params;
 
     return (
         <View style={styles.container}>
@@ -20,7 +20,7 @@ const Clients = ({ route, navigation }) => {
             <SafeAreaView>
             <View style={{ flexDirection: 'row' }}>
                     <Button
-                        onPress={() => navigation.navigate('Content Page', {
+                        onPress={() => navigation.navigate('MyClients', {
                             name: name
                         })}
                         title={"< " + name}
@@ -55,7 +55,9 @@ const Clients = ({ route, navigation }) => {
                 <TouchableOpacity
                     style={[styles.button, styles.px12]}
                     onPress={() => navigation.navigate('Chat', {
-                        name: name
+                        name: name,
+                        profile: profile,
+                        is_trainer: true
                       })}
                 >
                     <Text > Chat </Text>

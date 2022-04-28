@@ -22,8 +22,9 @@ const DATA = [
  */
 const Chat = ({ route, navigation }) => {
     //paras from the parents
-  const { name, exp, review, miles } = route.params;
+  const { name, exp, review, miles, is_trainer, profile } = route.params;
   // route.params.profile.UID is the trainer's uid
+  console.log(profile);
   const trainerId = route.params.profile.UID
 
   const [note, setnotes] = React.useState([])

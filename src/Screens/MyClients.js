@@ -35,6 +35,7 @@ const Item = ({ item, nav }) => (
             style={styles.list_button}
             onPress={() => nav.navigate('Clients', {
                 name: item.name,
+                profile: item,
                 date_next_meeting: item.date_next_meeting
             })}
         >

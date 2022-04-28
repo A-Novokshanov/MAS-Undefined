@@ -18,11 +18,13 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
     const [profile_data, setProfile] = useState(profile);
     //fetch the newest data for the user
     useEffect(() => {
+        
         const fetchData = async () => {
 
             try {
                 if (is_trainer) {
                     const data = await getTrainerProfile()
+                    console.log(data)
                     setProfile(data)
                 } else {
                     const data = await getProfile()
@@ -42,7 +44,7 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
 
             <SafeAreaView>
                 <Text style={[styles.subtitle, styles.px6]}>
-                    Hi, {profile_data.username}
+                    Hi, {profile_data.username?profile_data.username:profile_data.name}
                 </Text>
 
                 <TouchableOpacity
@@ -53,16 +55,16 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
                         is_trainer: is_trainer
                     })}
                 >
-                    <Text > Name: {profile_data.username} </Text>
+                    <Text > Name: {profile_data.username?profile_data.username:profile_data.name} </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.pf_button]}
                 >
                     <Text onPress={() => navigation.navigate('Update_info', {
-                        c_type: "email",
+                        c_type: "Email",
                         value: profile_data.email,
                         is_trainer: is_trainer
-                    })}> Email: {profile_data.email}</Text>
+                    })}> Email: {profile_data.email?profile_data.email:profile_data.Email}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.pf_button]}

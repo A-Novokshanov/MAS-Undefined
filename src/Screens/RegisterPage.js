@@ -24,6 +24,7 @@ export default class RegisterPage extends React.Component {
         await createUserWithEmailAndPassword(auth, email, password);
         //if its a client, make the profile for the client on the firebase
         if (!is_trainer) {
+            console.log(is_trainer);
             await makeProfile(email, '');
         }
 
@@ -51,7 +52,7 @@ export default class RegisterPage extends React.Component {
                         style={{
                             width: 55,
                             height: 55,
-                            alignSelf:"center",
+                            alignSelf: "center",
                             marginTop: 15
                         }}
                         source={require('../Icon/home.png')}
@@ -86,20 +87,26 @@ export default class RegisterPage extends React.Component {
                                 style={styles.home_but}
                             />
                             <Text style={{ marginTop: 15 }}>
-                                
+
                                 <BouncyCheckbox
                                     onPress={(isChecked) => {
-                                        setFieldValue('is_trainer', isChecked)
+                                        console.log(isChecked);
+
+                                        setFieldValue('is_trianer', isChecked)
                                     }}
-                                    
-                                    size={40}
-                                    textStyle={styles.subtitle3}
+                                    textStyle={{
+                                        fontSize: 20,
+                                        fontWeight: "bold",
+                                        color: 'grey',
+                                        textAlign: "center",
+                                        textDecorationLine: "none",
+                                    }}
                                     text="I am a trainer"
                                 />
 
                             </Text>
-                            {values.error?<Text style={styles.error}> {values.error} </Text>:<View></View>}
-                            
+                            {values.error ? <Text style={styles.error}> {values.error} </Text> : <View></View>}
+
                             <TouchableOpacity
                                 style={styles.button}
                                 onPress={(handleSubmit)}>

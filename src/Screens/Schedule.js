@@ -13,7 +13,7 @@ import Ads from './Ads';
  */
 const Schedule = ({ route, navigation }) => {
     //params from the parents
-    const { name } = route.params;
+    const { name, is_trainer } = route.params;
 
     /**
      * Component init for CalendarPicker
@@ -39,6 +39,7 @@ const Schedule = ({ route, navigation }) => {
         date.setDate(date.getDate() + 2), date.setDate(date.getDate() + 2),
     ]
     const onDateChange = (date) => (
+        is_trainer?console.log("not trainer"):
         navigation.navigate('Payment', {
             date: date,
             name: name

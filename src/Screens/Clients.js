@@ -64,7 +64,8 @@ const Clients = ({ route, navigation }) => {
                     style={[styles.button, styles.px12]}
                 >
                     <Text onPress={() => navigation.navigate('Schedule', {
-                        name: name
+                        name: name,
+                        is_trainer: true
                       })}> View Schedule </Text>
                 </TouchableOpacity>
                 <TouchableOpacity

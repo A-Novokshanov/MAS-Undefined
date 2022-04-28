@@ -40,7 +40,7 @@ const Trainer_init = ({ navigation, route }) => {
                         email: profile? profile.email : '',
                         address: profile? profile.address : '',
                         exp: profile? profile.exp : '',
-                      price: profile? number(profile.price) : 0,
+                      price: profile? parseInt(profile.price) : 0,
                         is_friendly: profile? profile.is_friendly : false,
                         specialization: profile? profile.specialization : '',
                         certificate: profile? profile.certificate : ''

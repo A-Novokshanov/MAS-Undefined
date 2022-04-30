@@ -1,69 +1,109 @@
+//React dependency
 import React from 'react';
-import * as firebase from '@firebase/app'
-import { getAuth, signInWithEmailAndPassword } from '@firebase/auth'
-import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
 import { Formik } from 'formik';
 import styles from '../Style/Styles.styles';
+import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
+import {setTestDeviceIDAsync} from 'expo-ads-admob';
+import Ads from './Ads';
+//firebase dependency
+import { getAuth, signInWithEmailAndPassword } from '@firebase/auth';
 
+
+/**
+ * Screen for the Login page
+ */
 export default class LoginPage extends React.Component {
-
+    /**
+     * Handle login button, pass email and password to firebase for auth check
+     * @param {*} email 
+     * @param {*} password 
+     * @return navigate to Content page
+     */
     async submitLogin(email, password) {
 
         const auth = getAuth();
 
-        await signInWithEmailAndPassword(auth, email, password)
+        let temp1 = await signInWithEmailAndPassword(auth, email, password)
+        
+        // Set global test device ID
+        await setTestDeviceIDAsync('device');
+
+        console.log(temp1);
+
         this.props.navigation.navigate("Content Page")
     }
 
     render() {
         return (
             <View style={styles.app}>
-            <View style={styles.container}>
-                <Text style={styles.subtitle}>CS 4261 - Programming Assignment 1</Text>
-                <Text style={styles.title}>Cryptocurrency Price Tracker</Text>
-                <Text style={styles.subtitle}>Please Log In</Text>
-            </View>
-            
-            <Formik initialValues = 
-                {{title: 'Login',
-                email: '',
-                password: '',
-                error: ''
-                }}
-                onSubmit = {(values, {setFieldValue}) => this.submitLogin(values.email, values.password).catch(error => setFieldValue('error', error.message))}
-            >
-                {({handleChange, handleBlur, handleSubmit, values, setFieldValue}) => (
-                <View style={styles.container}>
-                    <Text style={styles.container}> E-Mail: </Text>
-                    <TextInput 
-                        placeholder="Input E-Mail" 
-                        onChangeText={handleChange('email')}
-                        onBlur={handleBlur('email')}
-                        value={values.email}
-                        style={styles.input}
+                {
+                    /**
+                     * Form for login, 
+                     * @email input stores in values.email
+                     * @password input stores in values.password
+                     * @return submitLogin(email, password)
+                     */
+                }
+                <View style={styles.home_style}>
+                    <Text style={styles.title}>TrainSmart!</Text>
+                    <Text style={styles.subtitle}>Presented By Team Undefined</Text>
+                    <Image
+                        style={{
+                            width: 125,
+                            height: 125,
+                            alignSelf:"center",
+                            marginTop: 15
+                        }}
+                        source={require('../Icon/home.png')}
                     />
-                    <Text style={styles.container}> Password: </Text>
-                    <TextInput 
-                        placeholder="Input Password" 
-                        onChangeText={handleChange('password')}
-                        onBlur={handleBlur('password')}
-                        value={values.password}
-                        style={styles.input}
-                    />
-                    <Text style={styles.error}> {values.error} </Text>
-                    <TouchableOpacity 
-                    style={styles.button}
-                    onPress={(handleSubmit)}>
-                    <Text style={styles.generic}> Login </Text>
-                    </TouchableOpacity>
                 </View>
-            )}
-            </Formik>
-                <TouchableOpacity 
-                    style={styles.button}
-                    onPress={() => this.props.navigation.navigate("Register Page")}>
-                    <Text style={styles.generic}> Register New Account </Text>
-                </TouchableOpacity>
+
+                <Formik initialValues=
+                    {{
+                        title: 'Login',
+                        email: '',
+                        password: '',
+                        error: ''
+                    }}
+                    onSubmit={(values, { setFieldValue }) => this.submitLogin(values.email,
+                        values.password).catch(error => setFieldValue('error', error.message))}
+                >
+                    {({ handleChange, handleBlur, handleSubmit, values, setFieldValue }) => (
+                        <View>
+                            <Text style={styles.subtitle2}>Please Login!</Text>
+                            <TextInput
+                                placeholder="E-Mail"
+                                onChangeText={handleChange('email')}
+                                onBlur={handleBlur('email')}
+                                value={values.email}
+                                style={styles.home_but}
+                            />
+                            <TextInput
+                                placeholder="Password"
+                                onChangeText={handleChange('password')}
+                                onBlur={handleBlur('password')}
+                                value={values.password}
+                                style={styles.home_but}
+                            />
+                            <Text style={styles.error}> {values.error} </Text>
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={(handleSubmit)}>
+                                <Text style={styles.generic}> Login </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={() => this.props.navigation.navigate("Register Page")}>
+                                <Text style={styles.generic}> Register New Account </Text>
+                            </TouchableOpacity>
+                        </View>
+                    )}
+                </Formik>
+                {
+                    /**
+                     * @Button navigate to Register Page
+                     */
+                }
             </View>
         )
     }

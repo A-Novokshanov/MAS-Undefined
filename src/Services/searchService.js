@@ -6,17 +6,8 @@ import 'firebase/compat/firestore';
 /*
 
   read trainer profiles from trainer profile collection and then filter based on query parameters
-
-
   collection of documents
-
-
-
-
-
   profile filters - of trainers
-
-
  */
 
 export async function searchProfiles(max_price = null, specalization = null, friendly = null, average_rating = null) {

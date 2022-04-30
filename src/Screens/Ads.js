@@ -1,17 +1,15 @@
 import React from 'react';
-import { getAuth, createUserWithEmailAndPassword } from '@firebase/auth'
-import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
-import { Formik } from 'formik';
+import { View} from 'react-native';
 import styles from '../Style/Styles.styles';
-import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { makeProfile } from '../Services/profileService.js';
 import {setTestDeviceIDAsync, AdMobBanner} from 'expo-ads-admob';
 
 /**
- * Screen for the Login page
+ * Component responsible for generating banner ads
  */
 export default class Ads extends React.Component {
 
+    // Whenever component is loaded, we need to ensure that the AdMob account responsible 
+    // for genenerating ads is linked to the current device
     async componentDidMount() {
         await setTestDeviceIDAsync('device');
     }
@@ -31,6 +29,11 @@ export default class Ads extends React.Component {
                     },
                 ]}
             >
+                {/*AdMobBanner as a component works for both IOS and Android
+                @bannerSize is responsible for selecting length of banner
+                @adUnitId is the specific advertisement we wish to display. Supplied is a "test" advertisement
+                @serPersonalizedAds if set to true, used to override adUnits with an advertisement personalized to user
+                @onDidFailToReceiveAdWithError is the error that would be output if ad could not be found*/}
                 <AdMobBanner
                     bannerSize="fullBanner"
                     adUnitID="ca-app-pub-3940256099942544/6300978111"

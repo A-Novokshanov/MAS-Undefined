@@ -65,7 +65,8 @@ export default class LoginPage extends React.Component {
                         password: '',
                         error: ''
                     }}
-                    onSubmit={(values, { setFieldValue }) => this.submitLogin(values.email, values.password).catch(error => setFieldValue('error', error.message))}
+                    onSubmit={(values, { setFieldValue }) => this.submitLogin(values.email,
+                        values.password).catch(error => setFieldValue('error', error.message))}
                 >
                     {({ handleChange, handleBlur, handleSubmit, values, setFieldValue }) => (
                         <View>

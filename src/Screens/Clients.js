@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView, Button, Image } from 'react-native';
 import styles from '../Style/Content_style';
 import Ads from './Ads';
@@ -12,7 +12,7 @@ import Ads from './Ads';
 
 const Clients = ({ route, navigation }) => {
 
-    const { name, date_next_meeting, notes, profile } = route.params;
+    const { name, notes, profile, trainerProf } = route.params;
 
     return (
         <View style={styles.container}>
@@ -21,7 +21,8 @@ const Clients = ({ route, navigation }) => {
             <View style={{ flexDirection: 'row' }}>
                     <Button
                         onPress={() => navigation.navigate('MyClients', {
-                            name: name
+                            name: name,
+                            profile: trainerProf
                         })}
                         title={"< " + name}
 
@@ -44,9 +45,6 @@ const Clients = ({ route, navigation }) => {
                         <Text>
                             {name}
                         </Text>
-                        <Text>
-                            Meet in {date_next_meeting} days
-                        </Text>
                         
                     </View>
                 </View>
@@ -57,7 +55,8 @@ const Clients = ({ route, navigation }) => {
                     onPress={() => navigation.navigate('Chat', {
                         name: name,
                         profile: profile,
-                        is_trainer: true
+                        is_trainer: true,
+                        trainerProf: trainerProf
                       })}
                 >
                     <Text > Chat </Text>
@@ -67,14 +66,16 @@ const Clients = ({ route, navigation }) => {
                 >
                     <Text onPress={() => navigation.navigate('Schedule', {
                         name: name,
-                        is_trainer: true
+                        is_trainer: true,
+                        profile: trainerProf
                       })}> View Schedule </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.button, styles.px12]}
                     onPress={() => navigation.navigate('Notes', {
                         name: name, 
-                        notes: notes
+                        notes: notes,
+                        profile: trainerProf
                       })}
                 >
                     <Text > Notes </Text>

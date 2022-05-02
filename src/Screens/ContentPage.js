@@ -163,7 +163,7 @@ const ContentPage = ({ navigation, route }) => {
                     </TouchableHighlight>
                 </View>
 
-                {// if fliter button clicked, show the filter content
+                {// if filter button clicked, show the filter content
                     show_filter ?
                         <View style={styles.filter_page} >
                             <Text style={styles.filter_text}>Within Distance - {Math.floor(range_value)} Miles</Text>
@@ -186,7 +186,6 @@ const ContentPage = ({ navigation, route }) => {
                                 <SelectDropdown
                                     data={Specialization_list}
                                     onSelect={(selectedItem, index) => {
-                                        //console.log(selectedItem, index);
                                         setSpecial(selectedItem)
                                     }}
                                     defaultButtonText={special}
@@ -209,7 +208,6 @@ const ContentPage = ({ navigation, route }) => {
                             <Text style={styles.filter_text}>Beginner Friendly-
                                 <BouncyCheckbox
                                     onPress={(isChecked) => {
-                                        //console.log(isChecked);
                                         setisFriendly(isChecked);
                                     }}
                                     textStyle={{

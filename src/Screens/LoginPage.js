@@ -30,17 +30,15 @@ export default class LoginPage extends React.Component {
         await setTestDeviceIDAsync('device');
 
 
+        is_trainer = await checkTrainer(email);
+        var temp = null
+        if (is_trainer) {
+            temp = await getTrainerProfile(auth.uid);
+        }
+        
 
-      const is_trainer = await checkTrainer(email);
-      if (is_trainer) {
-        const temp = await getTrainerProfile(auth.uid);
-        this.props.navigation.navigate("MyClients", { profile: temp }) // grab the data for a trainer
-      } else {
-        this.props.navigation.navigate("Content Page", { profile: {email: email} })
-      }
-        // console.log(temp);
-        // console.log('is trainer?' + is_trainer)
-
+        is_trainer ? this.props.navigation.navigate("MyClients", { profile: temp }) // grab the data for a trainer
+            : this.props.navigation.navigate("Content Page", { profile: {email: email} })
     }
 
     render() {

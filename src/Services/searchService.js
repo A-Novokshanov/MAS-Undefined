@@ -17,7 +17,7 @@ export async function searchProfiles(max_price = null, specalization = null, fri
 
   /*
     filter on:
-    price, specialization, begginer friendly, average rating
+    price, specialization, beginner friendly, average rating
 
   */
 
@@ -27,15 +27,9 @@ export async function searchProfiles(max_price = null, specalization = null, fri
     return doc.data()
   })
 
-  console.log(trainer_profile_docs)
-  console.log("original docs")
-
 
   let result_docs = trainer_profile_docs;
-  console.log(max_price)
-  console.log("max price &&&")
   if (max_price && max_price !== 0) {
-    console.log("filter max price")
     // filter
     result_docs = trainer_profile_docs.filter((trainer_profile) => {
       return trainer_profile.price <= max_price;
@@ -43,7 +37,6 @@ export async function searchProfiles(max_price = null, specalization = null, fri
   }
 
   if (specalization && specalization !== "Select a Specialization") {
-    console.log("filter specalization")
     result_docs = trainer_profile_docs.filter((trainer_profile) => {
       // if they can only select one specialization
       return specalization === trainer_profile.specialization;
@@ -51,7 +44,6 @@ export async function searchProfiles(max_price = null, specalization = null, fri
   }
 
   if (friendly === true) {
-    console.log("filter friendly")
     result_docs = trainer_profile_docs.filter((trainer_profile) => {
       // if they can only select one specialization
       return friendly === trainer_profile.friendly;
@@ -59,7 +51,6 @@ export async function searchProfiles(max_price = null, specalization = null, fri
   }
 
   if (average_rating) {
-    console.log("filter average rating")
     result_docs = trainer_profile_docs.filter((trainer_profile) => {
       // if they can only select one specialization
       return average_rating >= trainer_profile.ratings.average
@@ -67,4 +58,36 @@ export async function searchProfiles(max_price = null, specalization = null, fri
   }
 
   return result_docs;
+}
+
+/*
+  Find users who have messaged current trainer
+ */
+
+export async function getClients() {
+
+  const db = firebase.firestore();
+
+  const currentUser = firebase.auth().currentUser;
+  const currentUID = currentUser.uid;
+    
+  var res = await db.collection('Chats');
+  const check = await res.where('trainer', '==', currentUID).get();
+
+  var list = []
+  check.forEach(doc => {
+    list.push(doc.data()['client'])
+  });
+  var res2 = await db.collection('UserProfile')
+  const snapshot =  await res2.where('UID', 'in', list).get();
+  //var profiles = {};
+  // snapshot.forEach(doc => {
+  //   profiles[doc.id] = doc.data()
+  // });
+  var profiles = [];
+  snapshot.forEach(doc => {
+    profiles.push(doc.data())
+  });
+
+  return profiles
 }

@@ -97,7 +97,9 @@ const Trainer = ({ route, navigation }) => {
                         exp: profile.exp, 
                         review: profile.review, 
                         miles: profile.miles,
-                        notes: profile.notes
+                        notes: profile.notes,
+                        is_trainer: false,
+                        profile: profile
                       })}
                 >
                     <Text > CONTACT </Text>

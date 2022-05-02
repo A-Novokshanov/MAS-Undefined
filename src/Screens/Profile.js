@@ -8,7 +8,7 @@ import { getTrainerProfile } from '../Services/trainerProfileService.js'
  * the profile screen for both trainer and clients
  * @navigation navigation tool
  * @_name the user's name
- * @is_trianer whether the user is trainer
+ * @is_trainer whether the user is trainer
  * @profile the user's profile
  * @returns the profile screen
  */

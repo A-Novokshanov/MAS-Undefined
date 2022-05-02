@@ -25,7 +25,7 @@ export default class LoginPage extends React.Component {
         const auth = getAuth();
 
         let temp1 = await signInWithEmailAndPassword(auth, email, password)
-        
+
         // Set global test device ID
         await setTestDeviceIDAsync('device');
 

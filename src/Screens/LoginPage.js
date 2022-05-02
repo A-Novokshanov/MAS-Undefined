@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import styles from '../Style/Styles.styles';
 import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import {setTestDeviceIDAsync} from 'expo-ads-admob';
-import Ads from './Ads';
+import { checkTrainer } from '../Services/uidService';
 //firebase dependency
 import { getAuth, signInWithEmailAndPassword } from '@firebase/auth';
 
@@ -28,9 +28,10 @@ export default class LoginPage extends React.Component {
         // Set global test device ID
         await setTestDeviceIDAsync('device');
 
-        console.log(temp1);
-
-        this.props.navigation.navigate("Content Page")
+        is_trainer = await checkTrainer(email)
+        console.log('is trainer?' + is_trainer)
+        is_trainer ? this.props.navigation.navigate("MyClients", { profile: { email: email } }) // grab the data for a trainer
+            : this.props.navigation.navigate("Content Page", { profile: {email: email} })
     }
 
     render() {

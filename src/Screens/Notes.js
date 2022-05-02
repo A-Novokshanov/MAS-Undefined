@@ -73,7 +73,7 @@ const Notes = ({ route, navigation }) => {
             <SafeAreaView>
                 <View style={{ flexDirection: 'row' }}>
                     <Button
-                        onPress={() => navigation.navigate('Content Page', {
+                        onPress={() => is_trainer ? navigation.navigate('MyClients') : navigation.navigate('Content Page', {
                             name: name,
                             exp: exp,
                             review: review,

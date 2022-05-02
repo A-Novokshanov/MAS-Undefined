@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList, SafeAreaView, SectionList, Button, Image } from 'react-native'
 import styles from '../Style/Content_style'
 import { Formik } from 'formik';
@@ -31,15 +32,13 @@ const Chat = ({ route, navigation }) => {
   const [note, setnotes] = React.useState([])
   const [chatId, setChatId] = React.useState(null)
 
-  useEffect(() => {
+  useFocusEffect( React.useCallback(() => {
     const fetchData = async () => {
       // setRefresh(false)
       const chat_doc = await getChat(otherID, is_trainer);
 
-      // console.log("after get chat::")
-      // console.log(chat_doc)
       var keys = Object.keys(chat_doc)
-      // console.log(keys)
+      console.log(chat_doc)
       if (keys.length > 0) {
         setChatId(keys[0])
         const chats = chat_doc[chatId].messages.map((chat_ob) => {
@@ -47,8 +46,7 @@ const Chat = ({ route, navigation }) => {
             return `-${chat_ob.message}`;
           return chat_ob.message
         });
-        // console.log("chats array::")
-        // console.log(chats)
+
         setnotes(chats);
 
         setChatId(chatId)
@@ -59,7 +57,7 @@ const Chat = ({ route, navigation }) => {
     };
 
     fetchData();
-  }, []);
+  }, [chatId]));
 
     //chat data controller
     //sectionlist component

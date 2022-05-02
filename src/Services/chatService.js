@@ -58,8 +58,6 @@ export async function getChat(otherProfileUid, isTrainer) {
 
   var res = await db.collection('Chats');
   if (isTrainer) {
-    console.log(currentUID)
-    console.log(otherProfileUid)
     res = await res.where('trainer', '==', currentUID)
     res = await res.where('client', '==', otherProfileUid).get()
     var profiles = {};

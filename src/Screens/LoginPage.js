@@ -30,8 +30,8 @@ export default class LoginPage extends React.Component {
         await setTestDeviceIDAsync('device');
 
 
-        is_trainer = await checkTrainer(email);
-        var temp = null
+        const is_trainer = await checkTrainer(email);
+        let temp = null
         if (is_trainer) {
             temp = await getTrainerProfile(auth.uid);
         }

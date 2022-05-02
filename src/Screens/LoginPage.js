@@ -5,6 +5,7 @@ import styles from '../Style/Styles.styles';
 import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import {setTestDeviceIDAsync} from 'expo-ads-admob';
 import { checkTrainer } from '../Services/uidService';
+import { getTrainerProfile } from '../Services/trainerProfileService';
 //firebase dependency
 import { getAuth, signInWithEmailAndPassword } from '@firebase/auth';
 
@@ -28,9 +29,12 @@ export default class LoginPage extends React.Component {
         // Set global test device ID
         await setTestDeviceIDAsync('device');
 
-        is_trainer = await checkTrainer(email)
+
+        is_trainer = await checkTrainer(email);
+        let temp = await getTrainerProfile(auth.uid);
+        console.log(temp);
         console.log('is trainer?' + is_trainer)
-        is_trainer ? this.props.navigation.navigate("MyClients", { profile: { email: email } }) // grab the data for a trainer
+        is_trainer ? this.props.navigation.navigate("MyClients", { profile: temp }) // grab the data for a trainer
             : this.props.navigation.navigate("Content Page", { profile: {email: email} })
     }
 

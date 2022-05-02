@@ -17,26 +17,26 @@ const Profile = ({ navigation, name, is_trainer, profile }) => {
     //init the user's profile data
     const [profile_data, setProfile] = useState(profile);
     //fetch the newest data for the user
-    useEffect(() => {
+    // useEffect(() => {
         
-        const fetchData = async () => {
+    //     const fetchData = async () => {
 
-            try {
-                if (is_trainer) {
-                    const data = await getTrainerProfile()
-                    console.log(data)
-                    setProfile(data)
-                } else {
-                    const data = await getProfile()
-                    setProfile(data)
-                }
-            } catch (e) {
-                console.log(e)
-            }
-        }
+    //         try {
+    //             if (is_trainer) {
+    //                 const data = await getTrainerProfile()
+    //                 console.log(data)
+    //                 setProfile(data)
+    //             } else {
+    //                 const data = await getProfile()
+    //                 setProfile(data)
+    //             }
+    //         } catch (e) {
+    //             console.log(e)
+    //         }
+    //     }
 
-        fetchData();
-    }, []);
+    //     fetchData();
+    // }, []);
 
 
     return (

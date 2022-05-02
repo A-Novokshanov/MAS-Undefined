@@ -15,7 +15,7 @@ export async function makeProfile(username = "default", paypal = '') {
         email: currentUser.email,
         payment: paypal,
         UID: currentUID,
-        accountType: 'client'
+        is_trainer: false
     };
 
     await db.collection('UserProfile').doc(currentUID).set(data);

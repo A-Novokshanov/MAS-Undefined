@@ -27,6 +27,8 @@ const Trainer_init_2 = ({ navigation, route }) => {
                 is_trainer: true
             }
 
+            console.log(temp);
+
             //firebase update
             await makeTrainerProfile(temp);
 

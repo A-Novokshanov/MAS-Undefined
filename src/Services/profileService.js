@@ -55,9 +55,6 @@ export async function editProfile(attribute, value) {
 
   data[attribute] = value;
 
-  console.log(data);
-  console.log("updated data?")
-
   await db.collection('UserProfile').doc(currentUID).set(data);
 
 

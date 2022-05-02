@@ -129,7 +129,9 @@ const Chat = ({ route, navigation }) => {
             <SafeAreaView>
                 <View style={{ flexDirection: 'row' }}>
                     <Button
-                        onPress={() => is_trainer ? navigation.navigate('MyClients') : navigation.navigate('Content Page', {
+                        onPress={() => is_trainer ? navigation.navigate('MyClients', {
+                          profile: profile
+                        }) : navigation.navigate('Content Page', {
                             profile: profile
                         })}
                         title={"< " + name}

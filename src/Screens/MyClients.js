@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView, SectionList, Image } from 'react-native';
 import styles from '../Style/Content_style';
 import CalendarPicker from 'react-native-calendar-picker';
@@ -6,6 +6,7 @@ import moment from 'moment';
 import Profile from './Profile';
 import Message from './Message';
 import Ads from './Ads';
+import { getClients } from '../Services/searchService';
 
 //Init data for the trainer's customer
 const DATA = [
@@ -29,22 +30,21 @@ const DATA = [
 ];
 
 //sectionlist's component
-const Item = ({ item, nav }) => (
+const Item = ({ item, nav, route }) => (
     <View>
         <TouchableOpacity
             style={styles.list_button}
             onPress={() => nav.navigate('Clients', {
-                name: item.name,
+                name: item.username,
                 profile: item,
-                date_next_meeting: item.date_next_meeting
+                trainerProf: route.params.profile
             })}
         >
             <Image
                 style={styles.tinyLogo}
                 source={require('../Icon/pic.png')}
             />
-            <Text>{item.name}</Text>
-            <Text>Next Meeting in {item.date_next_meeting} days</Text>
+            <Text>{item.username}</Text>
         </TouchableOpacity>
     </View>
 );
@@ -89,6 +89,29 @@ let disable_dates = [
 const MyClients = ({ navigation, route }) => {
     //state controller to track the nav tab, init with My Trainers
     const [direction, setDirection] = useState("Clients");
+    //state controller to init the data for the sectionlist
+    const [contentData, setContentData] = useState([]);
+
+    //Fetch data when the page is rendering
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getClients();
+                console.log('HERE!!!')
+                console.log(data)
+                const wrapper = [
+                    {
+                        data: data
+                    }
+                ]
+                //set the init data for SectionList
+                setContentData(wrapper);
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        fetchData();
+    }, []);
     /**
      * Rendering pages will be stored in the page and changed when the nav bar changed
      * direction = My trainer, my schedule and my profile
@@ -100,9 +123,9 @@ const MyClients = ({ navigation, route }) => {
             <View>
                 <SectionList
                     contentContainerStyle={styles.listContainer}
-                    sections={DATA}
+                    sections={contentData}
                     keyExtractor={(item, index) => item + index}
-                    renderItem={({ item }) => <Item item={item} nav={navigation} />}
+                    renderItem={({ item }) => <Item item={item} nav={navigation} route={route} />}
                 />
 
             </View>

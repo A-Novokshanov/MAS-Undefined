@@ -94,7 +94,7 @@ export async function getChat(otherProfileUid) {
 }
 
 //Function to add a new message
-export async function makeNewMessage(chatId, otherProfileUid, message) {
+export async function makeNewMessage(chatId, otherProfileUid, message, isTrainer) {
 
   const db = firebase.firestore();
 
@@ -126,7 +126,7 @@ export async function makeNewMessage(chatId, otherProfileUid, message) {
   console.log(message)
 
 
-  chat_doc.messages.push({is_trainer: false, message: message});
+  chat_doc.messages.push({is_trainer: isTrainer, message: message});
 
   await db.collection('Chats').doc(chatId).set(chat_doc);
 

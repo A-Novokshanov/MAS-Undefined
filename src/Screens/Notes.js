@@ -13,7 +13,7 @@ import Ads from './Ads';
  */
 const Notes = ({ route, navigation }) => {
     //params pass by the parents
-    var { name, exp, review, miles } = route.params;
+    var { name, exp, review, miles, profile } = route.params;
     //note state controller
     const [ note, setnotes ] = React.useState([]);
     //fetch the note from the firebase
@@ -73,7 +73,9 @@ const Notes = ({ route, navigation }) => {
             <SafeAreaView>
                 <View style={{ flexDirection: 'row' }}>
                     <Button
-                        onPress={() => is_trainer ? navigation.navigate('MyClients') : navigation.navigate('Content Page', {
+                        onPress={() => is_trainer ? navigation.navigate('MyClients', {
+                            profile: profile
+                        }) : navigation.navigate('Content Page', {
                             name: name,
                             exp: exp,
                             review: review,

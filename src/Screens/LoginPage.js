@@ -31,9 +31,12 @@ export default class LoginPage extends React.Component {
 
 
         is_trainer = await checkTrainer(email);
-        let temp = await getTrainerProfile(auth.uid);
-        console.log(temp);
-        console.log('is trainer?' + is_trainer)
+        var temp = null
+        if (is_trainer) {
+            temp = await getTrainerProfile(auth.uid);
+        }
+        
+
         is_trainer ? this.props.navigation.navigate("MyClients", { profile: temp }) // grab the data for a trainer
             : this.props.navigation.navigate("Content Page", { profile: {email: email} })
     }

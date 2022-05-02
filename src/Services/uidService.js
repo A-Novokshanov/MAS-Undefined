@@ -3,6 +3,19 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 //Function to add a new account
+export async function checkTrainer(email) {
+
+    const db = firebase.firestore();
+    
+    var res = await db.collection('TrainerProfile');
+    const check = await res.where('Email', '==', email).get();
+
+    if (check.empty) {
+        return false;
+    }
+    return true;
+}
+
 export async function addAccount() {
 
     const db = firebase.firestore();

@@ -4,6 +4,7 @@ import styles from '../Style/Content_style'
 import { Formik } from 'formik';
 import { getChat, makeNewMessage, newChat } from '../Services/chatService.js';
 import Ads from './Ads';
+import { checkTrainer } from '../Services/uidService';
 
 
 //Init chat data for the chat screen
@@ -119,6 +120,7 @@ const Chat = ({ route, navigation }) => {
             />
         );
     }
+
     //Rendering items
     return (
 
@@ -127,12 +129,8 @@ const Chat = ({ route, navigation }) => {
             <SafeAreaView>
                 <View style={{ flexDirection: 'row' }}>
                     <Button
-                        onPress={() => navigation.navigate('Content Page', {
-                            name: name,
-                            exp: exp,
-                            review: review,
-                            miles: miles,
-                            notes: note
+                        onPress={() => is_trainer ? navigation.navigate('MyClients') : navigation.navigate('Content Page', {
+                            profile: profile
                         })}
                         title={"< " + name}
                     />

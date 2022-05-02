@@ -1,5 +1,6 @@
 //Front-end dependency
 import React, { useState, useEffect, useRef } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { View, Text, TextInput, TouchableOpacity, SafeAreaView, SectionList, TouchableHighlight, Image } from 'react-native';
 import styles from '../Style/Content_style';
 import moment from 'moment';
@@ -102,8 +103,10 @@ const ContentPage = ({ navigation, route }) => {
     const [isFriendly, setisFriendly] = useState(false);
 
     //Fetch data when the page is rendering
-    useEffect(() => {
-        const fetchData = async () => {
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchData = async () => {
+        console.log("content page fetch data")
             try {
                 //fetch data from the firebase and store it in to a wrapper
                 const data = await searchProfiles(price_range, special, isFriendly, null);
@@ -123,7 +126,7 @@ const ContentPage = ({ navigation, route }) => {
             }
         }
         fetchData();
-    }, []);
+    }, [price_range, special, isFriendly]));
 
     //output for date picker
     const onDateChange = (date) => (

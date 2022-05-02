@@ -65,7 +65,10 @@ const Trainer = ({ route, navigation }) => {
                             {profile.exp}+ years exp
                         </Text>
                         <Text>
-                            {profile.review? profile.review: 0} reviews
+                          {profile.ratings
+                           ? Object.keys(profile.ratings).length == 2
+                           ? "1 review" : `${Object.keys(profile.ratings).length - 1} reviews`
+                           : 0}
                         </Text>
                         <Text>
                         Rating: {profile.ratings? profile.ratings.average: "None"}

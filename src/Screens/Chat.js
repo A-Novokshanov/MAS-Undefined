@@ -35,10 +35,10 @@ const Chat = ({ route, navigation }) => {
     const fetchData = async () => {
       // setRefresh(false)
       const chat_doc = await getChat(otherID, is_trainer);
-      console.log('please')
-      console.log(chat_doc)
-      setChatId(Object.keys(chat_doc)[0])
-      if (chat_doc) {
+      var keys = Object.keys(chat_doc)
+      console.log(keys)
+      if (keys.length > 0) {
+        setChatId(keys[0])
         setnotes(chat_doc[chatId][messages]((chat_ob) => {
           if (chat_ob.is_trainer)
             return `-${chat_ob.message}`;

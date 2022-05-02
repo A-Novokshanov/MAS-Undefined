@@ -23,10 +23,10 @@ const DATA = [
  */
 const Chat = ({ route, navigation }) => {
     //paras from the parents
-  const { name, exp, review, miles, is_trainer, profile } = route.params;
+  const { name, exp, review, miles, is_trainer, profile, trainerProf } = route.params;
   // route.params.profile.UID is the trainer's uid
-  console.log(profile);
-  const trainerId = route.params.profile.UID
+  //console.log(profile);
+  const otherID = route.params.profile.UID
 
   const [note, setnotes] = React.useState([])
   const [chatId, setChatId] = React.useState(null)
@@ -34,26 +34,20 @@ const Chat = ({ route, navigation }) => {
   useEffect(() => {
     const fetchData = async () => {
       // setRefresh(false)
-      const chat_doc = await getChat(trainerId);
-      console.log("the chat doc we found: ", chat_doc)
+      const chat_doc = await getChat(otherID, is_trainer);
+      console.log('please')
+      console.log(chat_doc)
+      setChatId(Object.keys(chat_doc)[0])
       if (chat_doc) {
-        console.log("this ", chat_doc, " is boolean true")
-        setnotes(chat_doc.messages.map((chat_ob) => {
+        setnotes(chat_doc[chatId][messages]((chat_ob) => {
           if (chat_ob.is_trainer)
             return `-${chat_ob.message}`;
           return chat_ob.message
         }));
-        /*
 
-          msg:
- { message : hi,
-   is_trainer: boolean}
-*/
-        console.log("id of the old chat doc ", chat_doc.id);
-        setChatId(chat_doc.id)
+        setChatId(chatId)
       } else {
-        const id = await newChat(trainerId);
-        console.log("id of newly created chat: ", id)
+        const id = await newChat(otherID);
         setChatId(id);
       }
     };
@@ -102,13 +96,8 @@ const Chat = ({ route, navigation }) => {
     console.log("in submit notes:::::::::::::::::::::::::;")
     setnotes([...note, String(input_notes)])
     console.log(input_notes)
-    console.log(note)
-    const new_notes = note
-    // new_notes.push({message: input_notes, is_trainer:false})
-    // console.log(new_notes)
-    // setnotes(new_notes)
 
-    makeNewMessage(chatId, trainerId, String(input_notes))
+    await makeNewMessage(chatId, String(input_notes), is_trainer)
     }
     //input field for chat
     const UselessTextInput = (props) => {
@@ -130,7 +119,7 @@ const Chat = ({ route, navigation }) => {
                 <View style={{ flexDirection: 'row' }}>
                     <Button
                         onPress={() => is_trainer ? navigation.navigate('MyClients', {
-                          profile: profile
+                          profile: trainerProf
                         }) : navigation.navigate('Content Page', {
                             profile: profile
                         })}

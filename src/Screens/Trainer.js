@@ -95,7 +95,7 @@ const Trainer = ({ route, navigation }) => {
                         review: profile.review, 
                         miles: profile.miles,
                         notes: profile.notes,
-                        is_trainer: is_trainer,
+                        is_trainer: false,
                         profile: profile
                       })}
                 >

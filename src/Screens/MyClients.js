@@ -97,8 +97,6 @@ const MyClients = ({ navigation, route }) => {
         const fetchData = async () => {
             try {
                 const data = await getClients();
-                console.log('HERE!!!')
-                console.log(data)
                 const wrapper = [
                     {
                         data: data

@@ -49,86 +49,56 @@ export async function newChat(otherProfileUid) {
 
 
 //Function to get a chat's messages
-export async function getChat(otherProfileUid) {
-
-  // right now assume other is trainer
+export async function getChat(otherProfileUid, isTrainer) {
 
   const db = firebase.firestore();
 
-  console.log("in get chat::")
-
   const currentUser = firebase.auth().currentUser;
-  // console.log(currentUser);
-  const currUid = currentUser.uid;
-  // console.log(currUid)
-  // console.log(otherProfileUid)
+  const currentUID = currentUser.uid;
 
-    const res = await db.collection('Chats')
-  const snapshot = await res.get();
-
-  const collection_tuples = snapshot.docs.map((doc) => {
-    return {id: doc.id, data: doc.data()}
-  });
-
-
-  console.log("in get chat")
-  console.log("client id: ", currUid, " trainer id: ", otherProfileUid)
-  // console.log(collection_tuples)
-
-  if (collection_tuples) {
-    const chat_doc = collection_tuples.find((tuple) => {
-      console.log('in find')
-      console.log(tuple)
-      return (tuple.data.client === currUid && tuple.data.trainer === otherProfileUid) || (tuple.data.client === otherProfileUid && tuple.data.trainer === currUid);
+  var res = await db.collection('Chats');
+  if (isTrainer) {
+    console.log(currentUID)
+    console.log(otherProfileUid)
+    res = await res.where('trainer', '==', currentUID)
+    res = await res.where('client', '==', otherProfileUid).get()
+    var profiles = {};
+    res.forEach(doc => {
+      profiles[doc.id] = doc.data()
     });
-
-    if (chat_doc) {
-      console.log("in get chat: found a chat doc: chat doc")
-      console.log(chat_doc)
-      const data = chat_doc.data
-      data.id = chat_doc.id;
-      return data;
-    }
+    
+    return profiles
+  } else {
+    res = await res.where('client', '==', currentUID)
+    res = await res.where('trainer', '==', otherProfileUid).get()
+    var profiles = {};
+    res.forEach(doc => {
+      profiles[doc.id] = doc.data()
+    });
+    
+    return profiles
   }
-  return null
+  
 }
 
 //Function to add a new message
-export async function makeNewMessage(chatId, otherProfileUid, message, isTrainer) {
+export async function makeNewMessage(chatId, message, isTrainer) {
 
   const db = firebase.firestore();
+  var res = await db.collection('Chats').doc(chatId);
+  var chat = await res.get();
 
-  const currentUser = firebase.auth().currentUser;
-  const currUid = currentUser.uid;
+  
+  messages = chat.get('messages')
+  console.log(messages)
+  newMessage = {is_trainer: isTrainer, message: message}
+  messages.push(newMessage);
+  console.log(messages)
+  const data = {
+    messages: messages
+  }
 
-
-  const res = await db.collection('Chats')
-  const snapshot = await res.get();
-
-  const docs = snapshot.docs.map((doc) => {
-    return doc.data()
-  });
-
-  console.log("-- in make new message");
-  console.log(docs)
-  console.log(chatId)
-  console.log(message)
-
-  const chat_doc = docs.find((doc) => {
-    return (doc.client === currUid && doc.trainer === otherProfileUid) || (doc.client === otherProfileUid && doc.trainer === currUid);
-  });
-
-  console.log(chat_doc)
-
-  console.log("chat doc in make new message")
-  console.log("client id: ", currUid, " trainer id: ", otherProfileUid)
-  console.log(chat_doc);
-  console.log(message)
-
-
-  chat_doc.messages.push({is_trainer: isTrainer, message: message});
-
-  await db.collection('Chats').doc(chatId).set(chat_doc);
+  await db.collection('Chats').doc(chatId).update(data);
 
   return true;
 

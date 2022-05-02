@@ -56,7 +56,7 @@ const Clients = ({ route, navigation }) => {
                         name: name,
                         profile: profile,
                         is_trainer: true,
-                        profile: trainerProf
+                        trainerProf: trainerProf
                       })}
                 >
                     <Text > Chat </Text>

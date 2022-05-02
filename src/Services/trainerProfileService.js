@@ -45,7 +45,7 @@ export async function getTrainerProfile() {
 
     if (!snapshot.exists) {
 
-        await makeProfile();
+        // await makeProfile();
         return {};
 
     } else {

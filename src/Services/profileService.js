@@ -15,7 +15,7 @@ export async function makeProfile(username = "default", paypal = '') {
         email: currentUser.email,
         payment: paypal,
         UID: currentUID,
-        accountType: 'client'
+        is_trainer: false
     };
 
     await db.collection('UserProfile').doc(currentUID).set(data);
@@ -54,9 +54,6 @@ export async function editProfile(attribute, value) {
   const data = await getProfile();
 
   data[attribute] = value;
-
-  console.log(data);
-  console.log("updated data?")
 
   await db.collection('UserProfile').doc(currentUID).set(data);
 

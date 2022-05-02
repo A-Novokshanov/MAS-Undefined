@@ -9,10 +9,7 @@ export async function checkTrainer(email) {
     
     var res = await db.collection('TrainerProfile');
     const check = await res.where('Email', '==', email.toLowerCase()).get();
-    console.log('Hello I am here!')
-    console.log(email)
-    //console.log(check)
-    console.log(check.empty)
+
     return (check.empty) ? false : true
 }
 

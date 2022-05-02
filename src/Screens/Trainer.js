@@ -113,7 +113,7 @@ const Trainer = ({ route, navigation }) => {
                     style={[styles.button, styles.px12]}
                     onPress={() => navigation.navigate('Reviews', {
                         profile : profile,
-                        is_trianer: false
+                        is_trainer: false
                       })}
                 >
                     <Text > View Reviews </Text>

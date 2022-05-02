@@ -34,10 +34,10 @@ export async function getProfile(requestedUID = null) {
     const snapshot = await res.get();
 
     if (!snapshot.exists) {
-
-        await makeProfile();
+      // console.log("trying to get a profile that does not exist")
+        // await makeProfile();
         return {};
-        
+
     } else {
 
         return snapshot.data();

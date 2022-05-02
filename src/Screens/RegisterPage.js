@@ -24,7 +24,7 @@ export default class RegisterPage extends React.Component {
         await createUserWithEmailAndPassword(auth, email, password);
         //if its a client, make the profile for the client on the firebase
         if (!is_trainer) {
-            console.log(is_trainer);
+          console.log(is_trainer);
             await makeProfile(email, '');
         }
 
@@ -65,9 +65,9 @@ export default class RegisterPage extends React.Component {
                         email: '',
                         password: '',
                         error: '',
-                        is_trianer: false
+                        is_trainer: false
                     }}
-                    onSubmit={(values, { setFieldValue }) => this.submitRegister(values.email, values.password, values.is_trianer).catch(error => setFieldValue('error', error.message))}
+                    onSubmit={(values, { setFieldValue }) => this.submitRegister(values.email, values.password, values.is_trainer).catch(error => setFieldValue('error', error.message))}
                 >
                     {({ handleChange, handleBlur, handleSubmit, values, setFieldValue }) => (
                         <View style={styles.container}>
@@ -92,7 +92,7 @@ export default class RegisterPage extends React.Component {
                                     onPress={(isChecked) => {
                                         console.log(isChecked);
 
-                                        setFieldValue('is_trianer', isChecked)
+                                        setFieldValue('is_trainer', isChecked)
                                     }}
                                     textStyle={{
                                         fontSize: 20,

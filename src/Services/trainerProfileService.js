@@ -44,8 +44,8 @@ export async function getTrainerProfile() {
   const snapshot = await res.get();
 
   if (!snapshot.exists) {
-
-    await makeProfile();
+    // console.log("calling make profile in getTrainerProfile")
+    // await makeProfile();
     return {};
 
   } else {
